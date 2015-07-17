@@ -1,7 +1,9 @@
-This is a Joke
+This is a Joke!
 ==============
 
-Your reaction when you see this framework!
+Your reaction when you see this framework.
+
+Entity Joke 
 
 Issues:
 -----
