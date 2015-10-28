@@ -1,0 +1,51 @@
+﻿using EntityJoke.Structure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace EntityJoke.Linq
+{
+    public class FieldAliasReplacerBuilder
+    {
+        private EntityJoin join;
+        private Field field;
+        private string sqlQuery;
+        private string entityPath;
+
+        public FieldAliasReplacerBuilder Join(EntityJoin join)
+        {
+            this.join = join;
+            return this;
+        }
+
+        public FieldAliasReplacerBuilder Field(Field field)
+        {
+            this.field = field;
+            return this;
+        }
+
+        public FieldAliasReplacerBuilder SqlQuery(string sqlQuery)
+        {
+            this.sqlQuery = sqlQuery;
+            return this;
+        }
+
+        public FieldAliasReplacerBuilder EntityPath(string entityPath)
+        {
+            this.entityPath = entityPath;
+            return this;
+        }
+
+        public FieldAliasReplacer Builder()
+        {
+            var replacer = new FieldAliasReplacer();
+            replacer.Join = join;
+            replacer.Field = field;
+            replacer.SQLQuery = sqlQuery;
+            replacer.EntityPath = entityPath;
+
+            return replacer;
+        }
+    }
+}

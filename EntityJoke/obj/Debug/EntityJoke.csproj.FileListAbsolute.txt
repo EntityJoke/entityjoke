@@ -1,0 +1,5 @@
+C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJoke\obj\Debug\EntityJoke.csprojResolveAssemblyReference.cache
+C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJoke\bin\Debug\EntityJoke.dll
+C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJoke\bin\Debug\EntityJoke.pdb
+C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJoke\obj\Debug\EntityJoke.dll
+C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJoke\obj\Debug\EntityJoke.pdb

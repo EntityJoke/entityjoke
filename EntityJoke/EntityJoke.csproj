@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{29FFF21A-CD5B-43B5-884C-AF76ACB6D671}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EntityJoke</RootNamespace>
+    <AssemblyName>EntityJoke</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connection\DataTableGenerator.cs" />
+    <Compile Include="Connection\DbConnectionFactory.cs" />
+    <Compile Include="Connection\DbDataAdapterFactory.cs" />
+    <Compile Include="Connection\JokeConfiguration.cs" />
+    <Compile Include="Connection\JokeMySQLConfiguration.cs" />
+    <Compile Include="Connection\JokeMySQLConfigurationBuilder.cs" />
+    <Compile Include="Connection\JokePostgreSQLConfiguration.cs" />
+    <Compile Include="Connection\JokePostgreSQLConfigurationBuilder.cs" />
+    <Compile Include="Connection\JokeSQLiteConfiguration.cs" />
+    <Compile Include="Connection\JokeSQLiteConfigurationBuilder.cs" />
+    <Compile Include="Core\DictionaryEntitiesAspect.cs" />
+    <Compile Include="Core\DictionaryEntitiesMap.cs" />
+    <Compile Include="Core\EntitiesLoader.cs" />
+    <Compile Include="Core\EntityJoke.cs" />
+    <Compile Include="Core\EntityLoader.cs" />
+    <Compile Include="Core\EntityLoaderBuilder.cs" />
+    <Compile Include="Core\FieldValueSetter.cs" />
+    <Compile Include="Core\Joke.cs" />
+    <Compile Include="Core\JokeConfigurationBuilder.cs" />
+    <Compile Include="Core\SQLCommandExecutor.cs" />
+    <Compile Include="Linq\FieldAliasReplacer.cs" />
+    <Compile Include="Linq\FieldAliasReplacerBuilder.cs" />
+    <Compile Include="Linq\FieldPositionCondition.cs" />
+    <Compile Include="Linq\FieldPositionConditionExtractor.cs" />
+    <Compile Include="Linq\FromGeneratorBuilder.cs" />
+    <Compile Include="Linq\IQuerySimpleGenerator.cs" />
+    <Compile Include="Linq\OrderByGeneratorBuilder.cs" />
+    <Compile Include="Linq\QueryDataBasePattern.cs" />
+    <Compile Include="Linq\QuerySimple.cs" />
+    <Compile Include="Linq\QuerySimpleGeneratorFactory.cs" />
+    <Compile Include="Linq\SelectGeneratorBuilder.cs" />
+    <Compile Include="Linq\SQLCommandAliasReplacer.cs" />
+    <Compile Include="Linq\SQLGeneratorBuilder.cs" />
+    <Compile Include="Linq\SQLWithConditionGeneratorBuilder.cs" />
+    <Compile Include="Linq\WhereGeneratorBuilder.cs" />
+    <Compile Include="Process\AliasGenerator.cs" />
+    <Compile Include="Process\CommandDeleteGenerator.cs" />
+    <Compile Include="Process\CommandInsertGenerator.cs" />
+    <Compile Include="Process\CommandUpdateGenerator.cs" />
+    <Compile Include="Process\DeleteCommandsExecutor.cs" />
+    <Compile Include="Process\EntityTreeAliasGenerator.cs" />
+    <Compile Include="Process\FieldExtractor.cs" />
+    <Compile Include="Process\NameFieldGenerator.cs" />
+    <Compile Include="Process\NameGenerator.cs" />
+    <Compile Include="Process\NonQueryCommandsExecutor.cs" />
+    <Compile Include="Process\ValueFieldExtractor.cs" />
+    <Compile Include="Process\ValueFieldFormatted.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structure\Alias.cs" />
+    <Compile Include="Structure\Entity.cs" />
+    <Compile Include="Structure\EntityTreeAlias.cs" />
+    <Compile Include="Structure\Fields.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
