@@ -1,9 +1,0 @@
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\bin\Debug\EntityJokeTests.dll
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\bin\Debug\EntityJokeTests.pdb
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\obj\Debug\EntityJokeTests.csprojResolveAssemblyReference.cache
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\obj\Debug\EntityJokeTests.dll
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\obj\Debug\EntityJokeTests.pdb
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\bin\Debug\EntityJoke.dll
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\bin\Debug\nunit.framework.dll
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\bin\Debug\EntityJoke.pdb
-C:\Users\Guilherme\Desktop\Projetos\EntityJoke\EntityJokeTests\bin\Debug\nunit.framework.xml
