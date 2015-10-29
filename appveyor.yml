@@ -4,6 +4,5 @@ deploy:
     provider: Local
 
 artifacts:
-  - path: EntityJoke\bin
+  - path: EntityJoke\bin\Debug\EntityJoke.dll
     name: EntityJoke
-    type: zip
