@@ -1,0 +1,3 @@
+artifacts:
+  - path: EntityJoke\bin\Debug\EntityJoke.dll
+    name: EntityJoke
