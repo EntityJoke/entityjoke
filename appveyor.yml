@@ -1,8 +1,5 @@
 configuration: Debug
 
-deploy:
-    provider: Local
-
 artifacts:
   - path: entityjoke\src\EntityJoke\bin\Debug\EntityJoke.dll
     name: EntityJoke
