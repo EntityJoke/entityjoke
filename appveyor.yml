@@ -1,3 +1,4 @@
 artifacts:
-  - path: EntityJoke\bin\Debug\EntityJoke.dll
+  - path: EntityJoke\bin
     name: EntityJoke
+    type: zip
