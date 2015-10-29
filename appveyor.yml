@@ -1,3 +1,8 @@
+configuration: Debug
+
+deploy:
+    provider: Local
+
 artifacts:
   - path: EntityJoke\bin
     name: EntityJoke
