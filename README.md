@@ -3,7 +3,37 @@ This is a Joke!
 
 Your reaction when you see this framework.
 
-Entity Joke 
+
+Example:
+
+	* PostgreSql with Npgsql
+
+	public class Person
+	{
+		public int Id;
+		public string Name;
+	}
+
+	public class ExampleJoke
+	{
+		public List<Person> GetPersons(){
+			//configure
+			JokeConfigurationBuilder.NewConfigurationToPostgreSQL()
+				.Host("localhost")
+				.Port("5432")
+				.Username("admin")
+				.Password("password")
+				.DataBase("namedatabase")
+				.BuildConfiguration();
+
+			//Get all persons
+			List<Person> persons = Joke().Query<Person>().Execute();
+
+			return persons;
+		}
+	}
+
+
 
 Issues:
 -----
