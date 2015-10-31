@@ -29,6 +29,9 @@ namespace EntityJoke.Core
 
         public void AddOrRefreshAspect(object obj)
         {
+            if (obj == null)
+                return;
+
             ProcessJoins(obj);
 
             if (IsObjectProcessed(obj))
@@ -49,6 +52,9 @@ namespace EntityJoke.Core
 
         private void ProcessJoins(object obj)
         {
+            if (obj == null)
+                return;
+
             Entity ent = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
 
             ent.GetFields().Where(f => f.IsEntity).ToList()
@@ -58,7 +64,7 @@ namespace EntityJoke.Core
         private void ProcessJoins(object obj, Field f)
         {
             var objJoin = new ValueFieldExtractor(obj, f).Extract();
-            DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(objJoin);
+            DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(objJoin);
         }
 
         private bool IsObjectProcessed(object obj)

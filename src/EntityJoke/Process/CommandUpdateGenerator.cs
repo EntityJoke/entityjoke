@@ -20,10 +20,15 @@ namespace EntityJokeTests.Core
 
         public string GetCommand()
         {
-            return GetInsertThisObject();
+            return ObjectHasChange() ? GetUpdateThisObject() : "";
         }
 
-        private string GetInsertThisObject()
+        private bool ObjectHasChange()
+        {
+            return entity.GetFields().Any(f => HasChange(f));
+        }
+
+        private string GetUpdateThisObject()
         {
             return String.Format("{0} {1} {2}",
                 GetUpdate(),
@@ -40,37 +45,59 @@ namespace EntityJokeTests.Core
         {
             string columns = "";
 
-            foreach (Field field in GetFieldsOrdered())
+            foreach (Field field in GetFieldsToUpdateOrdered())
                 columns += String.Format(", {0} = {1}", field.ColumnName, GetValueToUpdate(field));
 
-            return String.Format("SET {0}", columns.Substring(2));
+            return String.Format("SET {0}", columns.Length > 0 ? columns.Substring(2) : "");
         }
 
-        private IEnumerable<Field> GetFieldsOrdered()
+        private List<Field> GetFieldsToUpdateOrdered()
         {
             return entity.GetFields()
                 .Where(f => !f.IsKey && HasChange(f))
-                .OrderBy(f => f.Name);
+                .OrderBy(f => f.Name).ToList();
         }
 
         private bool HasChange(Field field)
         {
-            return field.IsEntity ? GetJoinComparison(field) : GetFieldComparison(field);
+            return field.IsEntity ? !IsEqualsJoinObjects(objectUpdate, field) : !IsEqualsField(objectUpdate, field);
         }
 
-        private bool GetJoinComparison(Field field)
-        {
-            return true;
-        }
-
-        private bool GetFieldComparison(Field field)
+        private bool IsEqualsJoinObjects(object obj, Field field)
         {
             var aspect = DictionaryEntitiesAspects.GetInstance().GetAspect(objectUpdate);
+            var valueA = GetObjectField(aspect, field);
 
-            var valueA = new ValueFieldExtractor(objectUpdate, field).Extract();
+            var valueB = GetObjectField(obj, field);
+
+            if (valueA == null)
+                return valueB == null;
+
+            if (valueB == null)
+                return false;
+
+            Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(valueB.GetType());
+            Field fieldId = entityJoin.FieldDictionary["id"];
+
+            return IsEqualsField(valueB, fieldId);
+        }
+
+        private bool IsEqualsField(object obj, Field field)
+        {
+            var aspect = DictionaryEntitiesAspects.GetInstance().GetAspect(obj);
+
+            if (aspect == null)
+                return obj == null;
+
+            var valueA = new ValueFieldExtractor(obj, field).Extract();
             var valueB = new ValueFieldExtractor(aspect, field).Extract();
 
-            return valueA != valueB;
+            return IsEqualsObjects(valueA, valueB);
+        }
+
+        private static bool IsEqualsObjects(object valueA, object valueB)
+        {
+            return valueA == null ? valueB == null : valueA.Equals(valueB);
         }
 
         private string GetWhere()
@@ -89,12 +116,20 @@ namespace EntityJokeTests.Core
 
         private string GetJoinIdValue(Field field)
         {
-            object join = new ValueFieldExtractor(objectUpdate, field).Extract();
+            var join = GetObjectField(objectUpdate, field);
+
+            if (join == null)
+                return "null";
 
             Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
             Field idField = entityJoin.FieldDictionary["id"];
 
             return new ValueFieldFormatted(join, idField).Format();
+        }
+
+        private object GetObjectField(object obj, Field field)
+        {
+            return new ValueFieldExtractor(obj, field).Extract();
         }
 
     }

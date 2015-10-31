@@ -29,6 +29,9 @@ namespace EntityJoke.Core
 
         public void AddOrRefreshObject(object obj)
         {
+            if (obj == null)
+                return;
+
             ProcessJoins(obj);
 
             if (IsObjectProcessed(obj))
