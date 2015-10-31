@@ -49,6 +49,7 @@
     <Compile Include="Connection\JokePostgreSQLConfigurationBuilder.cs" />
     <Compile Include="Connection\JokeSQLiteConfiguration.cs" />
     <Compile Include="Connection\JokeSQLiteConfigurationBuilder.cs" />
+    <Compile Include="Core\DictionaryEntitiesAspects.cs" />
     <Compile Include="Core\DictionaryEntitiesObjects.cs" />
     <Compile Include="Core\DictionaryEntitiesMap.cs" />
     <Compile Include="Core\DictionaryEntityLoader.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Linq\SQLWithConditionGeneratorBuilder.cs" />
     <Compile Include="Linq\WhereGeneratorBuilder.cs" />
     <Compile Include="Process\AliasGenerator.cs" />
+    <Compile Include="Process\ClonerObject.cs" />
     <Compile Include="Process\CommandDeleteGenerator.cs" />
     <Compile Include="Process\CommandInsertGenerator.cs" />
     <Compile Include="Process\CommandUpdateGenerator.cs" />

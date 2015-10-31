@@ -9,12 +9,12 @@ namespace EntityJokeTests.Core
 {
     public class CommandUpdateGenerator
     {
-        object objectInsert;
+        object objectUpdate;
         Entity entity;
 
         public CommandUpdateGenerator(object objectInsert)
         {
-            this.objectInsert = objectInsert;
+            this.objectUpdate = objectInsert;
             this.entity = DictionaryEntitiesMap.INSTANCE.GetEntity(objectInsert.GetType());
         }
 
@@ -49,8 +49,28 @@ namespace EntityJokeTests.Core
         private IEnumerable<Field> GetFieldsOrdered()
         {
             return entity.GetFields()
-                .Where(f => !f.IsKey)
+                .Where(f => !f.IsKey && HasChange(f))
                 .OrderBy(f => f.Name);
+        }
+
+        private bool HasChange(Field field)
+        {
+            return field.IsEntity ? GetJoinComparison(field) : GetFieldComparison(field);
+        }
+
+        private bool GetJoinComparison(Field field)
+        {
+            return true;
+        }
+
+        private bool GetFieldComparison(Field field)
+        {
+            var aspect = DictionaryEntitiesAspects.GetInstance().GetAspect(objectUpdate);
+
+            var valueA = new ValueFieldExtractor(objectUpdate, field).Extract();
+            var valueB = new ValueFieldExtractor(aspect, field).Extract();
+
+            return valueA != valueB;
         }
 
         private string GetWhere()
@@ -62,14 +82,14 @@ namespace EntityJokeTests.Core
         private string GetValueToUpdate(Field field)
         {
             if(!field.IsEntity)
-                return new ValueFieldFormatted(objectInsert, field).Format();
+                return new ValueFieldFormatted(objectUpdate, field).Format();
 
             return GetJoinIdValue(field);
         }
 
         private string GetJoinIdValue(Field field)
         {
-            object join = new ValueFieldExtractor(objectInsert, field).Extract();
+            object join = new ValueFieldExtractor(objectUpdate, field).Extract();
 
             Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
             Field idField = entityJoin.FieldDictionary["id"];

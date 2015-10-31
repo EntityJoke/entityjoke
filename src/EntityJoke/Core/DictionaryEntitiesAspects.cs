@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace EntityJoke.Core
 {
-    public class DictionaryEntitiesObjects
+    public class DictionaryEntitiesAspects
     {
-        private static DictionaryEntitiesObjects instance = new DictionaryEntitiesObjects();
+        private static DictionaryEntitiesAspects instance = new DictionaryEntitiesAspects();
 
         private Dictionary<string, object> entityes = new Dictionary<string, object>();
         public int CountObjects { get { return entityes.Count; } }
 
-        private DictionaryEntitiesObjects() { }
+        private DictionaryEntitiesAspects() { }
 
-        public static DictionaryEntitiesObjects GetInstance()
+        public static DictionaryEntitiesAspects GetInstance()
         {
             return instance;
         }
@@ -27,7 +27,7 @@ namespace EntityJoke.Core
             entityes.Clear();
         }
 
-        public void AddOrRefreshObject(object obj)
+        public void AddOrRefreshAspect(object obj)
         {
             ProcessJoins(obj);
 
@@ -39,12 +39,12 @@ namespace EntityJoke.Core
 
         private void RefreshObject(object obj)
         {
-            entityes[GetKey(obj)] = obj;
+            entityes[GetKey(obj)] = new ClonerObject(obj).clone();
         }
 
         private void AddObject(object obj)
         {
-            entityes.Add(GetKey(obj), obj);
+            entityes.Add(GetKey(obj), new ClonerObject(obj).clone());
         }
 
         private void ProcessJoins(object obj)
@@ -71,7 +71,7 @@ namespace EntityJoke.Core
             return new KeyDictionaryObjectExtractor(obj).Extract(); 
         }
 
-        public object GetObject(object obj)
+        public object GetAspect(object obj)
         {
             if (IsObjectProcessed(obj))
                 return entityes[GetKey(obj)];
