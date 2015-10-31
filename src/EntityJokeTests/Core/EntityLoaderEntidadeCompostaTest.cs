@@ -46,10 +46,30 @@ namespace EntityJokeTests.Core
             Assert.That(produto.CategoriaTeste.Nome, Is.EqualTo("Cereal 1"));
         }
 
+        [Test]
+        public void CarregaEntidadeCategoriaIgualParaOsDoisProdutos()
+        {
+            var produto1 = (ProdutoTeste)target
+                .Entity(entity)
+                .Row(dataTable.Rows[0])
+                .Columns(dataTable.Columns)
+                .Build();
+
+            var produto2 = (ProdutoTeste)target
+                .Entity(entity)
+                .Row(dataTable.Rows[1])
+                .Columns(dataTable.Columns)
+                .Build();
+
+            Assert.That(produto1, Is.Not.EqualTo(produto2));
+            Assert.That(produto1.CategoriaTeste, Is.EqualTo(produto2.CategoriaTeste));
+        }
+
         private void SetUpDictionaryEntityes()
         {
             DictionaryEntitiesMap.INSTANCE.Clear();
             DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(ProdutoTeste));
+            DictionaryEntitiesAspect.GetInstance().Clear();
             entity = DictionaryEntitiesMap.INSTANCE.GetEntity(typeof(ProdutoTeste));
         }
 
@@ -57,6 +77,7 @@ namespace EntityJokeTests.Core
         {
             SetUpColunas();
             AddRow(1, "Trigo", "Alvalade", "1", "Pacote", "Kg", 2, "Cereal 1");
+            AddRow(2, "Trigo", "Sol", "5", "Pacote", "Kg", 2, "Cereal 1");
         }
 
         private void SetUpColunas()

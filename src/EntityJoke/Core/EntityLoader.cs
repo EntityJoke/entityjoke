@@ -11,17 +11,41 @@ namespace EntityJoke.Core
 {
     public class EntityLoader
     {
-        internal DataRow Row;
-        internal int IndexColumn;
-        internal Entity Entity;
-        internal DataColumnCollection Columns;
+        public DataRow Row;
+        public int IndexColumn;
+        public Entity Entity;
+        public DataColumnCollection Columns;
         private object obj;
 
-        internal object LoadInstance()
+        public object LoadInstance()
         {
             obj = Activator.CreateInstance(Entity.Type);
-            ProccesColumns();
+            LoadObject();
             return obj;
+        }
+
+        private void LoadObject()
+        {
+            if (IsObjectProcessed())
+                RecoverObject();
+            else
+                ProccesColumns();
+        }
+
+        private bool IsObjectProcessed()
+        {
+            ProcessField();
+            return GetObjectInDictionary() != null;
+        }
+
+        private object GetObjectInDictionary()
+        {
+            return DictionaryEntitiesAspect.GetInstance().GetAspect(obj);
+        }
+
+        private void RecoverObject()
+        {
+            obj = GetObjectInDictionary();
         }
 
         private void ProccesColumns()
@@ -32,6 +56,8 @@ namespace EntityJoke.Core
                 ProcessField();
 
             Entity.Joins.ForEach(j => ProcessJoin(j));
+
+            PutObjectInDictionary();
         }
 
         private int EntityColumnsLength()
@@ -88,6 +114,11 @@ namespace EntityJoke.Core
                 .Columns(Columns)
                 .IndexColumn(IndexColumn)
                 .Build();
+        }
+
+        private void PutObjectInDictionary()
+        {
+            DictionaryEntitiesAspect.GetInstance().TryAddObject(obj);
         }
     }
 }

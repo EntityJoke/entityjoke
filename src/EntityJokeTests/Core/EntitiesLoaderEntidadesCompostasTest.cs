@@ -22,7 +22,7 @@ namespace EntityJokeTests.Core
         [Test]
         public void AssertQuantidadeDeRegistro()
         {
-            Assert.That(target.Load().Count, Is.EqualTo(2));
+            Assert.That(target.Load().Count, Is.EqualTo(3));
         }
 
         [Test]
@@ -84,10 +84,26 @@ namespace EntityJokeTests.Core
             Assert.That(produtos[1].CategoriaTeste.Nome, Is.EqualTo("Cereal 2"));
         }
 
+        [Test]
+        public void AssertCategoriasIguais()
+        {
+            List<ProdutoTeste> produtos = target.Load();
+
+            var prod1 = produtos[0];
+            var prod2 = produtos[1];
+            var prod3 = produtos[2];
+
+            Assert.That(prod1.CategoriaTeste, Is.Not.EqualTo(prod2.CategoriaTeste));
+            Assert.That(prod2.CategoriaTeste, Is.Not.EqualTo(prod3.CategoriaTeste));
+
+            Assert.That(prod1.CategoriaTeste, Is.EqualTo(prod3.CategoriaTeste));
+        }
+
         private static void SetUpDictionaryEntityes()
         {
             DictionaryEntitiesMap.INSTANCE.Clear();
             DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(ProdutoTeste));
+            DictionaryEntitiesAspect.GetInstance().Clear();
         }
 
         private void SetUpDataTable()
@@ -95,6 +111,7 @@ namespace EntityJokeTests.Core
             SetUpColunas();
             AddRow(1, "Trigo", "Alvalade", "1", "Pacote", "Kg", 2, "Cereal 1");
             AddRow(2, "Arroz", "Tio João", "500", "Pacote", "g", 3, "Cereal 2");
+            AddRow(3, "Farinha", "Campo Largo", "500", "Pacote", "g", 2, "Cereal 1");
         }
 
         private void SetUpColunas()
