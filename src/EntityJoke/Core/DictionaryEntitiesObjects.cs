@@ -88,26 +88,5 @@ namespace EntityJoke.Core
 
             return null;
         }
-
-        private void CopyObjects()
-        {
-            entityes.Keys.ToList()
-                .ForEach(k => CopyObject(k));
-        }
-
-        private void CopyObject(string k)
-        {
-            entityes[k] = GetCopyObj(entityes[k]);
-        }
-
-        private object GetCopyObj(object obj)
-        {
-            object copy = Activator.CreateInstance(obj.GetType());
-
-            DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType())
-                .GetFields().ForEach(f => CopyFieldValue(obj, copy, f));
-
-            return copy;
-        }
     }
 }
