@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace EntityJoke.Core
 {
-    public class DictionaryEntitiesAspect
+    public class DictionaryEntitiesObjects
     {
-        private static DictionaryEntitiesAspect instance = new DictionaryEntitiesAspect();
+        private static DictionaryEntitiesObjects instance = new DictionaryEntitiesObjects();
 
         private Dictionary<string, object> entityes = new Dictionary<string, object>();
         public int CountObjects { get { return entityes.Count; } }
 
-        private DictionaryEntitiesAspect() { }
+        private DictionaryEntitiesObjects() { }
 
-        public static DictionaryEntitiesAspect GetInstance()
+        public static DictionaryEntitiesObjects GetInstance()
         {
             return instance;
         }
@@ -27,17 +27,24 @@ namespace EntityJoke.Core
             entityes.Clear();
         }
 
-
-        public bool TryAddObject(object obj)
+        public void AddOrRefreshObject(object obj)
         {
-            if (IsObjectProcessed(obj))
-                return false;
-
             ProcessJoins(obj);
 
-            entityes.Add(GetKey(obj), obj);
+            if (IsObjectProcessed(obj))
+                RefreshObject(obj);
+            else
+                AddObject(obj);
+        }
 
-            return true;
+        private void RefreshObject(object obj)
+        {
+            entityes[GetKey(obj)] = obj;
+        }
+
+        private void AddObject(object obj)
+        {
+            entityes.Add(GetKey(obj), obj);
         }
 
         private void ProcessJoins(object obj)
@@ -51,7 +58,7 @@ namespace EntityJoke.Core
         private void ProcessJoins(object obj, Field f)
         {
             var objJoin = new ValueFieldExtractor(obj, f).Extract();
-            DictionaryEntitiesAspect.GetInstance().TryAddObject(objJoin);
+            DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(objJoin);
         }
 
         private bool IsObjectProcessed(object obj)
@@ -61,32 +68,7 @@ namespace EntityJoke.Core
 
         private string GetKey(object obj)
         {
-            return String.Format("{0}_{1}", GetTypeName(obj), GetIdValue(obj));
-        }
-
-        private string GetTypeName(object obj)
-        {
-            return DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType()).Type.FullName;
-        }
-
-        private string GetIdValue(object obj)
-        {
-            return new ValueFieldExtractor(obj, GetIdField(obj)).Extract().ToString();
-        }
-
-        private Field GetIdField(object obj)
-        {
-            return DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType()).FieldDictionary["id"];
-        }
-
-        private object GetCopyObj(object obj)
-        {
-            object copy = Activator.CreateInstance(obj.GetType());
-
-            DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType())
-                .GetFields().ForEach(f => CopyFieldValue(obj, copy, f));
-
-            return copy;
+            return new KeyDictionaryObjectExtractor(obj).Extract(); 
         }
 
         private void CopyFieldValue(object origin, object copy, Field field)
@@ -107,7 +89,7 @@ namespace EntityJoke.Core
             return null;
         }
 
-        public void CopyObjects()
+        private void CopyObjects()
         {
             entityes.Keys.ToList()
                 .ForEach(k => CopyObject(k));
@@ -116,6 +98,16 @@ namespace EntityJoke.Core
         private void CopyObject(string k)
         {
             entityes[k] = GetCopyObj(entityes[k]);
+        }
+
+        private object GetCopyObj(object obj)
+        {
+            object copy = Activator.CreateInstance(obj.GetType());
+
+            DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType())
+                .GetFields().ForEach(f => CopyFieldValue(obj, copy, f));
+
+            return copy;
         }
     }
 }

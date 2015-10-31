@@ -12,13 +12,13 @@ namespace EntityJokeTests.Core
     public class DictionaryEntitiesAspectTest
     {
 
-        DictionaryEntitiesAspect target;
+        DictionaryEntitiesObjects target;
 
         [SetUp]
         public void SetUp()
         {
             DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(ProdutoTeste));
-            target = DictionaryEntitiesAspect.GetInstance();
+            target = DictionaryEntitiesObjects.GetInstance();
             target.Clear();
         }
 
@@ -31,7 +31,7 @@ namespace EntityJokeTests.Core
             cat.Id = 1;
             cat.Nome = "Categoria";
 
-            target.TryAddObject(cat);
+            target.AddOrRefreshObject(cat);
 
             Assert.That(target.CountObjects, Is.EqualTo(1));
         }
@@ -45,57 +45,11 @@ namespace EntityJokeTests.Core
             cat.Id = 1;
             cat.Nome = "Categoria";
 
-            Assert.That(target.TryAddObject(cat), Is.True);
+            target.AddOrRefreshObject(cat);
             Assert.That(target.CountObjects, Is.EqualTo(1));
 
-            Assert.That(target.TryAddObject(cat), Is.False);
+            target.AddOrRefreshObject(cat);
             Assert.That(target.CountObjects, Is.EqualTo(1));
-        }
-
-        [Test]
-        public void DicionarioRealizaCopiaDeObjetoCategoria()
-        {
-            CategoriaTeste cat = new CategoriaTeste();
-            cat.Id = 1;
-            cat.Nome = "Categoria";
-
-            target.TryAddObject(cat);
-
-            Assert.That(cat, Is.EqualTo(target.GetAspect(cat)));
-
-            target.CopyObjects();
-
-            Assert.That(cat, Is.Not.EqualTo(target.GetAspect(cat)));
-        }
-
-        [Test]
-        public void DicionarioRealizaCopiaDeObjetoProduto()
-        {
-            CategoriaTeste cat = new CategoriaTeste();
-            cat.Id = 1;
-            cat.Nome = "Categoria";
-
-            ProdutoTeste prod1 = new ProdutoTeste() { Id = 1, Nome = "Arroz", CategoriaTeste = cat };
-            ProdutoTeste prod2 = new ProdutoTeste() { Id = 2, Nome = "Trigo", CategoriaTeste = cat };
-
-            target.TryAddObject(prod1);
-            Assert.That(target.CountObjects, Is.EqualTo(2));
-            Assert.That(prod1, Is.EqualTo(target.GetAspect(prod1)));
-            Assert.That(cat, Is.EqualTo(target.GetAspect(cat)));
-
-            target.CopyObjects();
-
-            target.TryAddObject(prod2);
-            Assert.That(target.CountObjects, Is.EqualTo(3));
-            Assert.That(prod2, Is.EqualTo(target.GetAspect(prod2)));
-            Assert.That(cat, Is.Not.EqualTo(target.GetAspect(cat)));
-
-            target.CopyObjects();
-
-            Assert.That(target.CountObjects, Is.EqualTo(3));
-            Assert.That(cat, Is.Not.EqualTo(target.GetAspect(cat)));
-            Assert.That(prod1, Is.Not.EqualTo(target.GetAspect(prod1)));
-            Assert.That(prod2, Is.Not.EqualTo(target.GetAspect(prod2)));
         }
     }
 }

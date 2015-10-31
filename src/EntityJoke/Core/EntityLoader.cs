@@ -1,4 +1,5 @@
-﻿using EntityJoke.Structure;
+﻿using EntityJoke.Process;
+using EntityJoke.Structure;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,11 +12,14 @@ namespace EntityJoke.Core
 {
     public class EntityLoader
     {
-        public DataRow Row;
+        private object obj;
+
         public int IndexColumn;
         public Entity Entity;
+        public DataRow Row;
         public DataColumnCollection Columns;
-        private object obj;
+
+        public Dictionary<string, object> DictionaryObjectsProcessed;
 
         public object LoadInstance()
         {
@@ -29,23 +33,34 @@ namespace EntityJoke.Core
             if (IsObjectProcessed())
                 RecoverObject();
             else
-                ProccesColumns();
+                CreateObject();
         }
 
         private bool IsObjectProcessed()
         {
             ProcessField();
-            return GetObjectInDictionary() != null;
+            return DictionaryObjectsProcessed.ContainsKey(GetKey(obj));
+        }
+
+        private string GetKey(object obj)
+        {
+            return new KeyDictionaryObjectExtractor(obj).Extract();
         }
 
         private object GetObjectInDictionary()
         {
-            return DictionaryEntitiesAspect.GetInstance().GetAspect(obj);
+            return DictionaryEntitiesObjects.GetInstance().GetAspect(obj);
         }
 
         private void RecoverObject()
         {
             obj = GetObjectInDictionary();
+        }
+
+        private void CreateObject()
+        {
+            ProccesColumns();
+            PutObjectInDictionary();
         }
 
         private void ProccesColumns()
@@ -56,8 +71,6 @@ namespace EntityJoke.Core
                 ProcessField();
 
             Entity.Joins.ForEach(j => ProcessJoin(j));
-
-            PutObjectInDictionary();
         }
 
         private int EntityColumnsLength()
@@ -113,12 +126,14 @@ namespace EntityJoke.Core
                 .Row(Row)
                 .Columns(Columns)
                 .IndexColumn(IndexColumn)
+                .Dictionary(DictionaryObjectsProcessed)
                 .Build();
         }
 
         private void PutObjectInDictionary()
         {
-            DictionaryEntitiesAspect.GetInstance().TryAddObject(obj);
+            DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(obj);
+            DictionaryObjectsProcessed.Add(GetKey(obj), obj);
         }
     }
 }

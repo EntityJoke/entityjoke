@@ -15,6 +15,7 @@ namespace EntityJoke.Core
         private Entity entity;
         private List<T> listEntities = new List<T>();
         private Type type = typeof(T);
+        private Dictionary<string, object> dictionaryObjectsProcessed;
 
         public EntitiesLoader(DataTable produtoTable)
         {
@@ -24,6 +25,8 @@ namespace EntityJoke.Core
 
         public List<T> Load()
         {
+            dictionaryObjectsProcessed = new Dictionary<string, object>();
+
             foreach (DataRow row in produtoTable.Rows)
                 listEntities.Add(CreateInstance(row));
 
@@ -36,6 +39,7 @@ namespace EntityJoke.Core
                 .Entity(entity)
                 .Row(row)
                 .Columns(produtoTable.Columns)
+                .Dictionary(dictionaryObjectsProcessed)
                 .Build();
         }
     }

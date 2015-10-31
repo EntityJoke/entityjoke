@@ -49,8 +49,9 @@
     <Compile Include="Connection\JokePostgreSQLConfigurationBuilder.cs" />
     <Compile Include="Connection\JokeSQLiteConfiguration.cs" />
     <Compile Include="Connection\JokeSQLiteConfigurationBuilder.cs" />
-    <Compile Include="Core\DictionaryEntitiesAspect.cs" />
+    <Compile Include="Core\DictionaryEntitiesObjects.cs" />
     <Compile Include="Core\DictionaryEntitiesMap.cs" />
+    <Compile Include="Core\DictionaryEntityLoader.cs" />
     <Compile Include="Core\EntitiesLoader.cs" />
     <Compile Include="Core\EntityJoke.cs" />
     <Compile Include="Core\EntityLoader.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Process\DeleteCommandsExecutor.cs" />
     <Compile Include="Process\EntityTreeAliasGenerator.cs" />
     <Compile Include="Process\FieldExtractor.cs" />
+    <Compile Include="Process\KeyDictionaryObjectExtractor.cs" />
     <Compile Include="Process\NameFieldGenerator.cs" />
     <Compile Include="Process\NameGenerator.cs" />
     <Compile Include="Process\NonQueryCommandsExecutor.cs" />

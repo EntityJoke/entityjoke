@@ -15,6 +15,7 @@ namespace EntityJoke.Core
         private int indexColumn;
         private Entity entity;
         private DataColumnCollection columns;
+        private Dictionary<string, object> dictionaryEntities = new Dictionary<string, object>();
 
         public EntityLoaderBuilder Entity(Entity entity)
         {
@@ -40,6 +41,12 @@ namespace EntityJoke.Core
             return this;
         }
 
+        public EntityLoaderBuilder Dictionary(Dictionary<string, object> dictionaryEntities)
+        {
+            this.dictionaryEntities = dictionaryEntities;
+            return this;
+        }
+
         public object Build()
         {
             EntityLoader loader = new EntityLoader();
@@ -47,7 +54,9 @@ namespace EntityJoke.Core
             loader.IndexColumn = indexColumn;
             loader.Entity = entity;
             loader.Columns = columns;
+            loader.DictionaryObjectsProcessed = dictionaryEntities;
             return loader.LoadInstance();
         }
+
     }
 }

@@ -103,7 +103,7 @@ namespace EntityJokeTests.Core
         {
             DictionaryEntitiesMap.INSTANCE.Clear();
             DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(ProdutoTeste));
-            DictionaryEntitiesAspect.GetInstance().Clear();
+            DictionaryEntitiesObjects.GetInstance().Clear();
         }
 
         private void SetUpDataTable()
