@@ -49,7 +49,7 @@ namespace EntityJoke.Core
 
         private object GetObjectInDictionary()
         {
-            return DictionaryEntitiesObjects.GetInstance().GetAspect(obj);
+            return DictionaryEntitiesObjects.GetInstance().GetObject(obj);
         }
 
         private void RecoverObject()
@@ -132,8 +132,34 @@ namespace EntityJoke.Core
 
         private void PutObjectInDictionary()
         {
-            DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(obj);
+            if (IsObjectInDictionaryEntities())
+                RefreshObject();
+            else
+                DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(obj);
+
             DictionaryObjectsProcessed.Add(GetKey(obj), obj);
+        }
+
+        private bool IsObjectInDictionaryEntities()
+        {
+            return DictionaryEntitiesObjects.GetInstance().GetObject(obj) != null;
+        }
+
+        private void RefreshObject()
+        {
+            var objectDictionary = DictionaryEntitiesObjects.GetInstance().GetObject(obj);
+            Entity.GetFields().ForEach(f => RefreshFieldValue(objectDictionary, f));
+            obj = objectDictionary;
+        }
+
+        private void RefreshFieldValue(object objectDictionary, Field field)
+        {
+            new FieldValueSetter(objectDictionary, field, GetValue(field)).Set();
+        }
+
+        private object GetValue(Field field)
+        {
+            return new ValueFieldExtractor(obj, field).Extract();
         }
     }
 }

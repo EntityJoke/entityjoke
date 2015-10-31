@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace EntityJokeTests.Core
 {
     [TestFixture]
-    public class DictionaryEntitiesAspectTest
+    public class DictionaryEntitiesObjectsTest
     {
 
         DictionaryEntitiesObjects target;

@@ -81,7 +81,7 @@ namespace EntityJoke.Core
             return new ValueFieldExtractor(origin, field).Extract();
         }
 
-        public object GetAspect(object obj)
+        public object GetObject(object obj)
         {
             if (IsObjectProcessed(obj))
                 return entityes[GetKey(obj)];

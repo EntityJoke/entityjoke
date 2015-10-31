@@ -61,7 +61,7 @@
     <Compile Include="Connection\DbConnectionFactoryTest.cs" />
     <Compile Include="Connection\DbDataAdapterFactoryTest.cs" />
     <Compile Include="Connection\JokeConfigurationTest.cs" />
-    <Compile Include="Core\DictionaryEntitiesAspectTest.cs" />
+    <Compile Include="Core\DictionaryEntitiesObjectsTest.cs" />
     <Compile Include="Core\EntitiesLoaderEntidadesCompostasTest.cs" />
     <Compile Include="Core\EntitiesLoaderTest.cs" />
     <Compile Include="Core\EntityLoaderEntidadeCompostaTest.cs" />

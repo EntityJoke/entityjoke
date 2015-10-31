@@ -99,6 +99,43 @@ namespace EntityJokeTests.Core
             Assert.That(prod1.CategoriaTeste, Is.EqualTo(prod3.CategoriaTeste));
         }
 
+        [Test]
+        public void AssertCategoriasIguaisEAtualizadasAposUmaNovaPesquisa()
+        {
+            List<ProdutoTeste> produtos = target.Load();
+
+            var prod1 = produtos[0];
+            var prod2 = produtos[1];
+            var prod3 = produtos[2];
+
+            Assert.That(prod1.CategoriaTeste, Is.Not.EqualTo(prod2.CategoriaTeste));
+            Assert.That(prod2.CategoriaTeste, Is.Not.EqualTo(prod3.CategoriaTeste));
+
+            Assert.That(prod1.CategoriaTeste, Is.EqualTo(prod3.CategoriaTeste));
+
+            Assert.That(prod1.CategoriaTeste.Nome, Is.EqualTo("Cereal 1"));
+            Assert.That(prod3.CategoriaTeste.Nome, Is.EqualTo("Cereal 1"));
+
+            produtoTable = new DataTable();
+            SetUpColunas();
+            AddRow(4, "Aveia", "Nestle", "500", "Pacote", "g", 2, "Cereal 1 Up");
+
+            target = new EntitiesLoader<ProdutoTeste>(produtoTable);
+
+            var prod4 = target.Load()[0];
+
+            Assert.That(prod2.CategoriaTeste, Is.Not.EqualTo(prod1.CategoriaTeste));
+            Assert.That(prod2.CategoriaTeste, Is.Not.EqualTo(prod3.CategoriaTeste));
+            Assert.That(prod2.CategoriaTeste, Is.Not.EqualTo(prod4.CategoriaTeste));
+
+            Assert.That(prod1.CategoriaTeste, Is.EqualTo(prod3.CategoriaTeste));
+            Assert.That(prod1.CategoriaTeste, Is.EqualTo(prod4.CategoriaTeste));
+
+            Assert.That(prod1.CategoriaTeste.Nome, Is.EqualTo("Cereal 1 Up"));
+            Assert.That(prod3.CategoriaTeste.Nome, Is.EqualTo("Cereal 1 Up"));
+            Assert.That(prod4.CategoriaTeste.Nome, Is.EqualTo("Cereal 1 Up"));
+        }
+
         private static void SetUpDictionaryEntityes()
         {
             DictionaryEntitiesMap.INSTANCE.Clear();
@@ -108,6 +145,7 @@ namespace EntityJokeTests.Core
 
         private void SetUpDataTable()
         {
+            produtoTable = new DataTable();
             SetUpColunas();
             AddRow(1, "Trigo", "Alvalade", "1", "Pacote", "Kg", 2, "Cereal 1");
             AddRow(2, "Arroz", "Tio João", "500", "Pacote", "g", 3, "Cereal 2");
@@ -116,7 +154,6 @@ namespace EntityJokeTests.Core
 
         private void SetUpColunas()
         {
-            produtoTable = new DataTable();
             produtoTable.Columns.Add(new DataColumn("p_id", typeof(int)));
             produtoTable.Columns.Add(new DataColumn("p_nome", typeof(string)));
             produtoTable.Columns.Add(new DataColumn("p_marca", typeof(string)));
