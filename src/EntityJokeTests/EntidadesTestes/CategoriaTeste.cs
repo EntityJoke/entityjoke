@@ -16,7 +16,7 @@ namespace EntityJokeTests.Core
 
         internal void CarregaSubCategorias()
         {
-            var sql = new Joke<CategoriaTeste>().Query()
+            var sql = Joke.Query<CategoriaTeste>()
                 .Where("categoriaTeste.IdCategoriaTeste = " + Id);
 
             var lis = sql.Execute();

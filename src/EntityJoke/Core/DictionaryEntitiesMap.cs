@@ -40,8 +40,10 @@ namespace EntityJoke.Core
 
         public Entity GetEntity(Type type)
         {
-            Entity entity;
-            return entityes.TryGetValue(type.FullName, out entity) ? entity : null;
+            if (!ExistsEntity(type))
+                entityes.Add(type.FullName, LoadEntity(type));
+
+            return entityes[type.FullName];
         }
 
         public int EntityesCount()

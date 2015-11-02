@@ -1,40 +1,31 @@
 ﻿using EntityJoke.Linq;
-using EntityJoke.Structure;
-using System;
+using EntityJoke.Process;
 using System.Collections.Generic;
 
 namespace EntityJoke.Core
 {
-    public class Joke<T>
+    public class Joke
     {
-        private Entity entity;
-
-        public Joke()
-        {
-            Type type = typeof(T);
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(type);
-            entity = DictionaryEntitiesMap.INSTANCE.GetEntity(type);
-        }
-
-        public string GetEntityName()
-        {
-            return entity.Name;
-        }
-
-        public Dictionary<string, Field> GetEntityFields()
-        {
-            return entity.FieldDictionary;
-        }
-
-        public QuerySimple<T> Query()
+        public static QuerySimple<T> Query<T>()
         {
             return new QuerySimple<T>();
         }
 
-        public List<T> GetAll()
+        public static List<T> GetAll<T>()
         {
-            return Query().Execute();
+            return Query<T>().Execute();
         }
 
-    }
+        public static void Save(object obj)
+        {
+            new NonQueryCommandsExecutor(obj).Execute();
+        }
+
+        public static void Delete(object obj)
+        {
+            new DeleteCommandsExecutor(obj).Execute();
+        }
+
+    
+}
 }

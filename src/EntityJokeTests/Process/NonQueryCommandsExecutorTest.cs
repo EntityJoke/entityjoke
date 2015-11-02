@@ -20,14 +20,11 @@ namespace EntityJokeTests.Process
         const string SENHA      = "TyUT3KxQ82";
         const string JOKE_BD    = "basedeprodutos1";
 
-        Joke<CategoriaTeste> target;
-
         [SetUp]
         public void SetUp()
         {
             DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(CategoriaTeste));
             DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(Ags));
-            target = new Joke<CategoriaTeste>();
             JokeConfigurationBuilder.NewConfigurationToPostgreSQL()
                 .Host(LOCAL_HOST)
                 .Port(PORTA_5432)
@@ -49,7 +46,7 @@ namespace EntityJokeTests.Process
             NonQueryCommandsExecutor executor = new NonQueryCommandsExecutor(cat);
             executor.Execute();
 
-            var novaCategoria = target.Query()
+            var novaCategoria = Joke.Query<CategoriaTeste>()
                 .Where("categoriaTeste.Id = 20000")
                 .Execute()[0];
 
@@ -68,7 +65,7 @@ namespace EntityJokeTests.Process
             NonQueryCommandsExecutor executor = new NonQueryCommandsExecutor(cat);
             executor.Execute();
 
-            var novaCategoria = new Joke<GgsTeste>().Query()
+            var novaCategoria = Joke.Query<GgsTeste>()
                 .Where("nome ILIKE 'Teste%4'")
                 .Execute()[0];
 
@@ -89,7 +86,7 @@ namespace EntityJokeTests.Process
             NonQueryCommandsExecutor executor = new NonQueryCommandsExecutor(ags);
             executor.Execute();
 
-            var novaCategoria = new Joke<Ags>().Query()
+            var novaCategoria = Joke.Query<Ags>()
                 .Where("ags.Ggs.Nome ILIKE 'Gui'")
                 .Execute()[0];
 

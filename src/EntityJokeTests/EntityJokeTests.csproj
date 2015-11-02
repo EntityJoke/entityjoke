@@ -67,7 +67,6 @@
     <Compile Include="Core\EntitiesLoaderTest.cs" />
     <Compile Include="Core\EntityLoaderEntidadeCompostaTest.cs" />
     <Compile Include="Core\EntityLoaderTest.cs" />
-    <Compile Include="Core\JokeTest.cs" />
     <Compile Include="EntidadesTestes\AlteracaoPrecoProduto.cs" />
     <Compile Include="EntidadesTestes\CategoriaTeste.cs" />
     <Compile Include="EntidadesTestes\ComparadorProdutos.cs" />

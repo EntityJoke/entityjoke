@@ -84,12 +84,5 @@ namespace EntityJokeTests.Procces
             Assert.That(produto.FieldDictionary["codigo_de_barras"].Type.Name, Is.EqualTo("String"));
         }
 
-        [Test]
-        public void NaoRecuperaEntityQueNaoProcessou()
-        {
-            Entity precoProduto = target.GetEntity(typeof(PrecoProduto));
-            Assert.That(precoProduto, Is.Null);
-        }
-
     }
 }
