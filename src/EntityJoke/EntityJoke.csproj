@@ -54,7 +54,6 @@
     <Compile Include="Core\DictionaryEntitiesMap.cs" />
     <Compile Include="Core\DictionaryEntityLoader.cs" />
     <Compile Include="Core\EntitiesLoader.cs" />
-    <Compile Include="Core\EntityJoke.cs" />
     <Compile Include="Core\EntityLoader.cs" />
     <Compile Include="Core\EntityLoaderBuilder.cs" />
     <Compile Include="Core\FieldValueSetter.cs" />

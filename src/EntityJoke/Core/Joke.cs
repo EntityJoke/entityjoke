@@ -16,6 +16,14 @@ namespace EntityJoke.Core
             return Query<T>().Execute();
         }
 
+        public static T GetById<T>(int id)
+        {
+            var entity = DictionaryEntitiesMap.INSTANCE.GetEntity(typeof(T));
+            return Query<T>()
+                .Where(entity.TreeAliases.Alias.Symbol + ".id = " + id)
+                .Execute()[0];
+        }
+
         public static void Save(object obj)
         {
             new NonQueryCommandsExecutor(obj).Execute();
