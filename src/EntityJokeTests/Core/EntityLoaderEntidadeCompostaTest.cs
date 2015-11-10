@@ -51,12 +51,14 @@ namespace EntityJokeTests.Core
         {
             var produto1 = (ProdutoTeste)target
                 .Entity(entity)
+                .PointerIndexColumn(new PointerIndexColumn())
                 .Row(dataTable.Rows[0])
                 .Columns(dataTable.Columns)
                 .Build();
 
             var produto2 = (ProdutoTeste)target
                 .Entity(entity)
+                .PointerIndexColumn(new PointerIndexColumn())
                 .Row(dataTable.Rows[1])
                 .Columns(dataTable.Columns)
                 .Build();

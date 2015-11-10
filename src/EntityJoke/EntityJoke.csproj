@@ -59,6 +59,7 @@
     <Compile Include="Core\FieldValueSetter.cs" />
     <Compile Include="Core\Joke.cs" />
     <Compile Include="Core\JokeConfigurationBuilder.cs" />
+    <Compile Include="Core\PointerIndexColumn.cs" />
     <Compile Include="Core\SQLCommandExecutor.cs" />
     <Compile Include="Linq\FieldAliasReplacer.cs" />
     <Compile Include="Linq\FieldAliasReplacerBuilder.cs" />

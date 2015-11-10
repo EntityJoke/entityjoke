@@ -14,7 +14,7 @@ namespace EntityJoke.Core
     {
         private object obj;
 
-        public int IndexColumn;
+        public PointerIndexColumn Pointer;
         public Entity Entity;
         public DataRow Row;
         public DataColumnCollection Columns;
@@ -67,7 +67,7 @@ namespace EntityJoke.Core
         {
             int limiteLoop = EntityColumnsLength();
 
-            for (; IndexColumn < limiteLoop; IndexColumn++)
+            for (; Pointer.IndexColumn < limiteLoop; Pointer.IndexColumn++)
                 ProcessField();
 
             Entity.Joins.ForEach(j => ProcessJoin(j));
@@ -76,7 +76,7 @@ namespace EntityJoke.Core
         private int EntityColumnsLength()
         {
             int fieldsNotEntity = Entity.GetFields().Where(f => !f.IsEntity).ToList().Count;
-            return fieldsNotEntity + IndexColumn;
+            return fieldsNotEntity + Pointer.IndexColumn;
         }
 
         private void ProcessField()
@@ -90,7 +90,7 @@ namespace EntityJoke.Core
 
         private DataColumn GetCurrentColumn()
         {
-            return Columns[IndexColumn];
+            return Columns[Pointer.IndexColumn];
         }
 
         private bool IsNullValue(object value)
@@ -125,7 +125,7 @@ namespace EntityJoke.Core
                 .Entity(join.Entity)
                 .Row(Row)
                 .Columns(Columns)
-                .IndexColumn(IndexColumn)
+                .PointerIndexColumn(Pointer)
                 .Dictionary(DictionaryObjectsProcessed)
                 .Build();
         }

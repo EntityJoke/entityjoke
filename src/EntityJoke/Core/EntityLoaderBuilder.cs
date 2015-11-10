@@ -12,7 +12,7 @@ namespace EntityJoke.Core
     public class EntityLoaderBuilder
     {
         private DataRow row;
-        private int indexColumn;
+        private PointerIndexColumn pointer = new PointerIndexColumn();
         private Entity entity;
         private DataColumnCollection columns;
         private Dictionary<string, object> dictionaryEntities = new Dictionary<string, object>();
@@ -35,9 +35,9 @@ namespace EntityJoke.Core
             return this;
         }
 
-        public EntityLoaderBuilder IndexColumn(int indexColumn)
+        public EntityLoaderBuilder PointerIndexColumn(PointerIndexColumn pointer)
         {
-            this.indexColumn = indexColumn;
+            this.pointer = pointer;
             return this;
         }
 
@@ -51,7 +51,7 @@ namespace EntityJoke.Core
         {
             EntityLoader loader = new EntityLoader();
             loader.Row = row;
-            loader.IndexColumn = indexColumn;
+            loader.Pointer = pointer;
             loader.Entity = entity;
             loader.Columns = columns;
             loader.DictionaryObjectsProcessed = dictionaryEntities;

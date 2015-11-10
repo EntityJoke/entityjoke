@@ -66,9 +66,11 @@
     <Compile Include="Core\EntitiesLoaderEntidadesCompostasTest.cs" />
     <Compile Include="Core\EntitiesLoaderTest.cs" />
     <Compile Include="Core\EntityLoaderEntidadeCompostaTest.cs" />
+    <Compile Include="Core\EntityLoaderDuasEntidadeCompostaTest.cs" />
     <Compile Include="Core\EntityLoaderTest.cs" />
     <Compile Include="EntidadesTestes\AlteracaoPrecoProduto.cs" />
     <Compile Include="EntidadesTestes\CategoriaTeste.cs" />
+    <Compile Include="EntidadesTestes\ComparadorCategorias.cs" />
     <Compile Include="EntidadesTestes\ComparadorProdutos.cs" />
     <Compile Include="EntidadesTestes\GGSTeste.cs" />
     <Compile Include="EntidadesTestes\PrecoProduto.cs" />
