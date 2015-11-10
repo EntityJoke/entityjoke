@@ -68,6 +68,10 @@ namespace EntityJoke.Process
         private void ProcessJoin(Field field)
         {
             var objectJoin = new ValueFieldExtractor(objectCommand, field).Extract();
+
+            if (objectJoin == null)
+                return;
+
             new NonQueryCommandsExecutor(objectJoin).Execute();
         }
 
