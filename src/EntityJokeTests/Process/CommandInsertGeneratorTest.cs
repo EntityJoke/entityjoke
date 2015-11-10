@@ -79,7 +79,7 @@ namespace EntityJokeTests.Process
             target = new CommandInsertGenerator(precoProduto);
 
             string insert = "";
-            insert += "INSERT INTO preco_produto (data_fim, data_inicio, preco, id_produto) VALUES ('" + dataFim + "', '" + dataIni + "', 20, 4)";
+            insert += "INSERT INTO preco_produto (data_fim, data_inicio, preco, id_produto) VALUES ('" + dataFim.GetDateTimeFormats()[54] + "', '" + dataIni.GetDateTimeFormats()[54] + "', 20, 4)";
 
             Assert.That(target.GetCommand(), Is.EqualTo(insert));
         }
@@ -104,7 +104,7 @@ namespace EntityJokeTests.Process
             target = new CommandInsertGenerator(comparador);
 
             string insert = "";
-            insert += "INSERT INTO comparador_produtos (data_comparacao, id_produto_a, id_produto_b) VALUES ('" + data + "', 4, 23)";
+            insert += "INSERT INTO comparador_produtos (data_comparacao, id_produto_a, id_produto_b) VALUES ('" + data.GetDateTimeFormats()[54] + "', 4, 23)";
 
             Assert.That(target.GetCommand(), Is.EqualTo(insert));
         }

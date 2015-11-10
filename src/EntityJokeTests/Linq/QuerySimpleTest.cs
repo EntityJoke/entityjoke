@@ -167,7 +167,7 @@ namespace EntityJokeTests.Linq
             sql += "SELECT " + SELECT_PRECO + ", ";
             sql += SELECT_PRODUTO.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
             sql += "FROM preco_produto p ";
-            sql += "JOIN produto pr ON (pr.id = p.id_produto)";
+            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto)";
 
             targetPreco = new QuerySimple<PrecoProduto>();
             Assert.That(targetPreco.ToString(), Is.EqualTo(sql));
@@ -183,7 +183,7 @@ namespace EntityJokeTests.Linq
             sql += "SELECT " + SELECT_PRECO + ", ";
             sql += SELECT_PRODUTO.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
             sql += "FROM preco_produto p ";
-            sql += "JOIN produto pr ON (pr.id = p.id_produto) ";
+            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto) ";
             sql += "WHERE p.preco = 3";
 
             Assert.That(targetPreco.ToString(), Is.EqualTo(sql));
@@ -199,7 +199,7 @@ namespace EntityJokeTests.Linq
             sql += "SELECT " + SELECT_PRECO + ", ";
             sql += SELECT_PRODUTO.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
             sql += "FROM preco_produto p ";
-            sql += "JOIN produto pr ON (pr.id = p.id_produto) ";
+            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto) ";
             sql += "WHERE pr.nome = 'Arroz'";
 
             Assert.That(targetPreco.ToString(), Is.EqualTo(sql));
@@ -215,8 +215,8 @@ namespace EntityJokeTests.Linq
             sql += "p.id p_id, p.data_fim p_data_fim, p.data_inicio p_data_inicio, p.preco p_preco, ";
             sql += "pr.id pr_id, pr.codigo_de_barras pr_codigo_de_barras, pr.nome pr_nome, pr.nome2 pr_nome2, pr.quantidade pr_quantidade ";
             sql += "FROM alteracao_preco_produto a ";
-            sql += "JOIN preco_produto p ON (p.id = a.id_preco_prod) ";
-            sql += "JOIN produto pr ON (pr.id = p.id_produto)";
+            sql += "LEFT JOIN preco_produto p ON (p.id = a.id_preco_prod) ";
+            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto)";
 
             Assert.That(targetAlteracao.ToString(), Is.EqualTo(sql));
         }
@@ -233,8 +233,8 @@ namespace EntityJokeTests.Linq
             sql += "p.id p_id, p.data_fim p_data_fim, p.data_inicio p_data_inicio, p.preco p_preco, ";
             sql += "pr.id pr_id, pr.codigo_de_barras pr_codigo_de_barras, pr.nome pr_nome, pr.nome2 pr_nome2, pr.quantidade pr_quantidade ";
             sql += "FROM alteracao_preco_produto a ";
-            sql += "JOIN preco_produto p ON (p.id = a.id_preco_prod) ";
-            sql += "JOIN produto pr ON (pr.id = p.id_produto) ";
+            sql += "LEFT JOIN preco_produto p ON (p.id = a.id_preco_prod) ";
+            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto) ";
             sql += "WHERE pr.codigo_de_barras = '058764' ";
             sql += "AND TRUNC(a.data_alteracao) > '11/07/2015' ";
             sql += "AND p.preco < 4 ";

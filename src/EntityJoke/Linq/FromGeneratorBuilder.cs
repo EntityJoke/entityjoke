@@ -8,7 +8,7 @@ namespace EntityJoke.Linq
 {
     public class FromGeneratorBuilder: SQLGeneratorBuilder<FromGeneratorBuilder>
     {
-        private const string FORMAT_JOIN = " JOIN {0} {1} ON ({1}.{2} = {3}.{4})";
+        private const string FORMAT_JOIN = " LEFT JOIN {0} {1} ON ({1}.{2} = {3}.{4})";
 
         string from;
 

@@ -135,7 +135,7 @@ namespace EntityJokeTests.Process
 
             string update = "";
             update += "UPDATE comparador_produtos ";
-            update += "SET data_comparacao = '" + data + "', ";
+            update += "SET data_comparacao = '" + data.GetDateTimeFormats()[54] + "', ";
             update += "id_produto_a = 4, ";
             update += "id_produto_b = 23 ";
             update += "WHERE id = 20";

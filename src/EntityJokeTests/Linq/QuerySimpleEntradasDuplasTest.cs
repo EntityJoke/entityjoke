@@ -45,8 +45,8 @@ namespace EntityJokeTests.Linq
             sql += "p.id p_id, p.codigo_de_barras p_codigo_de_barras, p.nome p_nome, p.nome2 p_nome2, p.quantidade p_quantidade, ";
             sql += "pr.id pr_id, pr.codigo_de_barras pr_codigo_de_barras, pr.nome pr_nome, pr.nome2 pr_nome2, pr.quantidade pr_quantidade ";
             sql += "FROM comparador_produtos c ";
-            sql += "JOIN produto p ON (p.id = c.id_produto_a) ";
-            sql += "JOIN produto pr ON (pr.id = c.id_produto_b) ";
+            sql += "LEFT JOIN produto p ON (p.id = c.id_produto_a) ";
+            sql += "LEFT JOIN produto pr ON (pr.id = c.id_produto_b) ";
             sql += "WHERE p.id = 100";
 
             Assert.That(target.ToString(), Is.EqualTo(sql));
