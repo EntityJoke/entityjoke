@@ -61,6 +61,25 @@ namespace EntityJokeTests.Process
         }
 
         [Test]
+        public void GeraInsertProdutoCategoriaNulaTeste()
+        {
+            ProdutoTeste produto = new ProdutoTeste();
+            produto.Id = 3;
+            produto.Nome = "Lasanha";
+            produto.Embalagem = "Caixa";
+            produto.Marca = "Sadia";
+            produto.Quantidade = "650";
+            produto.UnidadeMedida = "g";
+
+            target = new CommandInsertGenerator(produto);
+
+            string insert = "";
+            insert += "INSERT INTO produto_teste (embalagem, marca, nome, quantidade, unidade_medida) VALUES ('Caixa', 'Sadia', 'Lasanha', '650', 'g')";
+
+            Assert.That(target.GetCommand(), Is.EqualTo(insert));
+        }
+
+        [Test]
         public void GeraInsertPrecoProduto()
         {
             DateTime dataIni = new DateTime(2015, 11, 07);

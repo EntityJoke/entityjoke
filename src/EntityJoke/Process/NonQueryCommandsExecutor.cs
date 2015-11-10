@@ -2,14 +2,9 @@
 using EntityJoke.Core;
 using EntityJoke.Structure;
 using EntityJokeTests.Core;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Process
 {
@@ -29,7 +24,12 @@ namespace EntityJoke.Process
         {
             PreExecute();
 
-            this.commandSQL = GetCommandSQL();
+            commandSQL = GetCommandSQL();
+
+            if (commandSQL == "")
+                return;
+
+            Debug.WriteLine("CommandExecutor : " + commandSQL);
 
             DataTable returnCommand = new DataTableGenerator(commandSQL).Generate();
             RefreshObject(returnCommand);
@@ -54,7 +54,8 @@ namespace EntityJoke.Process
 
         private string GetCommandUpdate()
         {
-            return new CommandUpdateGenerator(objectCommand).GetCommand() + " RETURNING ID";
+            var update = new CommandUpdateGenerator(objectCommand).GetCommand();
+            return update == "" ? "" : update + " RETURNING ID";
         }
 
         private bool IsNewObject()

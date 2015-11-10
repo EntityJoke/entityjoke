@@ -137,6 +137,7 @@ namespace EntityJoke.Core
             else
                 DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(obj);
 
+            DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(obj);
             DictionaryObjectsProcessed.Add(GetKey(obj), obj);
         }
 

@@ -41,9 +41,19 @@ namespace EntityJokeTests.Core
             string columns = "";
 
             foreach (Field field in GetFieldsOrdered())
-                columns += String.Format(", {0}", field.ColumnName);
+                columns += GetColumnName(field);
 
             return String.Format("({0})", columns.Substring(2));
+        }
+
+        private string GetColumnName(Field field)
+        {
+            var columnName = String.Format(", {0}", field.ColumnName);
+
+            if(!field.IsEntity)
+                return columnName;
+
+            return GetJoinIdValue(field) == null ? "" : columnName;
         }
 
         private IEnumerable<Field> GetFieldsOrdered()
@@ -58,9 +68,16 @@ namespace EntityJokeTests.Core
             string values = "";
 
             foreach (Field field in GetFieldsOrdered())
-                values += String.Format(", {0}", GetValueToInsert(field));
+                values += AddValueInsert(field);
 
             return String.Format("({0})", values.Substring(2));
+        }
+
+        private string AddValueInsert(Field field)
+        {
+            var value = GetValueToInsert(field);
+
+            return value == null ? "" : String.Format(", {0}", value);
         }
 
         private string GetValueToInsert(Field field)
@@ -74,6 +91,9 @@ namespace EntityJokeTests.Core
         private string GetJoinIdValue(Field field)
         {
             object join = new ValueFieldExtractor(objectInsert, field).Extract();
+
+            if (join == null)
+                return null;
 
             Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
             Field idField = entityJoin.FieldDictionary["id"];

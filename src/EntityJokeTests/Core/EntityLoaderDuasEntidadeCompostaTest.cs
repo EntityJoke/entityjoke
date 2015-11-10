@@ -55,6 +55,13 @@ namespace EntityJokeTests.Core
         {
             SetUpColunas();
             AddRow(1, "131", 1, "Cat 1", 2, "Cat 2");
+
+            DataRow row1 = dataTable.NewRow();
+            row1["c_id"] = 2;
+            row1["c_codigo_comparacao"] = "132";
+            row1["ca_id"] = 1;
+            row1["ca_nome"] = "Cat 1";
+            dataTable.Rows.Add(row1);
         }
 
         private void SetUpColunas()

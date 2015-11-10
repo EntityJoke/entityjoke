@@ -52,7 +52,6 @@
     <Compile Include="Core\DictionaryEntitiesAspects.cs" />
     <Compile Include="Core\DictionaryEntitiesObjects.cs" />
     <Compile Include="Core\DictionaryEntitiesMap.cs" />
-    <Compile Include="Core\DictionaryEntityLoader.cs" />
     <Compile Include="Core\EntitiesLoader.cs" />
     <Compile Include="Core\EntityLoader.cs" />
     <Compile Include="Core\EntityLoaderBuilder.cs" />
