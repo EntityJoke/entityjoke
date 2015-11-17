@@ -55,6 +55,8 @@ namespace EntityJoke.Core
         private void RecoverObject()
         {
             obj = GetObjectInDictionary();
+            int fieldsNotEntity = Entity.GetFields().Where(f => !f.IsEntity).ToList().Count;
+            Pointer.IndexColumn += fieldsNotEntity;
         }
 
         private void CreateObject()
