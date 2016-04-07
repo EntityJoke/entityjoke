@@ -1,8 +1,5 @@
 ﻿using EntityJoke.Structure;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace EntityJoke.Linq
 {
@@ -12,13 +9,13 @@ namespace EntityJoke.Linq
 
         public string SQLQuery;
         public string EntityPath;
-        public EntityJoin Join;
+        public EntityJoin Entity;
         public Field Field;
         private FieldPositionCondition ocurrences;
 
         public string Replace()
         {
-            ocurrences = GetOcurrencesOldValue();
+            ocurrences = OcurrencesOldValue();
 
             Process();
 
@@ -28,61 +25,61 @@ namespace EntityJoke.Linq
         private void Process()
         {
             foreach (int startIndex in ocurrences.Positions)
-                SQLQuery = GetNewSQLCommand(startIndex);
+                SQLQuery = NewSQLCommand(startIndex);
         }
 
-        private string GetNewSQLCommand(int startIndex)
+        private string NewSQLCommand(int startIndex)
         {
             return String.Concat(
-                GetFirstPartSQLCommand(startIndex), 
-                GetNewValue(), 
-                GetLastPartSQLCommand(startIndex));
+                FirstPartSQLCommand(startIndex), 
+                NewValue(), 
+                LastPartSQLCommand(startIndex));
         }
 
-        private string GetFirstPartSQLCommand(int startIndex)
+        protected virtual string FirstPartSQLCommand(int startIndex)
         {
             return SQLQuery.Substring(0, startIndex);
         }
 
-        private string GetLastPartSQLCommand(int startIndex)
+        private string LastPartSQLCommand(int startIndex)
         {
             return SQLQuery.Substring(startIndex + ocurrences.LengthField());
         }
 
-        private FieldPositionCondition GetOcurrencesOldValue()
+        private FieldPositionCondition OcurrencesOldValue()
         {
             return new FieldPositionConditionExtractor(SQLQuery)
-                .Extract(GetOldValue());
+                .Extract(OldValue());
         }
 
-        private string GetOldValue()
+        private string OldValue()
         {
-            return String.Format(ALIAS_FIELD_FORMAT, GetEntity(), Field.Name);
+            return String.Format(ALIAS_FIELD_FORMAT, EntityWithPath(), Field.Name);
         }
 
-        private string GetEntity()
+        private string EntityWithPath()
         {
-            return String.Concat(GetEntityPath(), GetNameEntity());
+            return String.Concat(EntityPathFormatted(), NameEntity());
         }
 
-        private string GetEntityPath()
+        private string EntityPathFormatted()
         {
             return EntityPath != "" ? String.Concat(EntityPath,".") : "";
         }
 
-        private string GetNameEntity()
+        private string NameEntity()
         {
-            return IsEntityMain() ? Join.Field.Name : Join.Name;
+            return IsEntityMain() ? Entity.Field.Name : Entity.Name;
         }
 
         private bool IsEntityMain()
         {
-            return Join.Field != null;
+            return Entity.Field != null;
         }
 
-        private string GetNewValue()
+        protected virtual string NewValue()
         {
-            return String.Format(ALIAS_FIELD_FORMAT, Join.Alias.Symbol, Field.ColumnName);
+            return String.Format(ALIAS_FIELD_FORMAT, Entity.Alias.Symbol, Field.ColumnName);
         }
 
     }
