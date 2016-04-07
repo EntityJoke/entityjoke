@@ -13,7 +13,7 @@ namespace EntityJoke.Linq
         private string sqlQuery;
         private string entityPath;
 
-        public FieldAliasReplacerBuilder Join(EntityJoin join)
+        public FieldAliasReplacerBuilder Entity(EntityJoin join)
         {
             this.join = join;
             return this;
@@ -39,8 +39,8 @@ namespace EntityJoke.Linq
 
         public FieldAliasReplacer Builder()
         {
-            var replacer = new FieldAliasReplacer();
-            replacer.Join = join;
+            var replacer = FieldAliasReplacerFactory.Get(field);
+            replacer.Entity = join;
             replacer.Field = field;
             replacer.SQLQuery = sqlQuery;
             replacer.EntityPath = entityPath;

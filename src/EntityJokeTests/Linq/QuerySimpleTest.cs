@@ -1,6 +1,7 @@
 ﻿using EntityJoke.Core;
 using EntityJoke.Linq;
 using EntityJokeTests.Core;
+using EntityJokeTests.EntidadesTestes;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -222,7 +223,7 @@ namespace EntityJokeTests.Linq
         }
 
         [Test]
-        public void AssertSQLComCondicoesCompostasEOrderByCompostoAlteracaoPrecoProduto()
+        public void GeraSQLComCondicoesCompostasEOrderByCompostoAlteracaoPrecoProduto()
         {
             targetAlteracao = new QuerySimple<AlteracaoPrecoProduto>()
                 .Where("AlteracaoPrecoProduto.PrecoProd.produto.CodigoDeBarras = '058764' AND TRUNC(alteracaoPrecoProduto.DataAlteracao) > '11/07/2015' AND AlteracaoPrecoProduto.PrecoProd.Preco < 4")
@@ -243,6 +244,70 @@ namespace EntityJokeTests.Linq
             sql += "a.data_alteracao DESC";
 
             Assert.That(targetAlteracao.ToString(), Is.EqualTo(sql));
+        }
+
+        [Test]
+        public void GeraSQLSimplesComBool()
+        {
+            var targetContato = new QuerySimple<Contato>()
+                .Where("!contato.ativo");
+
+            string sql = "";
+            sql += "SELECT c.id c_id, c.ativo c_ativo, c.nome c_nome ";
+            sql += "FROM contato c ";
+            sql += "WHERE c.ativo = 0";
+
+            Assert.That(targetContato.ToString(), Is.EqualTo(sql));
+        }
+
+        [Test]
+        public void GeraSQLComBoolAtivoNoWhereEOrderBy()
+        {
+            var targetContato = new QuerySimple<Contato>()
+                .Where("contato.ativo")
+                .OrderBy("contato.ativo");
+
+            string sql = "";
+            sql += "SELECT c.id c_id, c.ativo c_ativo, c.nome c_nome ";
+            sql += "FROM contato c ";
+            sql += "WHERE c.ativo = 1 ";
+            sql += "ORDER BY c.ativo";
+
+            Assert.That(targetContato.ToString(), Is.EqualTo(sql));
+        }
+
+        [Test]
+        public void GeraSQLComWhereCompostoComBoolEOrderBy()
+        {
+            var targetContato = new QuerySimple<Contato>()
+                .Where("contato.nome LIKE '%!' AND !cOnTaTo.AtIvO")
+                .OrderBy("contato.Id, contato.ativo, contato.NoMe");
+
+            string sql = "";
+            sql += "SELECT c.id c_id, c.ativo c_ativo, c.nome c_nome ";
+            sql += "FROM contato c ";
+            sql += "WHERE c.nome LIKE '%!' AND c.ativo = 0 ";
+            sql += "ORDER BY c.id, c.ativo, c.nome";
+
+            Assert.That(targetContato.ToString(), Is.EqualTo(sql));
+        }
+
+        [Test]
+        public void GeraSQLComFiltrosEmDuasClassesComBoolean()
+        {
+            var targetPessoa = new QuerySimple<Pessoa>()
+                .Where("!pessoa.contato.ativo AND pEsSoA.nome = 'NOME' AND pessoa.Ativo")
+                .OrderBy("pessoa.contato.ativo, pessoa.contato.nome, PeSsoA.AtiVo");
+
+            string sql = "";
+            sql += "SELECT p.id p_id, p.ativo p_ativo, p.nome p_nome, ";
+            sql += "c.id c_id, c.ativo c_ativo, c.nome c_nome ";
+            sql += "FROM pessoa p ";
+            sql += "LEFT JOIN contato c ON (c.id = p.id_contato) ";
+            sql += "WHERE c.ativo = 0 AND p.nome = 'NOME' AND p.ativo = 1 ";
+            sql += "ORDER BY c.ativo, c.nome, p.ativo";
+
+            Assert.That(targetPessoa.ToString(), Is.EqualTo(sql));
         }
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="EntidadesTestes\CategoriaTeste.cs" />
     <Compile Include="EntidadesTestes\ComparadorCategorias.cs" />
     <Compile Include="EntidadesTestes\ComparadorProdutos.cs" />
+    <Compile Include="EntidadesTestes\Contato.cs" />
     <Compile Include="EntidadesTestes\GGSTeste.cs" />
     <Compile Include="EntidadesTestes\PrecoProduto.cs" />
     <Compile Include="EntidadesTestes\Produto.cs" />

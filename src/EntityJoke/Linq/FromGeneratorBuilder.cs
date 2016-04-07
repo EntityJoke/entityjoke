@@ -16,8 +16,8 @@ namespace EntityJoke.Linq
         {
             from = "";
 
-            AddEntityMain(entity.TreeAliases);
-            ProcessJoins(entity.TreeAliases);
+            AddEntityMain(entity.TreeJoins);
+            ProcessJoins(entity.TreeJoins);
 
             return from;
         }

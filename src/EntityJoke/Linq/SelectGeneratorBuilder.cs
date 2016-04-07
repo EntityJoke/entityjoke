@@ -14,7 +14,7 @@ namespace EntityJoke.Linq
 
         public override string Build()
         {
-            AddEntityAlias(entity.TreeAliases);
+            AddEntityAlias(entity.TreeJoins);
             return select.Substring(SEPARATOR.Length);
         }
 

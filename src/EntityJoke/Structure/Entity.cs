@@ -8,11 +8,11 @@ namespace EntityJoke.Structure
 {
     public class Entity
     {
-        public EntityJoin TreeAliases;
+        public EntityJoin TreeJoins;
         public Dictionary<string, Field> FieldDictionary;
         public Type Type;
         public string Name;
-        public List<EntityJoin> Joins { get { return TreeAliases.Joins; } }
+        public List<EntityJoin> Joins { get { return TreeJoins.Joins; } }
 
         public Entity(Type type)
         {
@@ -39,7 +39,7 @@ namespace EntityJoke.Structure
 
         private void LoadAliases()
         {
-            TreeAliases = new EntityJoinsGenerator().Generate(this);
+            TreeJoins = new EntityJoinsGenerator().Generate(this);
         }
 
         public override string ToString()

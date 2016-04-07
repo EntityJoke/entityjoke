@@ -10,44 +10,44 @@ namespace EntityJoke.Linq
     public class SQLCommandAliasReplacer
     {
         private string sqlCommand;
-        private Entity entity;
+        private Entity entityMain;
 
         public SQLCommandAliasReplacer(Entity entity, string sqlCommand)
         {
-            this.entity = entity;
+            this.entityMain = entity;
             this.sqlCommand = sqlCommand;
         }
 
         public string Replace()
         {
-            ReplaceFieldsEntity(entity.TreeAliases);
+            ReplaceFieldsEntity(entityMain.TreeJoins);
 
             return sqlCommand;
         }
 
-        private void ReplaceFieldsEntity(EntityJoin join, string entityPath = "")
+        private void ReplaceFieldsEntity(EntityJoin entity, string entityPath = "")
         {
-            ProcessAlias(join, entityPath);
-            join.Joins.ForEach(j => ReplaceFieldsEntity(j, GetCompletedNameField(join, entityPath)));
+            ProcessAlias(entity, entityPath);
+            entity.Joins.ForEach(j => ReplaceFieldsEntity(j, GetCompletedNameField(entity, entityPath)));
         }
 
-        private void ProcessAlias(EntityJoin join, string entityPath)
+        private void ProcessAlias(EntityJoin entity, string entityPath)
         {
-            join.Entity.GetFields()
+            entity.Entity.GetFields()
                 .OrderBy(f => f.ColumnName.Length)
                 .Reverse()
                 .Where(f => !f.IsEntity).ToList()
-                .ForEach(field => ReplaceConditionField(join, field, entityPath));
+                .ForEach(field => ReplaceConditionField(entity, field, entityPath));
         }
 
-        private string GetCompletedNameField(EntityJoin join, string entityPath)
+        private string GetCompletedNameField(EntityJoin entity, string entityPath)
         {
-            return IsEntityMain(join) ? GetEntityName(join) : GetNameFieldWithEntityPath(join, entityPath);
+            return IsEntityMain(entity) ? entity.Name : GetNameFieldWithEntityPath(entity, entityPath);
         }
 
-        private static string GetEntityName(EntityJoin join)
+        private bool IsEntityMain(EntityJoin entity)
         {
-            return join.Entity.Type.Name;
+            return entityMain == entity.Entity;
         }
 
         private string GetNameFieldWithEntityPath(EntityJoin join, string entityPath)
@@ -55,15 +55,10 @@ namespace EntityJoke.Linq
             return String.Format("{0}.{1}",entityPath, join.Field.Name);
         }
 
-        private bool IsEntityMain(EntityJoin join)
-        {
-            return join.Field == null;
-        }
-
         private void ReplaceConditionField(EntityJoin join, Field field, string entityPath)
         {
             FieldAliasReplacer replacer = new FieldAliasReplacerBuilder()
-                .Join(join)
+                .Entity(join)
                 .Field(field)
                 .SqlQuery(sqlCommand)
                 .EntityPath(entityPath)

@@ -60,8 +60,11 @@
     <Compile Include="Core\JokeConfigurationBuilder.cs" />
     <Compile Include="Core\PointerIndexColumn.cs" />
     <Compile Include="Core\SQLCommandExecutor.cs" />
+    <Compile Include="Linq\BoolFieldReplacer.cs" />
+    <Compile Include="Linq\BoolFieldAliasReplacer.cs" />
     <Compile Include="Linq\FieldAliasReplacer.cs" />
     <Compile Include="Linq\FieldAliasReplacerBuilder.cs" />
+    <Compile Include="Linq\FieldAliasReplacerFactory.cs" />
     <Compile Include="Linq\FieldPositionCondition.cs" />
     <Compile Include="Linq\FieldPositionConditionExtractor.cs" />
     <Compile Include="Linq\FromGeneratorBuilder.cs" />

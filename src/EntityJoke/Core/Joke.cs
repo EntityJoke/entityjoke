@@ -20,7 +20,7 @@ namespace EntityJoke.Core
         {
             var entity = DictionaryEntitiesMap.INSTANCE.GetEntity(typeof(T));
             return Query<T>()
-                .Where(entity.TreeAliases.Alias.Symbol + ".id = " + id)
+                .Where(entity.TreeJoins.Alias.Symbol + ".id = " + id)
                 .Execute()[0];
         }
 
