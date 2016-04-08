@@ -65,6 +65,7 @@
     <Compile Include="Core\DictionaryEntitiesObjectsTest.cs" />
     <Compile Include="Core\EntitiesLoaderEntidadesCompostasTest.cs" />
     <Compile Include="Core\EntitiesLoaderTest.cs" />
+    <Compile Include="Core\EntityLoaderComBoolTest.cs" />
     <Compile Include="Core\EntityLoaderEntidadeCompostaTest.cs" />
     <Compile Include="Core\EntityLoaderDuasEntidadeCompostaTest.cs" />
     <Compile Include="Core\EntityLoaderTest.cs" />

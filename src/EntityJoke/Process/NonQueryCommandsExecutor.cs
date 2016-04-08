@@ -77,8 +77,8 @@ namespace EntityJoke.Process
 
         protected virtual void RefreshObject(DataTable returnCommand)
         {
-            foreach (DataRow asv in returnCommand.Rows)
-                new FieldValueSetter(objectCommand, entity.FieldDictionary["id"], asv["id"]).Set();
+            foreach (DataRow row in returnCommand.Rows)
+                new FieldValueSetter(objectCommand, entity.FieldDictionary["id"], row["id"]).Set();
         }
     }
 }

@@ -1,17 +1,13 @@
 ﻿using EntityJoke.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace EntityJoke.Core
 {
-    class FieldValueSetter
+    internal class FieldValueSetter
     {
-        private object obj;
-        private Field field;
-        private object value;
+        protected object obj;
+        protected Field field;
+        protected object value;
 
         public FieldValueSetter(object obj, Field field, object value)
         {
@@ -23,18 +19,18 @@ namespace EntityJoke.Core
         public void Set()
         {
             if (field.IsProperty)
-                SetPropertyMethod(value, field.Name);
+                SetPropertyMethod(field.Name);
             else
-                SetField(value, field.Name);
+                SetField(field.Name);
         }
 
-        private void SetPropertyMethod(object value, string fieldName)
+        private void SetPropertyMethod(string fieldName)
         {
             PropertyInfo property = obj.GetType().GetProperty(fieldName);
             property.SetValue(obj, value);
         }
 
-        private void SetField(object value, string fieldName)
+        private void SetField(string fieldName)
         {
             FieldInfo field = obj.GetType().GetField(fieldName);
             field.SetValue(obj, value);

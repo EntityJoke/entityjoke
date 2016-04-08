@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Core
 {
@@ -113,7 +110,15 @@ namespace EntityJoke.Core
 
         private void SetFieldValue(Field field, object value)
         {
-            new FieldValueSetter(obj, field, value).Set();
+            if(IsBool(field))
+                new FieldBoolValueSetter(obj, field, value).Set();
+            else
+                new FieldValueSetter(obj, field, value).Set();
+        }
+
+        private bool IsBool(Field field)
+        {
+            return typeof(bool) == field.Type;
         }
 
         private void ProcessJoin(EntityJoin join)
