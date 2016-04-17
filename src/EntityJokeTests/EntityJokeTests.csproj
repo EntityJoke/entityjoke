@@ -69,6 +69,7 @@
     <Compile Include="Core\EntityLoaderEntidadeCompostaTest.cs" />
     <Compile Include="Core\EntityLoaderDuasEntidadeCompostaTest.cs" />
     <Compile Include="Core\EntityLoaderTest.cs" />
+    <Compile Include="Core\Relacionamento1N\EntitiesLoaderRelacionamentos1NTest.cs" />
     <Compile Include="EntidadesTestes\AlteracaoPrecoProduto.cs" />
     <Compile Include="EntidadesTestes\CategoriaTeste.cs" />
     <Compile Include="EntidadesTestes\ComparadorCategorias.cs" />
@@ -78,6 +79,8 @@
     <Compile Include="EntidadesTestes\PrecoProduto.cs" />
     <Compile Include="EntidadesTestes\Produto.cs" />
     <Compile Include="EntidadesTestes\ProdutoTeste.cs" />
+    <Compile Include="EntidadesTestes\Relacionamento1N\Autor.cs" />
+    <Compile Include="EntidadesTestes\Relacionamento1N\Livro.cs" />
     <Compile Include="Linq\FieldPositionConditionExtractorTest.cs" />
     <Compile Include="Linq\QuerySimpleEntradasDuplasTest.cs" />
     <Compile Include="Linq\QuerySimpleTest.cs" />

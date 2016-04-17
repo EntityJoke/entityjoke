@@ -1,11 +1,7 @@
-﻿using EntityJoke.Structure;
-using System;
+﻿using EntityJoke.Structure.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EntityJoke.Process
+namespace EntityJoke.Process.Generators
 {
     public class AliasGenerator
     {

@@ -1,25 +1,21 @@
-﻿using EntityJoke.Structure;
+﻿using EntityJoke.Structure.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Core
 {
     public class EntitiesLoader<T>
     {
-        private DataTable produtoTable;
+        private DataTable table;
         private Entity entity;
         private List<T> listEntities = new List<T>();
         private Type type = typeof(T);
         private Dictionary<string, object> dictionaryObjectsProcessed;
 
-        public EntitiesLoader(DataTable produtoTable)
+        public EntitiesLoader(DataTable table)
         {
-            this.produtoTable = produtoTable;
+            this.table = table;
             entity = DictionaryEntitiesMap.INSTANCE.GetEntity(type);
         }
 
@@ -27,7 +23,7 @@ namespace EntityJoke.Core
         {
             dictionaryObjectsProcessed = new Dictionary<string, object>();
 
-            foreach (DataRow row in produtoTable.Rows)
+            foreach (DataRow row in table.Rows)
                 listEntities.Add(CreateInstance(row));
 
             return listEntities;
@@ -38,7 +34,7 @@ namespace EntityJoke.Core
             return (T)new EntityLoaderBuilder()
                 .Entity(entity)
                 .Row(row)
-                .Columns(produtoTable.Columns)
+                .Columns(table.Columns)
                 .Dictionary(dictionaryObjectsProcessed)
                 .Build();
         }

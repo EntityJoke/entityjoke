@@ -1,5 +1,6 @@
 ﻿using EntityJoke.Process;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -110,10 +111,7 @@ namespace EntityJoke.Core
 
         private void SetFieldValue(Field field, object value)
         {
-            if(IsBool(field))
-                new FieldBoolValueSetter(obj, field, value).Set();
-            else
-                new FieldValueSetter(obj, field, value).Set();
+            field.GetSetter(obj, value).Set();
         }
 
         private bool IsBool(Field field)
@@ -162,12 +160,12 @@ namespace EntityJoke.Core
 
         private void RefreshFieldValue(object objectDictionary, Field field)
         {
-            new FieldValueSetter(objectDictionary, field, GetValue(field)).Set();
+            field.GetSetter(objectDictionary, GetValue(field)).Set();
         }
 
         private object GetValue(Field field)
         {
-            return new ValueFieldExtractor(obj, field).Extract();
+            return field.GetExtractor(obj).Extract();
         }
     }
 }

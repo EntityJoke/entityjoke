@@ -1,4 +1,4 @@
-﻿using EntityJoke.Structure;
+﻿using EntityJoke.Structure.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -35,7 +35,7 @@ namespace EntityJoke.Core
 
         private Entity LoadEntity(Type type)
         {
-            return new Entity(type);
+            return EntityFactory.Get(type);
         }
 
         public Entity GetEntity(Type type)

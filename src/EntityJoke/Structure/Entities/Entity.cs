@@ -1,10 +1,10 @@
-﻿using EntityJoke.Linq;
-using EntityJoke.Process;
+﻿using EntityJoke.Process.Generators;
+using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EntityJoke.Structure
+namespace EntityJoke.Structure.Entities
 {
     public class Entity
     {

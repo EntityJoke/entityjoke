@@ -1,11 +1,11 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Process;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EntityJokeTests.Core
+namespace EntityJoke.Process.Commands
 {
     public class CommandInsertGenerator
     {
@@ -83,14 +83,14 @@ namespace EntityJokeTests.Core
         private string GetValueToInsert(Field field)
         {
             if(!field.IsEntity)
-                return new ValueFieldFormatted(objectInsert, field).Format();
+                return new FieldValueFormatted(objectInsert, field).Format();
 
             return GetJoinIdValue(field);
         }
 
         private string GetJoinIdValue(Field field)
         {
-            object join = new ValueFieldExtractor(objectInsert, field).Extract();
+            object join = field.GetExtractor(objectInsert).Extract();
 
             if (join == null)
                 return null;
@@ -98,7 +98,7 @@ namespace EntityJokeTests.Core
             Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
             Field idField = entityJoin.FieldDictionary["id"];
 
-            return new ValueFieldFormatted(join, idField).Format();
+            return new FieldValueFormatted(join, idField).Format();
         }
 
     }

@@ -1,12 +1,6 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
-using System;
-using System.Collections;
+using EntityJoke.Structure.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Linq
 {
@@ -36,7 +30,7 @@ namespace EntityJoke.Linq
 
         public List<T> Execute()
         {
-            return new SQLCommandExecutor<T>(query.GetSqlCommand()).Execute();
+            return SQLCommandExecutorFactory<T>.Get(query.GetSqlCommand()).Execute();
         }
 
         public override string ToString()

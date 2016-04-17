@@ -1,18 +1,13 @@
-﻿using EntityJoke.Core;
-using EntityJoke.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 
-namespace EntityJoke.Process
+namespace EntityJoke.Structure.Fields
 {
-    public class ValueFieldFormatted
+    public class FieldValueFormatted
     {
         private object objectValue;
         private Field field;
 
-        public ValueFieldFormatted(object objectValue, Field field)
+        public FieldValueFormatted(object objectValue, Field field)
         {
             this.objectValue = objectValue;
             this.field = field;
@@ -20,7 +15,7 @@ namespace EntityJoke.Process
 
         public string Format()
         {
-            var value = new ValueFieldExtractor(objectValue, field).Extract();
+            var value = field.GetExtractor(objectValue).Extract();
 
             if (IsNumber())
                 return value.ToString();

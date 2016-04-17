@@ -1,12 +1,11 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EntityJoke.Process
+namespace EntityJoke.Process.Generators
 {
     public class EntityJoinsGenerator
     {

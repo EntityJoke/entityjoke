@@ -1,12 +1,12 @@
 ﻿using EntityJoke.Connection;
 using EntityJoke.Core;
-using EntityJoke.Structure;
-using EntityJokeTests.Core;
+using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
 
-namespace EntityJoke.Process
+namespace EntityJoke.Process.Commands
 {
     public class NonQueryCommandsExecutor
     {
@@ -61,13 +61,13 @@ namespace EntityJoke.Process
         private bool IsNewObject()
         {
             var idField = entity.FieldDictionary["id"];
-            int id = (int)new ValueFieldExtractor(objectCommand, idField).Extract();
+            int id = (int)idField.GetExtractor(objectCommand).Extract();
             return id == 0;
         }
 
         private void ProcessJoin(Field field)
         {
-            var objectJoin = new ValueFieldExtractor(objectCommand, field).Extract();
+            var objectJoin = field.GetExtractor(objectCommand).Extract();
 
             if (objectJoin == null)
                 return;
@@ -78,7 +78,7 @@ namespace EntityJoke.Process
         protected virtual void RefreshObject(DataTable returnCommand)
         {
             foreach (DataRow row in returnCommand.Rows)
-                new FieldValueSetter(objectCommand, entity.FieldDictionary["id"], row["id"]).Set();
+                entity.FieldDictionary["id"].GetSetter(objectCommand, row["id"]).Set();
         }
     }
 }

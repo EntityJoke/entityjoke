@@ -1,10 +1,5 @@
-﻿using EntityJoke.Core;
-using EntityJoke.Structure;
+﻿using EntityJoke.Structure.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Linq
 {

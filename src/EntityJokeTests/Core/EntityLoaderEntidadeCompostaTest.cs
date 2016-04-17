@@ -1,5 +1,5 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Entities;
 using NUnit.Framework;
 using System.Data;
 

@@ -1,4 +1,5 @@
-﻿using EntityJoke.Structure;
+﻿using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System;
 
 namespace EntityJoke.Linq

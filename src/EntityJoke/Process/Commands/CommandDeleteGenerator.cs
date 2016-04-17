@@ -1,12 +1,9 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EntityJoke.Process
+namespace EntityJoke.Process.Commands
 {
     public class CommandDeleteGenerator
     {
@@ -39,7 +36,7 @@ namespace EntityJoke.Process
 
         private string GetValueToDelete(Field field)
         {
-            return new ValueFieldFormatted(objectDelete, field).Format();
+            return new FieldValueFormatted(objectDelete, field).Format();
         }
     }
 }

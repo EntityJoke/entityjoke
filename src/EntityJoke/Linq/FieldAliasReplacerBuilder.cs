@@ -1,8 +1,5 @@
-﻿using EntityJoke.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 
 namespace EntityJoke.Linq
 {

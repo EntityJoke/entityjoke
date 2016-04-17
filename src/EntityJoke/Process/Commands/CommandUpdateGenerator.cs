@@ -1,11 +1,11 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Process;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EntityJokeTests.Core
+namespace EntityJoke.Process.Commands
 {
     public class CommandUpdateGenerator
     {
@@ -89,8 +89,8 @@ namespace EntityJokeTests.Core
             if (aspect == null)
                 return obj == null;
 
-            var valueA = new ValueFieldExtractor(obj, field).Extract();
-            var valueB = new ValueFieldExtractor(aspect, field).Extract();
+            var valueA = field.GetExtractor(obj).Extract();
+            var valueB = field.GetExtractor(aspect).Extract();
 
             return IsEqualsObjects(valueA, valueB);
         }
@@ -109,7 +109,7 @@ namespace EntityJokeTests.Core
         private string GetValueToUpdate(Field field)
         {
             if(!field.IsEntity)
-                return new ValueFieldFormatted(objectUpdate, field).Format();
+                return new FieldValueFormatted(objectUpdate, field).Format();
 
             return GetJoinIdValue(field);
         }
@@ -124,12 +124,12 @@ namespace EntityJokeTests.Core
             Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
             Field idField = entityJoin.FieldDictionary["id"];
 
-            return new ValueFieldFormatted(join, idField).Format();
+            return new FieldValueFormatted(join, idField).Format();
         }
 
         private object GetObjectField(object obj, Field field)
         {
-            return new ValueFieldExtractor(obj, field).Extract();
+            return field.GetExtractor(obj).Extract();
         }
 
     }

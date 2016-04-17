@@ -1,10 +1,8 @@
 ﻿using EntityJoke.Process;
-using EntityJoke.Structure;
-using System;
+using EntityJoke.Structure.Entities;
+using EntityJoke.Structure.Fields;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Core
 {
@@ -60,7 +58,7 @@ namespace EntityJoke.Core
 
         private void ProcessJoins(object obj, Field f)
         {
-            var objJoin = new ValueFieldExtractor(obj, f).Extract();
+            var objJoin = f.GetExtractor(obj).Extract();
             DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(objJoin);
         }
 

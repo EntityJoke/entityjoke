@@ -1,5 +1,5 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Fields;
 using System;
 
 namespace EntityJoke.Process
@@ -25,7 +25,7 @@ namespace EntityJoke.Process
 
         private string GetIdValue()
         {
-            return new ValueFieldExtractor(obj, GetIdField()).Extract().ToString();
+            return GetIdField().GetExtractor(obj).Extract().ToString();
         }
 
         private Field GetIdField()

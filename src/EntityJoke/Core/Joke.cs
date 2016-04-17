@@ -1,5 +1,5 @@
 ﻿using EntityJoke.Linq;
-using EntityJoke.Process;
+using EntityJoke.Process.Commands;
 using System.Collections.Generic;
 
 namespace EntityJoke.Core

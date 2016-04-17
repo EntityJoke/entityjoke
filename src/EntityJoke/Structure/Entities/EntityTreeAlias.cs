@@ -1,10 +1,7 @@
-﻿using System;
+﻿using EntityJoke.Structure.Fields;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EntityJoke.Structure
+namespace EntityJoke.Structure.Entities
 {
     public class EntityJoin
     {

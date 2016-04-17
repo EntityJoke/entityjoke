@@ -1,12 +1,6 @@
-﻿using EntityJoke.Core;
-using EntityJoke.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EntityJoke.Structure.Fields;
 
-namespace EntityJoke.Process
+namespace EntityJoke.Process.Commands
 {
     public class DeleteCommandsExecutor : NonQueryCommandsExecutor
     {
@@ -30,7 +24,7 @@ namespace EntityJoke.Process
 
         private void SetFieldNull(Field field)
         {
-            new FieldValueSetter(objectCommand, field, GetValue(field)).Set();
+            field.GetSetter(objectCommand, GetValue(field)).Set();
         }
 
         private object GetValue(Field field)

@@ -1,13 +1,8 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Entities;
 using EntityJokeTests.EntidadesTestes;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJokeTests.Core
 {

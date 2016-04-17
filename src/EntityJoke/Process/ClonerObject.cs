@@ -1,10 +1,6 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
+using EntityJoke.Structure.Fields;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Process
 {
@@ -34,12 +30,12 @@ namespace EntityJoke.Process
 
         private void CopyFieldValue(object copy, Field field)
         {
-            new FieldValueSetter(copy, field, GetValue(field)).Set();
+            field.GetSetter(copy, GetValue(field)).Set();
         }
 
         private object GetValue(Field field)
         {
-            return new ValueFieldExtractor(origin, field).Extract();
+            return field.GetExtractor(origin).Extract();
         }
     }
 }

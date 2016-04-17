@@ -4,7 +4,7 @@ using System.Data;
 
 namespace EntityJoke.Core
 {
-    public class SQLCommandExecutor<T>
+    public class SQLCommandExecutor<T> : ISQLCommandExecutor<T>
     {
         private string commandSQL;
 

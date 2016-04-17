@@ -1,10 +1,9 @@
 ﻿using EntityJoke.Core;
-using EntityJoke.Structure;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace EntityJoke.Process
+namespace EntityJoke.Structure.Fields
 {
     public class FieldExtractor
     {
@@ -29,7 +28,7 @@ namespace EntityJoke.Process
         {
             foreach (FieldInfo fieldInfo in type.GetFields())
             {
-                Field field = new Field(fieldInfo);
+                Field field = FieldFactory.Get(fieldInfo);
                 fields.Add(field.ColumnName, field);
                 VerifyIsEntity(field);
             }
@@ -47,7 +46,7 @@ namespace EntityJoke.Process
             {
                 if (isPropertyMethod(method))
                 {
-                    Field field = new Field(method);
+                    Field field = FieldFactory.Get(method);
                     fields.Add(field.ColumnName, field);
                     VerifyIsEntity(field);
                 }

@@ -1,5 +1,5 @@
 ﻿
-namespace EntityJoke.Process
+namespace EntityJoke.Process.Generators
 {
     internal class NameGenerator
     {

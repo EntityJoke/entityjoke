@@ -1,4 +1,4 @@
-﻿using EntityJoke.Structure;
+﻿using EntityJoke.Structure.Entities;
 using System;
 
 namespace EntityJoke.Linq
