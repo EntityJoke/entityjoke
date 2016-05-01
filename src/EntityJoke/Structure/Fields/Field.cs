@@ -15,26 +15,31 @@ namespace EntityJoke.Structure.Fields
 
         public Field(FieldInfoCreator creator)
         {
+            SetColumnName(creator);
+            SetName(creator);
+            SetType(creator);
+            SetProperty(creator);
+
+        }
+
+        protected virtual void SetColumnName(FieldInfoCreator creator)
+        {
             this.ColumnName = creator.ColumnName;
+        }
+
+        protected virtual void SetName(FieldInfoCreator creator)
+        {
             this.Name = creator.Name;
+        }
+
+        protected virtual void SetType(FieldInfoCreator creator)
+        {
             this.Type = creator.Type;
-            isProperty = creator.IsProperty; 
-
-            VerifyIsEntity();
         }
 
-        private void VerifyIsEntity()
+        protected virtual void SetProperty(FieldInfoCreator creator)
         {
-            if (IsSystemClass())
-                return;
-
-            ColumnName = String.Format("id_{0}", ColumnName);
-            IsEntity = true;
-        }
-
-        private bool IsSystemClass()
-        {
-            return Type.FullName.Contains("System.");
+            isProperty = creator.IsProperty;
         }
 
         public override string ToString()

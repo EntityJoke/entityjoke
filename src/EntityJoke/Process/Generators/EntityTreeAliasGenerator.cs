@@ -22,7 +22,7 @@ namespace EntityJoke.Process.Generators
             Alias alias = CreateAlias(entity, field);
             EntityJoin join = new EntityJoin(alias);
 
-            entity.GetFields().Where(f => f.IsEntity).ToList()
+            entity.GetFieldsJoins()
                 .ForEach(f => join.Joins.Add(Generate(f)));
 
             return join;

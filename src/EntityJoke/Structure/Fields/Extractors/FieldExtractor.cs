@@ -10,6 +10,7 @@ namespace EntityJoke.Structure.Fields
         private Dictionary<string, MethodInfo> dictionaryMethods;
 
         private Type type;
+        private Dictionary<string, Field> fields;
 
         public FieldExtractor(Type type)
         {
@@ -18,47 +19,37 @@ namespace EntityJoke.Structure.Fields
 
         public Dictionary<string, Field> Extract()
         {
-            Dictionary<string, Field> fields = new Dictionary<string, Field>();
-            LoadFieldsByFieldsInfo(fields);
-            LoadFieldsByMethods(fields);
+            fields = new Dictionary<string, Field>();
+            LoadFieldsByFieldsInfo();
+            LoadFieldsByMethods();
             return fields;
         }
 
-        private void LoadFieldsByFieldsInfo(Dictionary<string, Field> fields)
+        private void LoadFieldsByFieldsInfo()
         {
             foreach (FieldInfo fieldInfo in type.GetFields())
-            {
-                Field field = FieldFactory.Get(fieldInfo);
-                fields.Add(field.ColumnName, field);
-                VerifyIsEntity(field);
-            }
+                AddField(fieldInfo);
         }
 
-        private static void VerifyIsEntity(Field field)
+        private void AddField(FieldInfo fieldInfo)
         {
-            if (field.IsEntity)
-                DictionaryEntitiesMap.INSTANCE.TryAddEntity(field.Type);
+            Field field = FieldFactory.Get(fieldInfo);
+            fields.Add(field.ColumnName, field);
         }
 
-        private void LoadFieldsByMethods(Dictionary<string, Field> fields)
+        private void LoadFieldsByMethods()
         {
             foreach (MethodInfo method in type.GetMethods())
-            {
-                if (isPropertyMethod(method))
-                {
-                    Field field = FieldFactory.Get(method);
-                    fields.Add(field.ColumnName, field);
-                    VerifyIsEntity(field);
-                }
-            }
+                if (IsPropertyMethod(method))
+                    AddPropertyField(method);
         }
 
-        private bool isPropertyMethod(MethodInfo method)
+        private bool IsPropertyMethod(MethodInfo method)
         {
-            return method.Name.Contains("get_") && existsMethodSet(method.Name);
+            return method.Name.Contains("get_") && ExistsMethodSet(method.Name);
         }
 
-        private bool existsMethodSet(string method)
+        private bool ExistsMethodSet(string method)
         {
             if (dictionaryMethods == null)
                 LoadDictionaryMethods();
@@ -71,6 +62,12 @@ namespace EntityJoke.Structure.Fields
             dictionaryMethods = new Dictionary<string,MethodInfo>();
             foreach (MethodInfo method in type.GetMethods())
                 dictionaryMethods.Add(method.Name, method);
+        }
+
+        private void AddPropertyField(MethodInfo method)
+        {
+            Field field = FieldFactory.Get(method);
+            fields.Add(field.ColumnName, field);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace EntityJoke.Core
         {
             Entity ent = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
 
-            ent.GetFields().Where(f => f.IsEntity).ToList()
+            ent.GetFieldsJoins()
                 .ForEach(f => ProcessJoins(obj, f));
         }
 

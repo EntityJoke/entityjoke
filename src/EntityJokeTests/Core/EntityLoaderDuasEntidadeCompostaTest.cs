@@ -39,6 +39,17 @@ namespace EntityJokeTests.Core
             Assert.That(comparador.CategoriaB.Nome, Is.EqualTo("Cat 2"));
         }
 
+        [Test]
+        public void ValidaMetodoGetFieldsJoins()
+        {
+            Assert.That(entity.GetFields().Count, Is.EqualTo(4));
+
+            var joins = entity.GetFieldsJoins();
+            Assert.That(joins.Count, Is.EqualTo(2));
+            Assert.That(joins[0].ColumnName, Is.EqualTo("id_categoria_a"));
+            Assert.That(joins[1].ColumnName, Is.EqualTo("id_categoria_b"));
+        }
+
         private void SetUpDictionaryEntityes()
         {
             DictionaryEntitiesMap.INSTANCE.Clear();

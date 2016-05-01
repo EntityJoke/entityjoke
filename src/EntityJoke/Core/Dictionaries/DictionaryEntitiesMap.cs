@@ -12,7 +12,6 @@ namespace EntityJoke.Core
 
         private DictionaryEntitiesMap() { }
 
-
         public void Clear()
         {
             entityes.Clear();

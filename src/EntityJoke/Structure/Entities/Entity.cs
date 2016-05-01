@@ -52,6 +52,27 @@ namespace EntityJoke.Structure.Entities
             return FieldDictionary.Values.ToList();
         }
 
+        public List<Field> GetFieldsJoins()
+        {
+            return GetFields()
+                .Where(f => IsFieldsJoins(f))
+                .ToList();
+        }
+
+        private bool IsFieldsJoins(Field f)
+        {
+            return IsFieldEntity(f) && !IsFieldCollectionEntity(f);
+        }
+
+        private bool IsFieldEntity(Field f)
+        {
+            return f is FieldEntity;
+        }
+
+        private bool IsFieldCollectionEntity(Field f)
+        {
+            return f is FieldCollectionEntity;
+        }
     }
 
 

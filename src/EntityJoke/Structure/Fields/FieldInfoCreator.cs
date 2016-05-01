@@ -10,6 +10,7 @@ namespace EntityJoke.Structure.Fields
         public string Name;
         public bool IsProperty;
         public Type Type;
+        public string DeclaringTypeName;
 
         public FieldInfoCreator(MemberInfo info)
         {
@@ -17,6 +18,7 @@ namespace EntityJoke.Structure.Fields
             this.Name = info.Name.Replace("get_", "");
             this.IsProperty = GetIsProperty(info);
             this.Type = GetType(info);
+            this.DeclaringTypeName = info.DeclaringType.FullName;
         }
 
         private bool GetIsProperty(MemberInfo info)
