@@ -42,6 +42,7 @@
     <Compile Include="Core\Loaders\CollectionLoader.cs" />
     <Compile Include="Core\Loaders\CollectionsLoader.cs" />
     <Compile Include="Core\Loaders\EntitiesLoaderReflectionAdapter.cs" />
+    <Compile Include="Linq\Generator\CollectionSelectGenerator.cs" />
     <Compile Include="Process\Commands\DataTableGenerator.cs" />
     <Compile Include="Connection\DbConnectionFactory.cs" />
     <Compile Include="Connection\DbDataAdapterFactory.cs" />

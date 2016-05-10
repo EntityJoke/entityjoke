@@ -14,7 +14,6 @@ namespace EntityJokeTests.Core.Loaders
 {
     public class CollectionsLoaderTest
     {
-        DataTable autorTable;
         DataTable livroTable;
 
         CollectionsLoader target;
@@ -37,15 +36,6 @@ namespace EntityJokeTests.Core.Loaders
             var dictionary = new Dictionary<String, Object>();
             dictionary.Add(new KeyDictionaryObjectExtractor(autor).Extract(), autor);
             target = new CollectionsLoader(autor, dictionary);
-
-            //var autores = Joke.Query<Autor>()
-            //    .Execute();
-
-            //Assert.That(autores.Count, Is.EqualTo(1));
-
-            //var ericoVerissimo = autores[0];
-            //Assert.That(ericoVerissimo.Id, Is.EqualTo(1));
-            //Assert.That(ericoVerissimo.Nome, Is.EqualTo("Érico Veríssimo"));
 
             target.Load();
 
@@ -79,29 +69,7 @@ namespace EntityJokeTests.Core.Loaders
 
         private void SetUpDataTable()
         {
-            SetUpAutor();
             SetUpLivro();
-        }
-
-        private void SetUpAutor()
-        {
-            autorTable = new DataTable();
-            SetUpColunasAutorTable();
-            AddRowAutor(new Autor() { Id = 1, Nome = "Érico Veríssimo" });
-        }
-
-        private void SetUpColunasAutorTable()
-        {
-            autorTable.Columns.Add(new DataColumn("a_id", typeof(int)));
-            autorTable.Columns.Add(new DataColumn("a_nome", typeof(string)));
-        }
-
-        private void AddRowAutor(Autor autor)
-        {
-            DataRow row1 = autorTable.NewRow();
-            row1["a_id"] = autor.Id;
-            row1["a_nome"] = autor.Nome;
-            autorTable.Rows.Add(row1);
         }
 
         private void SetUpLivro()

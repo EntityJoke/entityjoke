@@ -83,6 +83,7 @@
     <Compile Include="EntidadesTestes\Relacionamento1N\Autor.cs" />
     <Compile Include="EntidadesTestes\Relacionamento1N\Livro.cs" />
     <Compile Include="Linq\FieldPositionConditionExtractorTest.cs" />
+    <Compile Include="Linq\Generator\CollectionSelectGeneratorTest.cs" />
     <Compile Include="Linq\QuerySimpleEntradasDuplasTest.cs" />
     <Compile Include="Linq\QuerySimpleTest.cs" />
     <Compile Include="Process\CommandDeleteGeneratorTest.cs" />

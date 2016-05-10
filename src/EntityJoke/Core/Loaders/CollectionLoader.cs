@@ -1,4 +1,6 @@
-﻿using EntityJoke.Structure.Fields;
+﻿using EntityJoke.Linq.Generator;
+using EntityJoke.Process.Commands;
+using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -41,19 +43,24 @@ namespace EntityJoke.Core.Loaders
             return LOADER_TYPE.GetConstructor(new[] { DataTableType(), DictionaryType() });
         }
 
-        private static Type DataTableType()
+        private Type DataTableType()
         {
             return typeof(DataTable);
         }
 
-        private static Type DictionaryType()
+        private Type DictionaryType()
         {
             return typeof(Dictionary<string, object>);
         }
 
-        private static DataTable GetDataTable()
+        private DataTable GetDataTable()
         {
-            return DictionaryInstanceFactory.GetDataTable();
+            return DataTableGeneratorFactory.Get(CommandSql()).Generate();
+        }
+
+        private string CommandSql()
+        {
+            return new CollectionSelectGenerator(obj, field).Generate();
         }
     }
 }
