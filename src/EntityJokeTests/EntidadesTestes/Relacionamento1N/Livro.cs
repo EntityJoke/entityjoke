@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityJokeTests.EntidadesTestes.Relacionamento1N
 {
-    internal class Livro
+    public class Livro
     {
         public int Id;
         public string Titulo;

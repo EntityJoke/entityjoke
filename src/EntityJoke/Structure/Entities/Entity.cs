@@ -73,6 +73,14 @@ namespace EntityJoke.Structure.Entities
         {
             return f is FieldCollectionEntity;
         }
+
+        public List<FieldCollectionEntity> GetFieldsCollection()
+        {
+            return GetFields()
+                .Where(f => IsFieldCollectionEntity(f))
+                .Cast<FieldCollectionEntity>()
+                .ToList();
+        }
     }
 
 

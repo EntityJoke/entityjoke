@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EntityJoke.Core
+namespace EntityJoke.Core.Loaders
 {
     public class PointerIndexColumn
     {

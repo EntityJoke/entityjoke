@@ -1,12 +1,14 @@
-﻿using EntityJoke.Process;
+﻿using EntityJoke.Linq;
+using EntityJoke.Process;
 using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace EntityJoke.Core
+namespace EntityJoke.Core.Loaders
 {
     public class EntityLoader
     {
@@ -59,8 +61,13 @@ namespace EntityJoke.Core
 
         private void CreateObject()
         {
-            ProccesColumns();
             PutObjectInDictionary();
+
+            ProccesColumns();
+            ProcessJoins();
+            ProcessCollections();
+
+            AddOrRefreshAspect();
         }
 
         private void ProccesColumns()
@@ -69,8 +76,6 @@ namespace EntityJoke.Core
 
             for (; Pointer.IndexColumn < limiteLoop; Pointer.IndexColumn++)
                 ProcessField();
-
-            Entity.Joins.ForEach(j => ProcessJoin(j));
         }
 
         private int EntityColumnsLength()
@@ -119,6 +124,11 @@ namespace EntityJoke.Core
             return typeof(bool) == field.Type;
         }
 
+        private void ProcessJoins()
+        {
+            Entity.Joins.ForEach(j => ProcessJoin(j));
+        }
+
         private void ProcessJoin(EntityJoin join)
         {
             SetFieldValue(join.Field, GetJoinValue(join));
@@ -142,7 +152,6 @@ namespace EntityJoke.Core
             else
                 DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(obj);
 
-            DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(obj);
             DictionaryObjectsProcessed.Add(GetKey(obj), obj);
         }
 
@@ -166,6 +175,16 @@ namespace EntityJoke.Core
         private object GetValue(Field field)
         {
             return field.GetExtractor(obj).Extract();
+        }
+
+        private void ProcessCollections()
+        {
+            new CollectionsLoader(obj, DictionaryObjectsProcessed).Load();
+        }
+
+        private void AddOrRefreshAspect()
+        {
+            DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(obj);
         }
     }
 }

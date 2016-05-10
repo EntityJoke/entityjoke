@@ -1,14 +1,23 @@
 ﻿using EntityJoke.Core;
+using EntityJoke.Core.Loaders;
+using EntityJoke.Process;
 using EntityJokeTests.EntidadesTestes.Relacionamento1N;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace EntityJokeTests.Core.Relacionamento1N
+namespace EntityJokeTests.Core.Loaders
 {
-    public class EntitiesLoaderRelacionamentos1NTest
+    public class CollectionsLoaderTest
     {
         DataTable autorTable;
         DataTable livroTable;
+
+        CollectionsLoader target;
 
         [SetUp]
         public void SetUp()
@@ -18,43 +27,39 @@ namespace EntityJokeTests.Core.Relacionamento1N
         }
 
         [Test]
-        public void FiltraFieldsCollectionsERealizaCast()
-        {
-            var entity = DictionaryEntitiesMap.INSTANCE.GetEntity(typeof(Autor));
-            var fields = entity.GetFieldsCollection();
-
-            Assert.That(fields.Count, Is.EqualTo(1));
-            Assert.That(fields[0].Type, Is.EqualTo(typeof(Livro)));
-            Assert.That(fields[0].ColumnName, Is.EqualTo("livros"));
-        }
-
-        [Test]
         public void CarregaAutorComListaDeLivros()
         {
             DictionaryInstanceFactory.GetInstance().Set("DataTableGeneratorMock", true);
-
-            DictionaryInstanceFactory.AddDataTableMock(autorTable);
             DictionaryInstanceFactory.AddDataTableMock(livroTable);
 
-            var autores = Joke.Query<Autor>()
-                .Execute();
+            var autor = new Autor() { Id = 1, Nome = "Érico Veríssimo" };
 
-            Assert.That(autores.Count, Is.EqualTo(1));
+            var dictionary = new Dictionary<String, Object>();
+            dictionary.Add(new KeyDictionaryObjectExtractor(autor).Extract(), autor);
+            target = new CollectionsLoader(autor, dictionary);
 
-            var ericoVerissimo = autores[0];
-            Assert.That(ericoVerissimo.Id, Is.EqualTo(1));
-            Assert.That(ericoVerissimo.Nome, Is.EqualTo("Érico Veríssimo"));
+            //var autores = Joke.Query<Autor>()
+            //    .Execute();
 
-            Assert.That(ericoVerissimo.Livros.Count, Is.EqualTo(3));
+            //Assert.That(autores.Count, Is.EqualTo(1));
 
-            Assert.That(ericoVerissimo.Livros[0].Id, Is.EqualTo(1));
-            Assert.That(ericoVerissimo.Livros[0].Titulo, Is.EqualTo("O Continente"));
+            //var ericoVerissimo = autores[0];
+            //Assert.That(ericoVerissimo.Id, Is.EqualTo(1));
+            //Assert.That(ericoVerissimo.Nome, Is.EqualTo("Érico Veríssimo"));
 
-            Assert.That(ericoVerissimo.Livros[1].Id, Is.EqualTo(6));
-            Assert.That(ericoVerissimo.Livros[1].Titulo, Is.EqualTo("O Retrato"));
+            target.Load();
 
-            Assert.That(ericoVerissimo.Livros[2].Id, Is.EqualTo(4));
-            Assert.That(ericoVerissimo.Livros[2].Titulo, Is.EqualTo("O Arquipélago"));
+            var livros = autor.Livros;
+            Assert.That(livros.Count, Is.EqualTo(3));
+
+            Assert.That(livros[0].Id, Is.EqualTo(1));
+            Assert.That(livros[0].Titulo, Is.EqualTo("O Continente"));
+
+            Assert.That(livros[1].Id, Is.EqualTo(6));
+            Assert.That(livros[1].Titulo, Is.EqualTo("O Retrato"));
+
+            Assert.That(livros[2].Id, Is.EqualTo(4));
+            Assert.That(livros[2].Titulo, Is.EqualTo("O Arquipélago"));
 
             DictionaryInstanceFactory.GetInstance().Set("SQLCommandExecutorMock", false);
         }
@@ -126,5 +131,6 @@ namespace EntityJokeTests.Core.Relacionamento1N
             row1["a_nome"] = autor.Nome;
             livroTable.Rows.Add(row1);
         }
+
     }
 }

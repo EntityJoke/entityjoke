@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\DataTableGenerator.cs" />
+    <Compile Include="Core\Loaders\CollectionLoader.cs" />
+    <Compile Include="Core\Loaders\CollectionsLoader.cs" />
+    <Compile Include="Core\Loaders\EntitiesLoaderReflectionAdapter.cs" />
+    <Compile Include="Process\Commands\DataTableGenerator.cs" />
     <Compile Include="Connection\DbConnectionFactory.cs" />
     <Compile Include="Connection\DbDataAdapterFactory.cs" />
     <Compile Include="Connection\JokeConfiguration.cs" />
@@ -53,20 +56,21 @@
     <Compile Include="Core\Dictionaries\DictionaryEntitiesObjects.cs" />
     <Compile Include="Core\Dictionaries\DictionaryEntitiesMap.cs" />
     <Compile Include="Core\Dictionaries\DictionaryInstanceFactory.cs" />
-    <Compile Include="Core\EntitiesLoader.cs" />
-    <Compile Include="Core\EntityLoader.cs" />
-    <Compile Include="Core\EntityLoaderBuilder.cs" />
+    <Compile Include="Core\Loaders\EntitiesLoader.cs" />
+    <Compile Include="Core\Loaders\EntityLoader.cs" />
+    <Compile Include="Core\Loaders\EntityLoaderBuilder.cs" />
+    <Compile Include="Process\Commands\DataTableGeneratorFactory.cs" />
     <Compile Include="Structure\Fields\FieldEntity.cs" />
     <Compile Include="Structure\Fields\FieldCollectionEntity.cs" />
     <Compile Include="Structure\Fields\Setters\FieldBoolValueConverter.cs" />
     <Compile Include="Structure\Fields\Setters\FieldPropertyValueSetter.cs" />
     <Compile Include="Structure\Fields\Setters\FieldValueSetter.cs" />
-    <Compile Include="Core\ISQLCommandExecutor.cs" />
+    <Compile Include="Process\Commands\IDataTableGenerador.cs" />
     <Compile Include="Core\Joke.cs" />
     <Compile Include="Core\JokeConfigurationBuilder.cs" />
-    <Compile Include="Core\PointerIndexColumn.cs" />
-    <Compile Include="Core\SQLCommandExecutor.cs" />
-    <Compile Include="Core\SQLCommandExecutorFactory.cs" />
+    <Compile Include="Core\Loaders\PointerIndexColumn.cs" />
+    <Compile Include="Process\Commands\SQLCommandExecutor.cs" />
+    <Compile Include="Process\Commands\SQLCommandExecutorFactory.cs" />
     <Compile Include="Linq\BoolFieldAliasReplacer.cs" />
     <Compile Include="Linq\FieldAliasReplacer.cs" />
     <Compile Include="Linq\FieldAliasReplacerBuilder.cs" />
@@ -84,7 +88,7 @@
     <Compile Include="Linq\SQLGeneratorBuilder.cs" />
     <Compile Include="Linq\SQLWithConditionGeneratorBuilder.cs" />
     <Compile Include="Linq\WhereGeneratorBuilder.cs" />
-    <Compile Include="Mocks\SQLCommandExecutorMock.cs" />
+    <Compile Include="Mocks\DataTableGeneratorMock.cs" />
     <Compile Include="Process\Generators\AliasGenerator.cs" />
     <Compile Include="Process\ClonerObject.cs" />
     <Compile Include="Process\Commands\CommandDeleteGenerator.cs" />

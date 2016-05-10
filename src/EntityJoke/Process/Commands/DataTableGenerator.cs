@@ -1,9 +1,10 @@
-﻿using System.Data;
+﻿using EntityJoke.Connection;
+using System.Data;
 using System.Data.Common;
 
-namespace EntityJoke.Connection
+namespace EntityJoke.Process.Commands
 {
-    public class DataTableGenerator
+    public class DataTableGenerator : IDataTableGenerador
     {
         private string commandSQL;
 
@@ -12,7 +13,7 @@ namespace EntityJoke.Connection
             this.commandSQL = commandSQL;
         }
 
-        internal DataTable Generate()
+        public DataTable Generate()
         {
             DbConnection conn = new DbConnectionFactory().Get();
             conn.Open();

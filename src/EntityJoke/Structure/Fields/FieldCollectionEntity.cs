@@ -5,27 +5,20 @@ namespace EntityJoke.Structure.Fields
 {
     public class FieldCollectionEntity : FieldEntity
     {
-        public Type TypeEntity;
-
         public FieldCollectionEntity(FieldInfoCreator creator) 
             : base(creator)
         {
             IsEntity = true;
         }
 
+        protected override void SetType(FieldInfoCreator creator)
+        {
+            this.Type = creator.Type.GenericTypeArguments[0];
+        }
+
         protected override void SetColumnName(FieldInfoCreator creator)
         {
             this.ColumnName = creator.ColumnName;
-        }
-
-        protected override bool ShouldAddEntity()
-        {
-            return false;
-        }
-
-        protected override Type DictionaryType()
-        {
-            return this.Type.GenericTypeArguments[0];
         }
     }
 }

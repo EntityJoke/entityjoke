@@ -10,7 +10,6 @@ namespace EntityJoke.Structure.Fields
         public FieldEntity(FieldInfoCreator creator) : base(creator)
         {
             SetDeclaringTypeName(creator);
-            SetEntity();
             IsEntity = true;
         }
 
@@ -24,20 +23,5 @@ namespace EntityJoke.Structure.Fields
             this.ColumnName = String.Format("id_{0}", creator.ColumnName);
         }
 
-        private void SetEntity()
-        {
-            if(ShouldAddEntity())
-                DictionaryEntitiesMap.INSTANCE.TryAddEntity(DictionaryType());
-        }
-
-        protected virtual bool ShouldAddEntity()
-        {
-            return true;
-        }
-
-        protected virtual Type DictionaryType()
-        {
-            return this.Type;
-        }
     }
 }

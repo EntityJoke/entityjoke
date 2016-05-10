@@ -24,9 +24,9 @@ namespace EntityJoke.Core
                 values.Add(key, value);
         }
 
-        public static bool IsSQLCommandExecutorMock()
+        public static bool IsDataTableGeneratorMock()
         {
-            return (bool)instance.values["SQLCommandExecutorMock"];
+            return (bool)instance.values["DataTableGeneratorMock"];
         }
 
         public static void AddDataTableMock(DataTable dataTable)

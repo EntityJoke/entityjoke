@@ -1,4 +1,5 @@
 ﻿using EntityJoke.Core;
+using EntityJoke.Core.Loaders;
 using EntityJoke.Structure.Entities;
 using EntityJokeTests.EntidadesTestes;
 using NUnit.Framework;

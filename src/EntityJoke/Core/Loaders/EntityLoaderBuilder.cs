@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace EntityJoke.Core
+namespace EntityJoke.Core.Loaders
 {
     public class EntityLoaderBuilder
     {

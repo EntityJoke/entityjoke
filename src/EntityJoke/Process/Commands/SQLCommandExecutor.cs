@@ -1,10 +1,12 @@
 ﻿using EntityJoke.Connection;
+using EntityJoke.Core;
+using EntityJoke.Core.Loaders;
 using System.Collections.Generic;
 using System.Data;
 
-namespace EntityJoke.Core
+namespace EntityJoke.Process.Commands
 {
-    public class SQLCommandExecutor<T> : ISQLCommandExecutor<T>
+    public class SQLCommandExecutor<T>
     {
         private string commandSQL;
 
@@ -21,7 +23,7 @@ namespace EntityJoke.Core
 
         private DataTable ExecuteCommandSQL()
         {
-            return new DataTableGenerator(commandSQL).Generate();
+            return DataTableGeneratorFactory.Get(commandSQL).Generate();
         }
 
         private static List<T> LoadEntities(DataTable dataTable)
