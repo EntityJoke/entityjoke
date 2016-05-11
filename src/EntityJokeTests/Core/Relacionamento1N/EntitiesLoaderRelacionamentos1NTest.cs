@@ -55,8 +55,6 @@ namespace EntityJokeTests.Core.Relacionamento1N
 
             Assert.That(ericoVerissimo.Livros[2].Id, Is.EqualTo(4));
             Assert.That(ericoVerissimo.Livros[2].Titulo, Is.EqualTo("O Arquipélago"));
-
-            DictionaryInstanceFactory.GetInstance().Set("SQLCommandExecutorMock", false);
         }
 
         private static void SetUpDictionaryEntityes()
@@ -69,7 +67,7 @@ namespace EntityJokeTests.Core.Relacionamento1N
         [TearDown]
         public void TearDown()
         {
-            DictionaryInstanceFactory.GetInstance().Set("SQLCommandExecutorMock", false);
+            DictionaryInstanceFactory.GetInstance().Set("DataTableGeneratorMock", false);
         }
 
         private void SetUpDataTable()
