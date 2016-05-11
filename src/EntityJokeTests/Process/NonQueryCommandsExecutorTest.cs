@@ -36,7 +36,7 @@ namespace EntityJokeTests.Process
             cat.Id = 20000;
             cat.Nome = "Teste Insert";
 
-            var insert = new CommandInsertGenerator(cat).GetCommand();
+            var insert = new CommandInsertGenerator(cat).Generate();
 
             NonQueryCommandsExecutor executor = new NonQueryCommandsExecutor(cat);
             executor.Execute();
@@ -55,7 +55,7 @@ namespace EntityJokeTests.Process
             GgsTeste cat = new GgsTeste();
             cat.Nome = "Teste Insert 4";
 
-            var insert = new CommandInsertGenerator(cat).GetCommand();
+            var insert = new CommandInsertGenerator(cat).Generate();
 
             NonQueryCommandsExecutor executor = new NonQueryCommandsExecutor(cat);
             executor.Execute();

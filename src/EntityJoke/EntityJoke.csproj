@@ -43,6 +43,7 @@
     <Compile Include="Core\Loaders\CollectionsLoader.cs" />
     <Compile Include="Core\Loaders\EntitiesLoaderReflectionAdapter.cs" />
     <Compile Include="Linq\Generator\CollectionSelectGenerator.cs" />
+    <Compile Include="Process\Commands\CommandSQLGenerator.cs" />
     <Compile Include="Process\Commands\DataTableGenerator.cs" />
     <Compile Include="Connection\DbConnectionFactory.cs" />
     <Compile Include="Connection\DbDataAdapterFactory.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Core\Loaders\EntityLoader.cs" />
     <Compile Include="Core\Loaders\EntityLoaderBuilder.cs" />
     <Compile Include="Process\Commands\DataTableGeneratorFactory.cs" />
+    <Compile Include="Process\Commands\ICommandSQLGenerator.cs" />
     <Compile Include="Structure\Fields\FieldEntity.cs" />
     <Compile Include="Structure\Fields\FieldCollectionEntity.cs" />
     <Compile Include="Structure\Fields\Setters\FieldBoolValueConverter.cs" />

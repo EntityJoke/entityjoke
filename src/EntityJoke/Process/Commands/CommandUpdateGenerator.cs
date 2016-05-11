@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace EntityJoke.Process.Commands
 {
-    public class CommandUpdateGenerator
+    public class CommandUpdateGenerator : ICommandSQLGenerator
     {
         object objectUpdate;
         Entity entity;
@@ -18,7 +18,7 @@ namespace EntityJoke.Process.Commands
             this.entity = DictionaryEntitiesMap.INSTANCE.GetEntity(objectInsert.GetType());
         }
 
-        public string GetCommand()
+        public string Generate()
         {
             return ObjectHasChange() ? GetUpdateThisObject() : "";
         }
@@ -30,7 +30,7 @@ namespace EntityJoke.Process.Commands
 
         private string GetUpdateThisObject()
         {
-            return String.Format("{0} {1} {2}",
+            return String.Format("{0} {1} {2} RETURNING ID",
                 GetUpdate(),
                 GetColumns(),
                 GetWhere());

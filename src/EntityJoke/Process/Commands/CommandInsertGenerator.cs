@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace EntityJoke.Process.Commands
 {
-    public class CommandInsertGenerator
+    public class CommandInsertGenerator : ICommandSQLGenerator
     {
         object objectInsert;
         Entity entity;
@@ -18,14 +18,14 @@ namespace EntityJoke.Process.Commands
             this.entity = DictionaryEntitiesMap.INSTANCE.GetEntity(objectInsert.GetType());
         }
 
-        public string GetCommand()
+        public string Generate()
         {
             return GetInsertThisObject();
         }
 
         private string GetInsertThisObject()
         {
-            return String.Format("{0} {1} VALUES {2}",
+            return String.Format("{0} {1} VALUES {2} RETURNING ID",
                 GetInsert(),
                 GetColumns(),
                 GetValues());

@@ -29,9 +29,9 @@ namespace EntityJokeTests.Process
 
             target = new CommandInsertGenerator(categoria);
 
-            string insert = "INSERT INTO categoria_teste (nome) VALUES ('Comidas')";
+            string insert = "INSERT INTO categoria_teste (nome) VALUES ('Comidas') RETURNING ID";
 
-            Assert.That(target.GetCommand(), Is.EqualTo(insert));
+            Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
@@ -52,9 +52,9 @@ namespace EntityJokeTests.Process
             target = new CommandInsertGenerator(produto);
 
             string insert = "";
-            insert += "INSERT INTO produto_teste (id_categoria_teste, embalagem, marca, nome, quantidade, unidade_medida) VALUES (4, 'Caixa', 'Sadia', 'Lasanha', '650', 'g')";
+            insert += "INSERT INTO produto_teste (id_categoria_teste, embalagem, marca, nome, quantidade, unidade_medida) VALUES (4, 'Caixa', 'Sadia', 'Lasanha', '650', 'g') RETURNING ID";
 
-            Assert.That(target.GetCommand(), Is.EqualTo(insert));
+            Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
@@ -71,9 +71,9 @@ namespace EntityJokeTests.Process
             target = new CommandInsertGenerator(produto);
 
             string insert = "";
-            insert += "INSERT INTO produto_teste (embalagem, marca, nome, quantidade, unidade_medida) VALUES ('Caixa', 'Sadia', 'Lasanha', '650', 'g')";
+            insert += "INSERT INTO produto_teste (embalagem, marca, nome, quantidade, unidade_medida) VALUES ('Caixa', 'Sadia', 'Lasanha', '650', 'g') RETURNING ID";
 
-            Assert.That(target.GetCommand(), Is.EqualTo(insert));
+            Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
@@ -95,9 +95,9 @@ namespace EntityJokeTests.Process
             target = new CommandInsertGenerator(precoProduto);
 
             string insert = "";
-            insert += "INSERT INTO preco_produto (data_fim, data_inicio, preco, id_produto) VALUES ('" + dataFim.GetDateTimeFormats()[54] + "', '" + dataIni.GetDateTimeFormats()[54] + "', 20, 4)";
+            insert += "INSERT INTO preco_produto (data_fim, data_inicio, preco, id_produto) VALUES ('" + dataFim.GetDateTimeFormats()[54] + "', '" + dataIni.GetDateTimeFormats()[54] + "', 20, 4) RETURNING ID";
 
-            Assert.That(target.GetCommand(), Is.EqualTo(insert));
+            Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
@@ -120,9 +120,9 @@ namespace EntityJokeTests.Process
             target = new CommandInsertGenerator(comparador);
 
             string insert = "";
-            insert += "INSERT INTO comparador_produtos (data_comparacao, id_produto_a, id_produto_b) VALUES ('" + data.GetDateTimeFormats()[54] + "', 4, 23)";
+            insert += "INSERT INTO comparador_produtos (data_comparacao, id_produto_a, id_produto_b) VALUES ('" + data.GetDateTimeFormats()[54] + "', 4, 23) RETURNING ID";
 
-            Assert.That(target.GetCommand(), Is.EqualTo(insert));
+            Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
     }

@@ -10,12 +10,16 @@ namespace EntityJoke.Process.Commands
 {
     public class NonQueryCommandsExecutor
     {
-        protected object objectCommand;
-        protected Entity entity;
+        private DataTable returnCommand;
+        private ICommandSQLGenerator commandGenerator;
         private string commandSQL;
+
+        protected Entity entity;
+        protected object objectCommand;
 
         public NonQueryCommandsExecutor(object obj)
         {
+            commandGenerator = CommandSQLGenerator.NewInstance(obj);
             entity = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
             this.objectCommand = obj;
         }
@@ -31,7 +35,7 @@ namespace EntityJoke.Process.Commands
 
             Debug.WriteLine("CommandExecutor : " + commandSQL);
 
-            DataTable returnCommand = new DataTableGenerator(commandSQL).Generate();
+            returnCommand = new DataTableGenerator(commandSQL).Generate();
             RefreshObject(returnCommand);
         }
 
@@ -44,25 +48,7 @@ namespace EntityJoke.Process.Commands
 
         protected virtual string GetCommandSQL()
         {
-            return IsNewObject() ? GetCommandInsert() : GetCommandUpdate();
-        }
-
-        private string GetCommandInsert()
-        {
-            return new CommandInsertGenerator(objectCommand).GetCommand() + " RETURNING ID";
-        }
-
-        private string GetCommandUpdate()
-        {
-            var update = new CommandUpdateGenerator(objectCommand).GetCommand();
-            return update == "" ? "" : update + " RETURNING ID";
-        }
-
-        private bool IsNewObject()
-        {
-            var idField = entity.FieldDictionary["id"];
-            int id = (int)idField.GetExtractor(objectCommand).Extract();
-            return id == 0;
+            return commandGenerator.Generate();
         }
 
         private void ProcessJoin(Field field)
