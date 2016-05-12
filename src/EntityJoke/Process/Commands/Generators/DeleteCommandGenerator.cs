@@ -5,12 +5,12 @@ using System;
 
 namespace EntityJoke.Process.Commands
 {
-    public class CommandDeleteGenerator
+    public class DeleteCommandGenerator
     {
         object objectDelete;
         Entity entity;
 
-        public CommandDeleteGenerator(object objectDelete)
+        public DeleteCommandGenerator(object objectDelete)
         {
             this.objectDelete = objectDelete;
             this.entity = DictionaryEntitiesMap.INSTANCE.GetEntity(objectDelete.GetType());

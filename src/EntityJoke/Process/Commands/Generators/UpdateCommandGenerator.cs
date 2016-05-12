@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace EntityJoke.Process.Commands
 {
-    public class CommandUpdateGenerator : ICommandSQLGenerator
+    public class UpdateCommandGenerator : ICommandSQLGenerator
     {
         object objectUpdate;
         Entity entity;
 
-        public CommandUpdateGenerator(object objectInsert)
+        public UpdateCommandGenerator(object objectInsert)
         {
             this.objectUpdate = objectInsert;
             this.entity = DictionaryEntitiesMap.INSTANCE.GetEntity(objectInsert.GetType());

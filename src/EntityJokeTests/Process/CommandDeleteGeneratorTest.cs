@@ -9,7 +9,7 @@ namespace EntityJokeTests.Process
     public class CommandDeleteGeneratorTest
     {
 
-        CommandDeleteGenerator target;
+        DeleteCommandGenerator target;
 
         [SetUp]
         public void SetUp()
@@ -24,7 +24,7 @@ namespace EntityJokeTests.Process
             cat.Id = 65;
             cat.Nome = "Cat Delete";
 
-            target = new CommandDeleteGenerator(cat);
+            target = new DeleteCommandGenerator(cat);
 
             string delete = "DELETE FROM categoria_teste WHERE id = 65";
 

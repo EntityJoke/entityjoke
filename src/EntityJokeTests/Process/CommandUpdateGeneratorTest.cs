@@ -10,7 +10,7 @@ namespace EntityJokeTests.Process
     public class CommandUpdateGeneratorTest
     {
 
-        CommandUpdateGenerator target;
+        UpdateCommandGenerator target;
 
         [SetUp]
         public void SetUp()
@@ -32,7 +32,7 @@ namespace EntityJokeTests.Process
 
             categoria.Nome = "Comidas 1";
 
-            target = new CommandUpdateGenerator(categoria);
+            target = new UpdateCommandGenerator(categoria);
 
             string insert = "UPDATE categoria_teste SET nome = 'Comidas 1' WHERE id = 2 RETURNING ID";
 
@@ -51,7 +51,7 @@ namespace EntityJokeTests.Process
 
             DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(produto);
 
-            target = new CommandUpdateGenerator(produto);
+            target = new UpdateCommandGenerator(produto);
             Assert.That(target.Generate(), Is.EqualTo(""));
 
             produto.CategoriaTeste = null;
@@ -61,7 +61,7 @@ namespace EntityJokeTests.Process
             produto.Quantidade = "650";
             produto.UnidadeMedida = "g";
 
-            target = new CommandUpdateGenerator(produto);
+            target = new UpdateCommandGenerator(produto);
 
             string update = "";
             update += "UPDATE produto_teste ";
@@ -90,14 +90,14 @@ namespace EntityJokeTests.Process
 
             DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(precoProduto);
 
-            target = new CommandUpdateGenerator(precoProduto);
+            target = new UpdateCommandGenerator(precoProduto);
             Assert.That(target.Generate(), Is.EqualTo(""));
 
             precoProduto.Produto = new Produto();
             precoProduto.Produto.Id = 4;
             precoProduto.Produto.Nome = "Trigo";
 
-            target = new CommandUpdateGenerator(precoProduto);
+            target = new UpdateCommandGenerator(precoProduto);
 
             string update = "";
             update += "UPDATE preco_produto ";
@@ -117,7 +117,7 @@ namespace EntityJokeTests.Process
 
             DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(comparador);
 
-            target = new CommandUpdateGenerator(comparador);
+            target = new UpdateCommandGenerator(comparador);
             Assert.That(target.Generate(), Is.EqualTo(""));
 
             comparador.DataComparacao = data;
@@ -137,7 +137,7 @@ namespace EntityJokeTests.Process
             update += "id_produto_b = 23 ";
             update += "WHERE id = 20 RETURNING ID";
 
-            target = new CommandUpdateGenerator(comparador);
+            target = new UpdateCommandGenerator(comparador);
             Assert.That(target.Generate(), Is.EqualTo(update));
         }
 

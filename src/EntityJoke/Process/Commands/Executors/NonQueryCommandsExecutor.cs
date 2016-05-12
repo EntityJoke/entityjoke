@@ -19,7 +19,7 @@ namespace EntityJoke.Process.Commands
 
         public NonQueryCommandsExecutor(object obj)
         {
-            commandGenerator = CommandSQLGenerator.NewInstance(obj);
+            commandGenerator = SelectCommandGenerator.NewInstance(obj);
             entity = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
             this.objectCommand = obj;
         }

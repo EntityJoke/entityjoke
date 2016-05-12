@@ -10,7 +10,7 @@ namespace EntityJokeTests.Process
     public class CommandInsertGeneratorTest
     {
 
-        CommandInsertGenerator target;
+        InsertCommandGenerator target;
 
         [SetUp]
         public void SetUp()
@@ -27,7 +27,7 @@ namespace EntityJokeTests.Process
             categoria.Id = 2;
             categoria.Nome = "Comidas";
 
-            target = new CommandInsertGenerator(categoria);
+            target = new InsertCommandGenerator(categoria);
 
             string insert = "INSERT INTO categoria_teste (nome) VALUES ('Comidas') RETURNING ID";
 
@@ -49,7 +49,7 @@ namespace EntityJokeTests.Process
             produto.CategoriaTeste.Id = 4;
             produto.CategoriaTeste.Nome = "Congelados";
 
-            target = new CommandInsertGenerator(produto);
+            target = new InsertCommandGenerator(produto);
 
             string insert = "";
             insert += "INSERT INTO produto_teste (id_categoria_teste, embalagem, marca, nome, quantidade, unidade_medida) VALUES (4, 'Caixa', 'Sadia', 'Lasanha', '650', 'g') RETURNING ID";
@@ -68,7 +68,7 @@ namespace EntityJokeTests.Process
             produto.Quantidade = "650";
             produto.UnidadeMedida = "g";
 
-            target = new CommandInsertGenerator(produto);
+            target = new InsertCommandGenerator(produto);
 
             string insert = "";
             insert += "INSERT INTO produto_teste (embalagem, marca, nome, quantidade, unidade_medida) VALUES ('Caixa', 'Sadia', 'Lasanha', '650', 'g') RETURNING ID";
@@ -92,7 +92,7 @@ namespace EntityJokeTests.Process
             precoProduto.Produto.Id = 4;
             precoProduto.Produto.Nome = "Trigo";
 
-            target = new CommandInsertGenerator(precoProduto);
+            target = new InsertCommandGenerator(precoProduto);
 
             string insert = "";
             insert += "INSERT INTO preco_produto (data_fim, data_inicio, preco, id_produto) VALUES ('" + dataFim.GetDateTimeFormats()[54] + "', '" + dataIni.GetDateTimeFormats()[54] + "', 20, 4) RETURNING ID";
@@ -117,7 +117,7 @@ namespace EntityJokeTests.Process
             comparador.ProdutoB.Id = 23;
             comparador.ProdutoB.Nome = "Macarrão";
 
-            target = new CommandInsertGenerator(comparador);
+            target = new InsertCommandGenerator(comparador);
 
             string insert = "";
             insert += "INSERT INTO comparador_produtos (data_comparacao, id_produto_a, id_produto_b) VALUES ('" + data.GetDateTimeFormats()[54] + "', 4, 23) RETURNING ID";

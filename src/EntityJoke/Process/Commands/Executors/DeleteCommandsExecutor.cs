@@ -14,7 +14,7 @@ namespace EntityJoke.Process.Commands
 
         protected override string GetCommandSQL()
         {
-            return new CommandDeleteGenerator(objectCommand).GetCommand();
+            return new DeleteCommandGenerator(objectCommand).GetCommand();
         }
 
         protected override void RefreshObject(System.Data.DataTable returnCommand)

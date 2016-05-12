@@ -4,13 +4,13 @@ using EntityJoke.Structure.Fields;
 
 namespace EntityJoke.Process.Commands
 {
-    public class CommandSQLGenerator
+    public class SelectCommandGenerator
     {
         public static ICommandSQLGenerator NewInstance(object obj)
         {
             if(IsNewObject(obj))
-                return new CommandInsertGenerator(obj);
-            return new CommandUpdateGenerator(obj);
+                return new InsertCommandGenerator(obj);
+            return new UpdateCommandGenerator(obj);
         }
 
         private static bool IsNewObject(object objectCommand)

@@ -17,18 +17,18 @@ namespace EntityJokeTests.Process.Commands
         public void CriaComandoInsert()
         {
             var novo = new Contato() { Nome = "Novo Contato", Ativo = true };
-            target = CommandSQLGenerator.NewInstance(novo);
+            target = SelectCommandGenerator.NewInstance(novo);
 
-            Assert.That(target, Is.InstanceOf(typeof(CommandInsertGenerator)));
+            Assert.That(target, Is.InstanceOf(typeof(InsertCommandGenerator)));
         }
 
         [Test]
         public void CriaComandoUpdate()
         {
             var novo = new Contato() { Id = 9, Nome = "Contato Antigo", Ativo = true };
-            target = CommandSQLGenerator.NewInstance(novo);
+            target = SelectCommandGenerator.NewInstance(novo);
 
-            Assert.That(target, Is.InstanceOf(typeof(CommandUpdateGenerator)));
+            Assert.That(target, Is.InstanceOf(typeof(UpdateCommandGenerator)));
         }
 
     }
