@@ -89,6 +89,7 @@
     <Compile Include="Process\CommandDeleteGeneratorTest.cs" />
     <Compile Include="Process\CommandInsertGeneratorTest.cs" />
     <Compile Include="Process\Commands\CommandSQLGeneratorTest.cs" />
+    <Compile Include="Process\Commands\Executors\InsertCommandsExecutorTest.cs" />
     <Compile Include="Process\CommandUpdateGeneratorTest.cs" />
     <Compile Include="Process\DictionaryEntitiesMapTest.cs" />
     <Compile Include="Process\EntityJoinTest.cs" />

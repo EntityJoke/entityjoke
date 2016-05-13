@@ -4,13 +4,13 @@ using System.Data.Common;
 
 namespace EntityJoke.Process.Commands
 {
-    public class DataTableGenerator : IDataTableGenerador
+    public class DataTableGenerator : IDataTableGenerator
     {
-        private string commandSQL;
+        private string commandSql;
 
-        public DataTableGenerator(string commandSQL)
+        public DataTableGenerator(string commandSql)
         {
-            this.commandSQL = commandSQL;
+            this.commandSql = commandSql;
         }
 
         public DataTable Generate()
@@ -18,7 +18,7 @@ namespace EntityJoke.Process.Commands
             DbConnection conn = new DbConnectionFactory().Get();
             conn.Open();
 
-            DbDataAdapter adp = new DbDataAdapterFactory(commandSQL, conn).Get();
+            DbDataAdapter adp = new DbDataAdapterFactory(commandSql, conn).Get();
             DataTable dataTable = new DataTable();
 
             adp.Fill(dataTable);

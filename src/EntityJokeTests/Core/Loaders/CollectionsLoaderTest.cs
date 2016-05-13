@@ -23,12 +23,12 @@ namespace EntityJokeTests.Core.Loaders
         {
             SetUpDictionaryEntityes();
             SetUpDataTable();
+            DictionaryInstanceFactory.SetDataTableGeneratorMock(true);
         }
 
         [Test]
         public void CarregaAutorComListaDeLivros()
         {
-            DictionaryInstanceFactory.GetInstance().Set("DataTableGeneratorMock", true);
             DictionaryInstanceFactory.AddDataTableMock(livroTable);
 
             var autor = new Autor() { Id = 1, Nome = "Érico Veríssimo" };
@@ -62,7 +62,7 @@ namespace EntityJokeTests.Core.Loaders
         [TearDown]
         public void TearDown()
         {
-            DictionaryInstanceFactory.GetInstance().Set("DataTableGeneratorMock", false);
+            DictionaryInstanceFactory.SetDataTableGeneratorMock(false);
         }
 
         private void SetUpDataTable()

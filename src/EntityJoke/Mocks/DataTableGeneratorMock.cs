@@ -4,7 +4,7 @@ using System.Data;
 
 namespace EntityJoke.Mocks
 {
-    public class DataTableGeneratorMock : IDataTableGenerador
+    public class DataTableGeneratorMock : IDataTableGenerator
     {
         private string sql;
 

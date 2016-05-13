@@ -29,6 +29,11 @@ namespace EntityJoke.Core
             return instance.values.ContainsKey("DataTableGeneratorMock") ? (bool)instance.values["DataTableGeneratorMock"] : false;
         }
 
+        public static void SetDataTableGeneratorMock(bool isMock)
+        {
+            instance.Set("DataTableGeneratorMock", isMock);
+        }
+
         public static void AddDataTableMock(DataTable dataTable)
         {
             Queue<DataTable> q = new Queue<DataTable>();

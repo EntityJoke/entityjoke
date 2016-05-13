@@ -6,7 +6,7 @@ namespace EntityJoke.Process.Commands
 {
     public class DataTableGeneratorFactory
     {
-        internal static IDataTableGenerador Get(string sql)
+        public static IDataTableGenerator Get(string sql)
         {
             if (DictionaryInstanceFactory.IsDataTableGeneratorMock())
                 return new DataTableGeneratorMock(sql);

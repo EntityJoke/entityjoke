@@ -2,7 +2,7 @@
 
 namespace EntityJoke.Process.Commands
 {
-    public interface IDataTableGenerador
+    public interface IDataTableGenerator
     {
 
         DataTable Generate();
