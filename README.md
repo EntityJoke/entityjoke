@@ -37,7 +37,7 @@ Example:
 
 Nuget 
 -
-[![NuGet Version](https://img.shields.io/nuget/v/EntityJoke.svg)](https://ci.appveyor.com/project/entityjoke)
+[![NuGet Version](https://img.shields.io/nuget/v/EntityJoke.svg)](https://www.nuget.org/packages/EntityJoke)
 
 Build
 -
