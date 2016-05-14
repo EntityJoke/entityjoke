@@ -108,6 +108,6 @@
   -->
 
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack EntityJoke.csproj -Symbols -Prop Configuration=Release" -Version 1.0.{build}></Exec>
+    <Exec Command="nuget pack EntityJoke.csproj -Symbols -Prop Configuration=Release -Version 1.0.{build}"></Exec>
   </Target>
 </Project>
