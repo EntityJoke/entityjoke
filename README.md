@@ -27,13 +27,17 @@ Example:
 				.BuildConfiguration();
 
 			//Get all persons
-			List<Person> persons = Joke().Query<Person>().Execute();
+			List<Person> persons = Joke.Query<Person>().Execute();
 
 			return persons;
 		}
 	}
+	
 
 
+Nuget:
+-----
+[![NuGet Version](https://img.shields.io/nuget/v/EntityJoke.svg)](https://ci.appveyor.com/project/entityjoke)
 
 Issues:
 -----
@@ -41,4 +45,4 @@ https://huboard.com/EntityJoke/entityjoke/#/
 
 Continuous Integration Jobs:
 -----
-https://ci.appveyor.com/project/entityjoke/entityjoke/history
+[![Build status](https://ci.appveyor.com/api/projects/status/iakonry0xd3e7rsl?svg=true)](https://ci.appveyor.com/project/entityjoke/entityjoke-6sb0k)
