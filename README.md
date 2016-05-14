@@ -35,14 +35,14 @@ Example:
 	
 
 
-Nuget:
------
+Nuget 
+-
 [![NuGet Version](https://img.shields.io/nuget/v/EntityJoke.svg)](https://ci.appveyor.com/project/entityjoke)
 
-Issues:
------
-https://huboard.com/EntityJoke/entityjoke/#/
-
-Continuous Integration Jobs:
------
+Build
+-
 [![Build status](https://ci.appveyor.com/api/projects/status/iakonry0xd3e7rsl?svg=true)](https://ci.appveyor.com/project/entityjoke/entityjoke-6sb0k)
+
+Issues
+-
+https://huboard.com/EntityJoke/entityjoke/#/

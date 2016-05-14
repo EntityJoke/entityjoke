@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EntityJoke")]
 [assembly: AssemblyDescription("EntityJoe is a simple ORM framework")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EntityJoke community")]
+[assembly: AssemblyCompany("EntityJoke Community")]
 [assembly: AssemblyProduct("EntityJoke")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
