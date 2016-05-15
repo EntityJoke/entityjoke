@@ -67,6 +67,12 @@
     <Compile Include="Process\Commands\Generators\ICommandSQLGenerator.cs" />
     <Compile Include="Structure\Fields\FieldEntity.cs" />
     <Compile Include="Structure\Fields\FieldCollectionEntity.cs" />
+    <Compile Include="Structure\Fields\Formaters\FieldValueBoolFormatterForSql.cs" />
+    <Compile Include="Structure\Fields\Formaters\FieldValueDateFormatterForSql.cs" />
+    <Compile Include="Structure\Fields\Formaters\FieldValueFormatterFactory.cs" />
+    <Compile Include="Structure\Fields\Formaters\FieldValueFormatterForSql.cs" />
+    <Compile Include="Structure\Fields\Formaters\FieldValueNumberFormatterForSql.cs" />
+    <Compile Include="Structure\Fields\Formaters\IFieldValueFormatter.cs" />
     <Compile Include="Structure\Fields\Setters\FieldBoolValueConverter.cs" />
     <Compile Include="Structure\Fields\Setters\FieldPropertyValueSetter.cs" />
     <Compile Include="Structure\Fields\Setters\FieldValueSetter.cs" />
@@ -107,7 +113,7 @@
     <Compile Include="Process\Generators\NameGenerator.cs" />
     <Compile Include="Process\Commands\Executors\NonQueryCommandsExecutor.cs" />
     <Compile Include="Structure\Fields\Extractors\FieldValueExtractor.cs" />
-    <Compile Include="Structure\Fields\FieldValueFormatted.cs" />
+    <Compile Include="Structure\Fields\FieldValueFormater.cs" />
     <Compile Include="Structure\Fields\Extractors\FieldPropertyValueExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structure\Entities\Alias.cs" />
@@ -124,8 +130,8 @@
   <Target Name="BeforeBuild">
   </Target>
   -->
-
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack EntityJoke.csproj -Symbols -Prop Configuration=Release"></Exec>
+    <Exec Command="nuget pack EntityJoke.csproj -Symbols -Prop Configuration=Release">
+    </Exec>
   </Target>
 </Project>

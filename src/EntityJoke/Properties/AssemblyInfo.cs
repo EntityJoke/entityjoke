@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("EntityJoke")]
-[assembly: AssemblyDescription("EntityJoe is a simple ORM framework")]
+[assembly: AssemblyDescription("Entity Joke is a simple open source ORM framework.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EntityJoke Community")]
-[assembly: AssemblyProduct("EntityJoke")]
+[assembly: AssemblyCompany("Entity Joke Community")]
+[assembly: AssemblyProduct("Entity Joke")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

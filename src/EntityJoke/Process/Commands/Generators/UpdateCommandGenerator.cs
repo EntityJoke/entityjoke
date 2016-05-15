@@ -109,7 +109,7 @@ namespace EntityJoke.Process.Commands
         private string GetValueToUpdate(Field field)
         {
             if(!field.IsEntity)
-                return new FieldValueFormatted(objectUpdate, field).Format();
+                return new FieldValueFormater(objectUpdate, field).Format();
 
             return GetJoinIdValue(field);
         }
@@ -124,7 +124,7 @@ namespace EntityJoke.Process.Commands
             Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
             Field idField = entityJoin.FieldDictionary["id"];
 
-            return new FieldValueFormatted(join, idField).Format();
+            return new FieldValueFormater(join, idField).Format();
         }
 
         private object GetObjectField(object obj, Field field)

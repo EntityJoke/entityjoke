@@ -2,12 +2,12 @@
 
 namespace EntityJoke.Structure.Fields
 {
-    public class FieldValueFormatted
+    public class FieldValueFormater
     {
         private object objectValue;
         private Field field;
 
-        public FieldValueFormatted(object objectValue, Field field)
+        public FieldValueFormater(object objectValue, Field field)
         {
             this.objectValue = objectValue;
             this.field = field;

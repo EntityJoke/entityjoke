@@ -78,7 +78,7 @@ namespace EntityJoke.Linq.Generator
 
         private string GetIdEntityMain()
         {
-            return new FieldValueFormatted(obj, GetIdField()).Format();
+            return new FieldValueFormater(obj, GetIdField()).Format();
         }
     }
 }

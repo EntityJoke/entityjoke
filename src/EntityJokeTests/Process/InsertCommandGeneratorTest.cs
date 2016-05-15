@@ -7,7 +7,7 @@ using System;
 namespace EntityJokeTests.Process
 {
     [TestFixture]
-    public class CommandInsertGeneratorTest
+    public class InsertCommandGeneratorTest
     {
 
         InsertCommandGenerator target;

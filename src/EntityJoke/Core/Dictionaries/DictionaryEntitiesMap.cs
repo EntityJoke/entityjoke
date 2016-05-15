@@ -54,5 +54,15 @@ namespace EntityJoke.Core
         {
             TryAddEntity(type);
         }
+
+        public static Entity Get(Type type)
+        {
+            return Instance().GetEntity(type);
+        }
+
+        public static DictionaryEntitiesMap Instance()
+        {
+            return INSTANCE;
+        }
     }
 }

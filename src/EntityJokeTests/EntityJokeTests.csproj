@@ -87,7 +87,7 @@
     <Compile Include="Linq\QuerySimpleEntradasDuplasTest.cs" />
     <Compile Include="Linq\QuerySimpleTest.cs" />
     <Compile Include="Process\CommandDeleteGeneratorTest.cs" />
-    <Compile Include="Process\CommandInsertGeneratorTest.cs" />
+    <Compile Include="Process\InsertCommandGeneratorTest.cs" />
     <Compile Include="Process\Commands\CommandSQLGeneratorTest.cs" />
     <Compile Include="Process\Commands\Executors\InsertCommandsExecutorTest.cs" />
     <Compile Include="Process\CommandUpdateGeneratorTest.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="Process\NonQueryCommandsExecutorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structure\FieldExtractorTest.cs" />
+    <Compile Include="Structure\Fields\FieldValueFormatterTest.cs" />
     <Compile Include="Structure\ToStringsTest.cs" />
   </ItemGroup>
   <ItemGroup>

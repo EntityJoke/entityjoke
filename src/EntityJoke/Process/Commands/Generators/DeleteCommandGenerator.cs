@@ -36,7 +36,7 @@ namespace EntityJoke.Process.Commands
 
         private string GetValueToDelete(Field field)
         {
-            return new FieldValueFormatted(objectDelete, field).Format();
+            return new FieldValueFormater(objectDelete, field).Format();
         }
     }
 }
