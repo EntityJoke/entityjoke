@@ -91,7 +91,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoData()
         {
-            DateTime value = new DateTime(2015, 07, 11, 18, 25, 15);
+            DateTime value = new DateTime(2015, 07, 11, 21, 25, 15, DateTimeKind.Utc);
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueDateFormatterForSql)));
