@@ -1,0 +1,1 @@
+..\NUnit.Runners\nunit-console.exe .\EntityJokeTests.dll
