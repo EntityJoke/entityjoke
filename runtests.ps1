@@ -30,3 +30,7 @@ Write-Host "Publish Coverage... Ok"
 Write-Host ""
 
 Write-Host "Tests, Coverage and Reporter... Ok"
+
+
+(Get-Content .\test-coverage\opencoverCoverage.xml) -replace 'fullPath="c:\projects\entityjoke\', '.\' | Set-Content .\test-coverage\opencoverCoverage.xml
+(Get-Content .\test-coverage\opencoverCoverage.xml) -replace 'fullPath="c:\projects\entityjoke\', '.\' | Set-Content .\test-coverage\opencoverCoverage.xml
