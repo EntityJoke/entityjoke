@@ -21,6 +21,7 @@ Write-Host "======== [Tests] Reporter ========="
 Write-Host ""
 
 Write-Host "==== [Tests] Publish Coverage ====="
+(Get-Content .\opencoverCoverage.xml) |  Foreach-Object { $_ -replace 'fullPath="c:\\projects\\entityjoke\\', 'fullPath="' } |  Set-Content .\opencoverCoverage.xml
 
 $coveralls = (Resolve-Path ".\test-coverage\Coveralls\csmacnz.Coveralls.exe").ToString()
     
@@ -30,7 +31,3 @@ Write-Host "Publish Coverage... Ok"
 Write-Host ""
 
 Write-Host "Tests, Coverage and Reporter... Ok"
-
-
-(Get-Content .\test-coverage\opencoverCoverage.xml) -replace 'fullPath="c:\projects\entityjoke\', '.\' | Set-Content .\test-coverage\opencoverCoverage.xml
-(Get-Content .\test-coverage\opencoverCoverage.xml) -replace 'fullPath="c:\projects\entityjoke\', '.\' | Set-Content .\test-coverage\opencoverCoverage.xml
