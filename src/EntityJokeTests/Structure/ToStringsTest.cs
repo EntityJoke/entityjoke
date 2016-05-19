@@ -32,7 +32,12 @@ namespace EntityJokeTests.Structure
         [Test]
         public void AssertAliasToString()
         {
-            Alias alias = new Alias(entity, "p");
+            Alias alias = new Alias()
+            {
+                Entity = entity,
+                Symbol = "p"
+            };
+
             Assert.That(alias.ToString(), Is.EqualTo("Produto: p"));
         }
 

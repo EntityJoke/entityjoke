@@ -1,12 +1,11 @@
 ﻿using EntityJoke.Core;
 using EntityJoke.Structure.Fields;
-using System;
 
 namespace EntityJoke.Process
 {
     public class KeyDictionaryObjectExtractor
     {
-        private object obj;
+        private readonly object obj;
 
         public KeyDictionaryObjectExtractor(object obj)
         {
@@ -15,7 +14,7 @@ namespace EntityJoke.Process
 
         public  string Extract()
         {
-            return String.Format("{0}_{1}", GetTypeName(), GetIdValue());
+            return $"{GetTypeName()}_{GetIdValue()}";
         }
 
         private string GetTypeName()

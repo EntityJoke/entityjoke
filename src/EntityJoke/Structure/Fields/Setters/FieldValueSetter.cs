@@ -2,9 +2,9 @@
 {
     public class FieldValueSetter
     {
-        protected object obj;
-        protected Field field;
-        protected object value;
+        protected readonly Field field;
+        protected readonly object obj;
+        protected readonly object value;
 
         public FieldValueSetter(object obj, Field field, object value)
         {

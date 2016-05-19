@@ -1,8 +1,4 @@
-﻿using EntityJoke.Core;
-using EntityJoke.Structure.Entities;
-using EntityJoke.Structure.Fields;
-using EntityJoke.Structure.Fields.Formaters;
-using EntityJokeTests.EntidadesTestes;
+﻿using EntityJoke.Structure.Fields.Formaters;
 using NUnit.Framework;
 using System;
 

@@ -6,12 +6,13 @@ namespace EntityJoke.Structure.Fields
     public class Field
     {
         public string ColumnName;
-        public string Name;
         public bool IsEntity;
         public bool IsKey { get { return Name == "Id"; } }
         public Type Type;
 
-        protected bool isProperty;
+        public readonly string Name;
+
+        protected readonly bool isProperty;
 
         public Field(FieldInfoCreator creator)
         {
@@ -23,7 +24,7 @@ namespace EntityJoke.Structure.Fields
 
         public override string ToString()
         {
-            return string.Format("[{0}]{1}: {2}", ColumnName, Name, Type);
+            return $"[{ColumnName}]{Name}: {Type}";
         }
 
         public virtual FieldValueSetter GetSetter(object obj, object value)

@@ -2,16 +2,19 @@
 
 namespace EntityJoke.Process.Generators
 {
-    internal class NameGenerator
+    public class NameGenerator
     {
-        internal static NameGenerator INSTANCE = new NameGenerator();
+        private readonly string name;
 
-        private NameGenerator() { }
+        public NameGenerator(string name)
+        {
+            this.name = name;
+        }
 
-        internal static string Generate(string name)
+        public string Generate()
         {
             var builder = new StringBuilder();
-            builder.Append(GetFirstLetter(name));
+            builder.Append(GetFirstLetter());
 
             foreach (char letter in name.Substring(1))
                 builder.Append(ProcessLetter(letter));
@@ -19,7 +22,7 @@ namespace EntityJoke.Process.Generators
             return builder.ToString();
         }
 
-        private static string GetFirstLetter(string name)
+        private string GetFirstLetter()
         {
             return name.Substring(0, 1).ToLower();
         }

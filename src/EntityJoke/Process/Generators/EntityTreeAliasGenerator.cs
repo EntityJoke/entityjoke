@@ -3,13 +3,12 @@ using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EntityJoke.Process.Generators
 {
     public class EntityJoinsGenerator
     {
-        private Dictionary<string, Alias> dictionaryAliases = new Dictionary<string, Alias>();
+        private readonly Dictionary<string, Alias> dictionaryAliases = new Dictionary<string, Alias>();
 
 
         public EntityJoin Generate(Entity entity)
@@ -20,7 +19,7 @@ namespace EntityJoke.Process.Generators
         private EntityJoin Generate(Entity entity, Field field)
         {
             var alias = CreateAlias(entity, field);
-            var join = new EntityJoin(alias);
+            var join = CreateEntityJoin(field, alias);
 
             entity.GetFieldsJoins()
                 .ForEach(f => join.Joins.Add(Generate(f)));
@@ -28,22 +27,35 @@ namespace EntityJoke.Process.Generators
             return join;
         }
 
+        private static EntityJoin CreateEntityJoin(Field field, Alias alias)
+        {
+            return new EntityJoin
+            {
+                Alias = alias,
+                Field = field
+            };
+        }
+
         private EntityJoin Generate(Field field)
         {
-            var join = Generate(GetEntity(field.Type), field);
-            join.Field = field;
-            return join;
+            return Generate(GetEntity(field.Type), field);
         }
 
         private static Entity GetEntity(Type type)
         {
-            return DictionaryEntitiesMap.INSTANCE.GetEntity(type);
+            return DictionaryEntitiesMap.Get(type);
         }
 
         private Alias CreateAlias(Entity entity, Field field)
         {
-            var alias = new Alias(entity, CreateSymbol(entity));
+            var alias = new Alias
+            {
+                Entity = entity,
+                Symbol = CreateSymbol(entity)
+            };
+
             dictionaryAliases.Add(alias.Symbol, alias);
+
             return alias;
         }
 

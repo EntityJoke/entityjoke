@@ -1,6 +1,4 @@
-﻿using EntityJoke.Connection;
-using EntityJoke.Core;
-using EntityJoke.Core.Loaders;
+﻿using EntityJoke.Core.Loaders;
 using System.Collections.Generic;
 using System.Data;
 
@@ -8,11 +6,11 @@ namespace EntityJoke.Process.Commands
 {
     public class SQLCommandExecutor<T>
     {
-        private string commandSQL;
+        private readonly string commandSQL;
 
         public SQLCommandExecutor(string sql)
         {
-            this.commandSQL = sql;
+            commandSQL = sql;
         }
 
         public List<T> Execute()

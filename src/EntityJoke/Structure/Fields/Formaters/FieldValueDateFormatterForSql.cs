@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Structure.Fields.Formaters
 {
     public class FieldValueDateFormatterForSql : IFieldValueFormatter
     {
-        private DateTime value;
+        private readonly DateTime value;
 
         public FieldValueDateFormatterForSql(object value)
         {
@@ -18,7 +14,7 @@ namespace EntityJoke.Structure.Fields.Formaters
         public string Format()
         {
             var timestampUnix = UnixTimestampFromDateTime(value.ToUniversalTime());
-            return String.Format("To_Timestamp({0})", timestampUnix);
+            return $"To_Timestamp({timestampUnix})";
         }
 
         public static long UnixTimestampFromDateTime(DateTime date)

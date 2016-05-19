@@ -5,9 +5,9 @@ namespace EntityJoke.Process.Generators
 {
     public class AliasGenerator
     {
-        private Entity entity;
-        private Dictionary<string, Alias> dictionaryAliases;
-        string alias = "";
+        private readonly Entity entity;
+        private readonly Dictionary<string, Alias> dictionaryAliases;
+        string alias = string.Empty;
 
         public AliasGenerator(Entity ent, Dictionary<string, Alias> dictionaryAliases)
         {

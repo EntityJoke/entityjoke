@@ -2,7 +2,7 @@
 {
     public class FieldPropertyValueExtractor : FieldValueExtractor
     {
-        public FieldPropertyValueExtractor(object objectValue, Field idField) 
+        public FieldPropertyValueExtractor(object objectValue, Field idField)
             : base(objectValue, idField){}
 
         public override object Extract()

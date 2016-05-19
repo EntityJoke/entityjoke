@@ -1,5 +1,4 @@
-﻿using EntityJoke.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -9,7 +8,7 @@ namespace EntityJoke.Structure.Fields
     {
         private Dictionary<string, MethodInfo> dictionaryMethods;
 
-        private Type type;
+        private readonly Type type;
         private Dictionary<string, Field> fields;
 
         public FieldExtractor(Type type)

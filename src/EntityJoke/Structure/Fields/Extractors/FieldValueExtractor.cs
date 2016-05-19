@@ -2,8 +2,8 @@
 {
     public class FieldValueExtractor
     {
-        private object objectValue;
-        private Field field;
+        private readonly Field field;
+        private readonly object objectValue;
 
         public FieldValueExtractor(object objectValue, Field field)
         {

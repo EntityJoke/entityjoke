@@ -6,7 +6,7 @@ namespace EntityJoke.Process.Commands
 {
     public class DataTableGenerator : IDataTableGenerator
     {
-        private string commandSql;
+        private readonly string commandSql;
 
         public DataTableGenerator(string commandSql)
         {

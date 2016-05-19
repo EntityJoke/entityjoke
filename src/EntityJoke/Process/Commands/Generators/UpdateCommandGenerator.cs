@@ -9,8 +9,8 @@ namespace EntityJoke.Process.Commands
 {
     public class UpdateCommandGenerator : ICommandSQLGenerator
     {
-        object objectUpdate;
-        Entity entity;
+        readonly Entity entity;
+        readonly object objectUpdate;
 
         public UpdateCommandGenerator(object objectInsert)
         {
@@ -30,15 +30,12 @@ namespace EntityJoke.Process.Commands
 
         private string GetUpdateThisObject()
         {
-            return String.Format("{0} {1} {2} RETURNING ID",
-                GetUpdate(),
-                GetColumns(),
-                GetWhere());
+            return $"{GetUpdate()} {GetColumns()} {GetWhere()} RETURNING ID";
         }
 
         private string GetUpdate()
         {
-            return String.Format("UPDATE {0}", entity.Name);
+            return $"UPDATE {entity.Name}";
         }
 
         private string GetColumns()
@@ -46,11 +43,11 @@ namespace EntityJoke.Process.Commands
             var builder = new System.Text.StringBuilder();
 
             foreach (Field field in GetFieldsToUpdateOrdered())
-                builder.Append(String.Format(", {0} = {1}", field.ColumnName, GetValueToUpdate(field)));
+                builder.Append($", {field.ColumnName} = {GetValueToUpdate(field)}");
 
             var columns = builder.ToString();
 
-            return String.Format("SET {0}", columns.Length > 0 ? columns.Substring(2) : "");
+            return $"SET {(columns.Length > 0 ? columns.Substring(2) : "")}";
         }
 
         private List<Field> GetFieldsToUpdateOrdered()
@@ -105,7 +102,7 @@ namespace EntityJoke.Process.Commands
         private string GetWhere()
         {
             var idField = entity.FieldDictionary["id"];
-            return String.Format("WHERE id = {0}", GetValueToUpdate(idField));
+            return $"WHERE id = {GetValueToUpdate(idField)}";
         }
 
         private string GetValueToUpdate(Field field)

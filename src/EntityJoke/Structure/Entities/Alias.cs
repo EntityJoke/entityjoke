@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EntityJoke.Structure.Entities
+﻿namespace EntityJoke.Structure.Entities
 {
     public class Alias
     {
@@ -8,15 +6,9 @@ namespace EntityJoke.Structure.Entities
         public string Symbol;
         public string EntityName { get { return Entity.Type.Name; } }
 
-        public Alias(Entity entity, string symbol)
-        {
-            this.Entity = entity;
-            this.Symbol = symbol;
-        }
-
         public override string ToString()
         {
-            return String.Format("{0}: {1}", EntityName, Symbol);
+            return $"{EntityName}: {Symbol}";
         }
     }
 }

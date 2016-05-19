@@ -1,8 +1,8 @@
 ﻿namespace EntityJoke.Structure.Fields
 {
-    internal class FieldBoolValueConverter
+    public class FieldBoolValueConverter
     {
-        private object value;
+        private readonly object value;
 
         public FieldBoolValueConverter(object value)
         {

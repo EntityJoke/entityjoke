@@ -10,9 +10,12 @@ namespace EntityJoke.Structure.Entities
     {
         public EntityJoin TreeJoins;
         public Dictionary<string, Field> FieldDictionary;
-        public Type Type;
         public string Name;
+        public readonly Type Type;
+
         public List<EntityJoin> Joins { get { return TreeJoins.Joins; } }
+
+        private NameGenerator nameGenerator;
 
         public Entity(Type type)
         {
@@ -29,7 +32,8 @@ namespace EntityJoke.Structure.Entities
 
         private void LoadName()
         {
-            Name = NameGenerator.Generate(Type.Name);
+            nameGenerator = new NameGenerator(Type.Name);
+            Name = nameGenerator.Generate();
         }
 
         private void LoadFields()
@@ -44,7 +48,7 @@ namespace EntityJoke.Structure.Entities
 
         public override string ToString()
         {
-            return String.Format("{0}: {1}", Name, Type);
+            return $"{Name}: {Type}";
         }
 
         public List<Field> GetFields()

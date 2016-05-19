@@ -6,19 +6,17 @@ namespace EntityJoke.Structure.Fields
 {
     public class FieldInfoCreator
     {
-        public string ColumnName;
-        public string Name;
-        public bool IsProperty;
-        public Type Type;
-        public string DeclaringTypeName;
+        public readonly string ColumnName;
+        public readonly string Name;
+        public readonly bool IsProperty;
+        public readonly Type Type;
 
         public FieldInfoCreator(MemberInfo info)
         {
-            this.ColumnName = new NameFieldGenerator(info).Generate();
-            this.Name = info.Name.Replace("get_", "");
-            this.IsProperty = GetIsProperty(info);
-            this.Type = GetType(info);
-            this.DeclaringTypeName = info.DeclaringType.FullName;
+            ColumnName = new NameFieldGenerator(info).Generate();
+            Name = info.Name.Replace("get_", "");
+            IsProperty = GetIsProperty(info);
+            Type = GetType(info);
         }
 
         private static bool GetIsProperty(MemberInfo info)

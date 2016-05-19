@@ -7,8 +7,8 @@ namespace EntityJoke.Process.Commands
 {
     public class DeleteCommandGenerator
     {
-        object objectDelete;
-        Entity entity;
+        readonly Entity entity;
+        readonly object objectDelete;
 
         public DeleteCommandGenerator(object objectDelete)
         {
@@ -23,20 +23,18 @@ namespace EntityJoke.Process.Commands
 
         private string GetDeleteThisObject()
         {
-            return String.Format("DELETE FROM {0} WHERE {1}",
-                entity.Name,
-                GetWhere());
+            return $"DELETE FROM {entity.Name} WHERE {GetWhere()}";
         }
 
         private string GetWhere()
         {
-            var idField = entity.FieldDictionary["id"];
-            return String.Format("id = {0}", GetValueToDelete(idField));
+            return $"id = {GetValueToDelete()}";
         }
 
-        private string GetValueToDelete(Field field)
+        private string GetValueToDelete()
         {
-            return new FieldValueFormater(objectDelete, field).Format();
+            var idField = entity.FieldDictionary["id"];
+            return new FieldValueFormater(objectDelete, idField).Format();
         }
     }
 }

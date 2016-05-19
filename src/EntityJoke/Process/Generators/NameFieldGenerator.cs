@@ -4,7 +4,8 @@ namespace EntityJoke.Process.Generators
 {
     internal class NameFieldGenerator
     {
-        private MemberInfo field;
+        private readonly MemberInfo field;
+        private NameGenerator nameGenerator;
 
         public NameFieldGenerator(MemberInfo field)
         {
@@ -13,7 +14,13 @@ namespace EntityJoke.Process.Generators
 
         public string Generate()
         {
-            return NameGenerator.Generate(field.Name.Replace("get_", ""));
+            nameGenerator = new NameGenerator(NameReplaced());
+            return nameGenerator.Generate();
+        }
+
+        private string NameReplaced()
+        {
+            return field.Name.Replace("get_", "");
         }
     }
 }

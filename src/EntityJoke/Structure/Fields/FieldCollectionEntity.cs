@@ -1,11 +1,8 @@
-﻿using EntityJoke.Core;
-using System;
-
-namespace EntityJoke.Structure.Fields
+﻿namespace EntityJoke.Structure.Fields
 {
     public class FieldCollectionEntity : FieldEntity
     {
-        public FieldCollectionEntity(FieldInfoCreator creator) 
+        public FieldCollectionEntity(FieldInfoCreator creator)
             : base(creator)
         {
             IsEntity = true;

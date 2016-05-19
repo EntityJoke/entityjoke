@@ -4,8 +4,8 @@ namespace EntityJoke.Structure.Fields
 {
     public class FieldValueFormater
     {
-        private object objectValue;
-        private Field field;
+        private readonly object objectValue;
+        private readonly Field field;
 
         public FieldValueFormater(object objectValue, Field field)
         {
@@ -44,7 +44,7 @@ namespace EntityJoke.Structure.Fields
 
         private static string GetValueText(object value)
         {
-            return String.Format("'{0}'", value);
+            return $"'{value}'";
         }
 
     }

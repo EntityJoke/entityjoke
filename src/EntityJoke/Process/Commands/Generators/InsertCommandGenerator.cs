@@ -10,8 +10,8 @@ namespace EntityJoke.Process.Commands
 {
     public class InsertCommandGenerator : ICommandSQLGenerator
     {
-        object objectInsert;
-        Entity entity;
+        readonly Entity entity;
+        readonly object objectInsert;
 
         public InsertCommandGenerator(object objectInsert)
         {
@@ -26,15 +26,12 @@ namespace EntityJoke.Process.Commands
 
         private string GetInsertThisObject()
         {
-            return String.Format("{0} {1} VALUES {2} RETURNING ID",
-                GetInsert(),
-                GetColumns(),
-                GetValues());
+            return $"{GetInsert()} {GetColumns()} VALUES {GetValues()} RETURNING ID";
         }
 
         private string GetInsert()
         {
-            return String.Format("INSERT INTO {0}", entity.Name);
+            return $"INSERT INTO {entity.Name}";
         }
 
         private string GetColumns()
@@ -44,12 +41,12 @@ namespace EntityJoke.Process.Commands
             foreach (Field field in GetFieldsOrdered())
                 builder.Append(GetColumnName(field));
 
-            return string.Format("({0})", builder.ToString().Substring(2));
+            return $"({builder.ToString().Substring(2)})";
         }
 
         private string GetColumnName(Field field)
         {
-            var columnName = String.Format(", {0}", field.ColumnName);
+            var columnName = $", {field.ColumnName}";
 
             if(!field.IsEntity)
                 return columnName;
@@ -71,14 +68,14 @@ namespace EntityJoke.Process.Commands
             foreach (Field field in GetFieldsOrdered())
                 builder.Append(AddValueInsert(field));
 
-            return String.Format("({0})", builder.ToString().Substring(2));
+            return $"({builder.ToString().Substring(2)})";
         }
 
         private string AddValueInsert(Field field)
         {
             var value = GetValueToInsert(field);
 
-            return value == null ? "" : String.Format(", {0}", value);
+            return value == null ? "" : $", {value}";
         }
 
         private string GetValueToInsert(Field field)
