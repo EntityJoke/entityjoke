@@ -1,29 +1,20 @@
-﻿using EntityJoke.Core;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
+﻿using System.Data.Common;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Connection
 {
     public class DbConnectionFactory
     {
 
-        public DbConnection Get()
-        {
-            return CreateDbConnection();
-        }
+        public static DbConnection Get() => CreateDbConnection();
 
-        private DbConnection CreateDbConnection()
+        private static DbConnection CreateDbConnection()
         {
             return (DbConnection)DbConnectionConstructor().
                 Invoke(new object[] { JokeConfiguration.Get().ConnectionString() });
         }
 
-        private ConstructorInfo DbConnectionConstructor()
+        private static ConstructorInfo DbConnectionConstructor()
         {
             return JokeConfiguration.Get()
                 .DbConnectionType()

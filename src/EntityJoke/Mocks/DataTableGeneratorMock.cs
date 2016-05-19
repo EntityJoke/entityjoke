@@ -6,7 +6,7 @@ namespace EntityJoke.Mocks
 {
     public class DataTableGeneratorMock : IDataTableGenerator
     {
-        private string sql;
+        private readonly string sql;
 
         public DataTableGeneratorMock(string sql)
         {

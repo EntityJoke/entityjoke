@@ -19,8 +19,8 @@ namespace EntityJoke.Process.Generators
 
         private EntityJoin Generate(Entity entity, Field field)
         {
-            Alias alias = CreateAlias(entity, field);
-            EntityJoin join = new EntityJoin(alias);
+            var alias = CreateAlias(entity, field);
+            var join = new EntityJoin(alias);
 
             entity.GetFieldsJoins()
                 .ForEach(f => join.Joins.Add(Generate(f)));
@@ -30,19 +30,19 @@ namespace EntityJoke.Process.Generators
 
         private EntityJoin Generate(Field field)
         {
-            EntityJoin join = Generate(GetEntity(field.Type), field);
+            var join = Generate(GetEntity(field.Type), field);
             join.Field = field;
             return join;
         }
 
-        private Entity GetEntity(Type type)
+        private static Entity GetEntity(Type type)
         {
             return DictionaryEntitiesMap.INSTANCE.GetEntity(type);
         }
 
         private Alias CreateAlias(Entity entity, Field field)
         {
-            Alias alias = new Alias(entity, CreateSymbol(entity));
+            var alias = new Alias(entity, CreateSymbol(entity));
             dictionaryAliases.Add(alias.Symbol, alias);
             return alias;
         }

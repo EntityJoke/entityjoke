@@ -1,4 +1,5 @@
-﻿
+﻿using System.Text;
+
 namespace EntityJoke.Process.Generators
 {
     internal class NameGenerator
@@ -7,14 +8,15 @@ namespace EntityJoke.Process.Generators
 
         private NameGenerator() { }
 
-        internal string Generate(string name)
+        internal static string Generate(string name)
         {
-            string newName = GetFirstLetter(name);
+            var builder = new StringBuilder();
+            builder.Append(GetFirstLetter(name));
 
             foreach (char letter in name.Substring(1))
-                newName += ProcessLetter(letter);
+                builder.Append(ProcessLetter(letter));
 
-            return newName;
+            return builder.ToString();
         }
 
         private static string GetFirstLetter(string name)
@@ -22,7 +24,7 @@ namespace EntityJoke.Process.Generators
             return name.Substring(0, 1).ToLower();
         }
 
-        private string ProcessLetter(char letter)
+        private static string ProcessLetter(char letter)
         {
             if (IsTheBeginningWord(letter))
                 return GetLetterWithSeparator(letter);
@@ -35,12 +37,12 @@ namespace EntityJoke.Process.Generators
             return "_" + (char)(letter + 32);
         }
 
-        private bool IsTheBeginningWord(char letter)
+        private static bool IsTheBeginningWord(char letter)
         {
             return IsUpperCase(letter);
         }
 
-        private bool IsUpperCase(char letter)
+        private static bool IsUpperCase(char letter)
         {
             return letter > 64 && letter < 91;
         }

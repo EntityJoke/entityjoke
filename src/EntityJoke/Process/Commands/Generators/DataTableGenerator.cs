@@ -15,11 +15,11 @@ namespace EntityJoke.Process.Commands
 
         public DataTable Generate()
         {
-            DbConnection conn = new DbConnectionFactory().Get();
+            var conn = DbConnectionFactory.Get();
             conn.Open();
 
-            DbDataAdapter adp = new DbDataAdapterFactory(commandSql, conn).Get();
-            DataTable dataTable = new DataTable();
+            var adp = new DbDataAdapterFactory(commandSql, conn).Get();
+            var dataTable = new DataTable();
 
             adp.Fill(dataTable);
 

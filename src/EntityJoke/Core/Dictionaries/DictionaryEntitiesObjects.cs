@@ -8,9 +8,9 @@ namespace EntityJoke.Core
 {
     public class DictionaryEntitiesObjects
     {
-        private static DictionaryEntitiesObjects instance = new DictionaryEntitiesObjects();
+        private static readonly DictionaryEntitiesObjects instance = new DictionaryEntitiesObjects();
+        private readonly Dictionary<string, object> entityes = new Dictionary<string, object>();
 
-        private Dictionary<string, object> entityes = new Dictionary<string, object>();
         public int CountObjects { get { return entityes.Count; } }
 
         private DictionaryEntitiesObjects() { }
@@ -48,15 +48,15 @@ namespace EntityJoke.Core
             entityes.Add(GetKey(obj), obj);
         }
 
-        private void ProcessJoins(object obj)
+        private static void ProcessJoins(object obj)
         {
-            Entity ent = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
+            var ent = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
 
             ent.GetFieldsJoins()
                 .ForEach(f => ProcessJoins(obj, f));
         }
 
-        private void ProcessJoins(object obj, Field f)
+        private static void ProcessJoins(object obj, Field f)
         {
             var objJoin = f.GetExtractor(obj).Extract();
             DictionaryEntitiesObjects.GetInstance().AddOrRefreshObject(objJoin);
@@ -67,9 +67,9 @@ namespace EntityJoke.Core
             return entityes.ContainsKey(GetKey(obj));
         }
 
-        private string GetKey(object obj)
+        private static string GetKey(object obj)
         {
-            return new KeyDictionaryObjectExtractor(obj).Extract(); 
+            return new KeyDictionaryObjectExtractor(obj).Extract();
         }
 
         public object GetObject(object obj)

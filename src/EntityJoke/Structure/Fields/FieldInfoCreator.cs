@@ -21,7 +21,7 @@ namespace EntityJoke.Structure.Fields
             this.DeclaringTypeName = info.DeclaringType.FullName;
         }
 
-        private bool GetIsProperty(MemberInfo info)
+        private static bool GetIsProperty(MemberInfo info)
         {
             return info is MethodInfo;
         }
@@ -31,12 +31,12 @@ namespace EntityJoke.Structure.Fields
             return IsProperty ? TypeByMethod(info) : TypeByField(info);
         }
 
-        private Type TypeByMethod(MemberInfo info)
+        private static Type TypeByMethod(MemberInfo info)
         {
             return ((MethodInfo)info).ReturnType;
         }
 
-        private Type TypeByField(MemberInfo info)
+        private static Type TypeByField(MemberInfo info)
         {
             return ((FieldInfo)info).FieldType;
         }

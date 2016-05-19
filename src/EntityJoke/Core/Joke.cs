@@ -33,7 +33,5 @@ namespace EntityJoke.Core
         {
             new DeleteCommandsExecutor(obj).Execute();
         }
-
-    
-}
+    }
 }

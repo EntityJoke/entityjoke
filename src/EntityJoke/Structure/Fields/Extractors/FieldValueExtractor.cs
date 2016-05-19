@@ -1,22 +1,19 @@
-﻿using EntityJoke.Structure.Fields;
-using System.Reflection;
-
-namespace EntityJoke.Structure.Fields
+﻿namespace EntityJoke.Structure.Fields
 {
     public class FieldValueExtractor
     {
         private object objectValue;
         private Field field;
 
-        public FieldValueExtractor(object objectValue, Field idField)
+        public FieldValueExtractor(object objectValue, Field field)
         {
             this.objectValue = objectValue;
-            this.field = idField;
+            this.field = field;
         }
 
         public virtual object Extract()
         {
-            FieldInfo value = ObjectValue().GetType().GetField(NameField());
+            var value = ObjectValue().GetType().GetField(NameField());
             return value.GetValue(objectValue);
         }
 

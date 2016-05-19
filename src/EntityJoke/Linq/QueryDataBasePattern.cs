@@ -26,12 +26,7 @@ namespace EntityJoke.Linq
 
         public string GetSqlCommand()
         {
-            string sqlCommand = String.Format("SELECT {0} FROM {1}{2}{3}",
-                GetSelect(),
-                GetFrom(),
-                GetWhere(),
-                GetOrderBy()).Trim();
-
+            var sqlCommand = $"SELECT {GetSelect()} FROM {GetFrom()}{GetWhere()}{GetOrderBy()}".Trim();
             return new SQLCommandAliasReplacer(entity, sqlCommand).Replace();
         }
 

@@ -7,8 +7,8 @@ namespace EntityJoke.Linq
 {
     public class QuerySimple<T>
     {
-        private IQuerySimpleGenerator query;
-        private Entity entity;
+        private readonly IQuerySimpleGenerator query;
+        private readonly Entity entity;
 
         public QuerySimple()
         {

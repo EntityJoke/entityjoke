@@ -23,7 +23,7 @@ namespace EntityJoke.Structure.Fields.Formaters
 
         public static long UnixTimestampFromDateTime(DateTime date)
         {
-            long unixTimestamp = date.Ticks - new DateTime(1970, 1, 1).Ticks;
+            var unixTimestamp = date.Ticks - new DateTime(1970, 1, 1).Ticks;
             return unixTimestamp / TimeSpan.TicksPerSecond;
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace EntityJoke.Structure.Fields
+﻿namespace EntityJoke.Structure.Fields
 {
     public class FieldValueSetter
     {
@@ -25,14 +23,14 @@ namespace EntityJoke.Structure.Fields
             return typeof(bool) == field.Type;
         }
 
-        private bool BoolValue(object value)
+        private static bool BoolValue(object value)
         {
             return new FieldBoolValueConverter(value).Convert();;
         }
 
         public virtual void Set()
         {
-            FieldInfo field = obj.GetType().GetField(this.field.Name);
+            var field = obj.GetType().GetField(this.field.Name);
             field.SetValue(obj, value);
         }
 

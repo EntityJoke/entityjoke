@@ -21,7 +21,7 @@ namespace EntityJoke.Linq
 
         private void AddEntityMain(EntityJoin entity)
         {
-            from += String.Format("{0} {1}", entity.Entity.Name, entity.Alias.Symbol);
+            from += $"{entity.Entity.Name} {entity.Alias.Symbol}";
         }
 
         private void ProcessJoins(EntityJoin entityA)

@@ -15,7 +15,7 @@ namespace EntityJokeTests.Connection
             JokeConfigurationBuilder.NewConfigurationToPostgreSQL()
                 .BuildConfiguration();
 
-            DbConnection connection = new DbConnectionFactory().Get();
+            DbConnection connection = DbConnectionFactory.Get();
             Assert.That(connection.GetType().ToString(), Is.EqualTo("Npgsql.NpgsqlConnection"));
         }
 
@@ -25,7 +25,7 @@ namespace EntityJokeTests.Connection
             JokeConfigurationBuilder.NewConfigurationToMySQL()
                 .BuildConfiguration();
 
-            DbConnection connection = new DbConnectionFactory().Get();
+            DbConnection connection = DbConnectionFactory.Get();
             Assert.That(connection.GetType().ToString(), Is.EqualTo("MySql.Data.MySqlClient.MySqlConnection"));
         }
 
@@ -35,7 +35,7 @@ namespace EntityJokeTests.Connection
             JokeConfigurationBuilder.NewConfigurationToSQLite()
                 .BuildConfiguration();
 
-            DbConnection connection = new DbConnectionFactory().Get();
+            DbConnection connection = DbConnectionFactory.Get();
             Assert.That(connection.GetType().ToString(), Is.EqualTo("System.Data.SQLite.SQLiteConnection"));
         }
 

@@ -17,7 +17,7 @@ namespace EntityJoke.Process.Commands
 
         public List<T> Execute()
         {
-            DataTable dataTable = ExecuteCommandSQL();
+            var dataTable = ExecuteCommandSQL();
             return LoadEntities(dataTable);
         }
 

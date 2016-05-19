@@ -12,9 +12,9 @@ namespace EntityJoke.Core.Loaders
     {
         private readonly Type LOADER_TYPE = typeof(EntitiesLoaderReflectionAdapter);
 
-        private Dictionary<string, object> dictionary;
-        private FieldCollectionEntity field;
-        private object obj;
+        private readonly Dictionary<string, object> dictionary;
+        private readonly FieldCollectionEntity field;
+        private readonly object obj;
 
         public CollectionLoader(object obj, Dictionary<string, object> dictionary, FieldCollectionEntity field)
         {
@@ -30,7 +30,7 @@ namespace EntityJoke.Core.Loaders
 
         private MethodInfo GetMethod()
         {
-            return LOADER_TYPE.GetMethod("Load").MakeGenericMethod(field.Type);
+            return LOADER_TYPE.GetMethod(nameof(Load)).MakeGenericMethod(field.Type);
         }
 
         private object GenerateLoaderInstance()
@@ -43,12 +43,12 @@ namespace EntityJoke.Core.Loaders
             return LOADER_TYPE.GetConstructor(new[] { DataTableType(), DictionaryType() });
         }
 
-        private Type DataTableType()
+        private static Type DataTableType()
         {
             return typeof(DataTable);
         }
 
-        private Type DictionaryType()
+        private static Type DictionaryType()
         {
             return typeof(Dictionary<string, object>);
         }

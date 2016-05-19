@@ -6,7 +6,7 @@ namespace EntityJoke.Linq
 {
     public class FieldAliasReplacer
     {
-        private static string ALIAS_FIELD_FORMAT = "{0}.{1}";
+        private static readonly string ALIAS_FIELD_FORMAT = "{0}.{1}";
 
         public string SQLQuery;
         public string EntityPath;
@@ -32,8 +32,8 @@ namespace EntityJoke.Linq
         private string NewSQLCommand(int startIndex)
         {
             return String.Concat(
-                FirstPartSQLCommand(startIndex), 
-                NewValue(), 
+                FirstPartSQLCommand(startIndex),
+                NewValue(),
                 LastPartSQLCommand(startIndex));
         }
 

@@ -4,6 +4,7 @@ using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace EntityJoke.Process.Commands
 {
@@ -38,12 +39,12 @@ namespace EntityJoke.Process.Commands
 
         private string GetColumns()
         {
-            string columns = "";
+            var builder = new StringBuilder();
 
             foreach (Field field in GetFieldsOrdered())
-                columns += GetColumnName(field);
+                builder.Append(GetColumnName(field));
 
-            return String.Format("({0})", columns.Substring(2));
+            return string.Format("({0})", builder.ToString().Substring(2));
         }
 
         private string GetColumnName(Field field)
@@ -65,12 +66,12 @@ namespace EntityJoke.Process.Commands
 
         private string GetValues()
         {
-            string values = "";
+            var builder = new StringBuilder();
 
             foreach (Field field in GetFieldsOrdered())
-                values += AddValueInsert(field);
+                builder.Append(AddValueInsert(field));
 
-            return String.Format("({0})", values.Substring(2));
+            return String.Format("({0})", builder.ToString().Substring(2));
         }
 
         private string AddValueInsert(Field field)
@@ -90,13 +91,13 @@ namespace EntityJoke.Process.Commands
 
         private string GetJoinIdValue(Field field)
         {
-            object join = field.GetExtractor(objectInsert).Extract();
+            var join = field.GetExtractor(objectInsert).Extract();
 
             if (join == null)
                 return null;
 
-            Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
-            Field idField = entityJoin.FieldDictionary["id"];
+            var entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
+            var idField = entityJoin.FieldDictionary["id"];
 
             return new FieldValueFormater(join, idField).Format();
         }

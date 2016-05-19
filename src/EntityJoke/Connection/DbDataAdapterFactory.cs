@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
+﻿using System.Data.Common;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Connection
 {
     public class DbDataAdapterFactory
     {
-        private DbConnection connection;
-        private string command;
+        private readonly DbConnection connection;
+        private readonly string command;
 
         public DbDataAdapterFactory(string command, DbConnection connection)
         {

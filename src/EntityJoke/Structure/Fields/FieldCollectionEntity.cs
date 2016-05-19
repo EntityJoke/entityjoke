@@ -9,16 +9,8 @@ namespace EntityJoke.Structure.Fields
             : base(creator)
         {
             IsEntity = true;
-        }
-
-        protected override void SetType(FieldInfoCreator creator)
-        {
-            this.Type = creator.Type.GenericTypeArguments[0];
-        }
-
-        protected override void SetColumnName(FieldInfoCreator creator)
-        {
-            this.ColumnName = creator.ColumnName;
+            ColumnName = creator.ColumnName;
+            Type = creator.Type.GenericTypeArguments[0];
         }
     }
 }

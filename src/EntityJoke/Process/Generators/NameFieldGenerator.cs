@@ -13,7 +13,7 @@ namespace EntityJoke.Process.Generators
 
         public string Generate()
         {
-            return NameGenerator.INSTANCE.Generate(field.Name.Replace("get_", ""));
+            return NameGenerator.Generate(field.Name.Replace("get_", ""));
         }
     }
 }

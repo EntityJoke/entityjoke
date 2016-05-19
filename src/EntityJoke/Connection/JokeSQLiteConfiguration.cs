@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace EntityJoke
 {
@@ -14,7 +11,7 @@ namespace EntityJoke
             return GetAssembly().GetType("System.Data.SQLite.SQLiteConnection");
         }
 
-        private Assembly GetAssembly()
+        private static Assembly GetAssembly()
         {
             return Assembly.Load("System.Data.SQLite");
         }
@@ -31,8 +28,7 @@ namespace EntityJoke
 
         public override string ConnectionString()
         {
-            return String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};"
-                , Host, Port, Username, Password, DataBase);
+            return $"Server={Host};Port={Port};User Id={Username};Password={Password};Database={DataBase};";
         }
     }
 }

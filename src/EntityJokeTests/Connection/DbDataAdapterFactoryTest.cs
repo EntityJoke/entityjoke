@@ -22,7 +22,7 @@ namespace EntityJokeTests.Connection
             JokeConfigurationBuilder.NewConfigurationToPostgreSQL()
                 .BuildConfiguration();
             
-            DbConnection connection = new DbConnectionFactory().Get();
+            DbConnection connection = DbConnectionFactory.Get();
             DbDataAdapter dbDataAdapter = new DbDataAdapterFactory(SQL, connection).Get();
 
             Assert.That(dbDataAdapter.GetType().ToString(), Is.EqualTo("Npgsql.NpgsqlDataAdapter"));
@@ -34,7 +34,7 @@ namespace EntityJokeTests.Connection
             JokeConfigurationBuilder.NewConfigurationToMySQL()
                 .BuildConfiguration();
 
-            DbConnection connection = new DbConnectionFactory().Get();
+            DbConnection connection = DbConnectionFactory.Get();
             DbDataAdapter dbDataAdapter = new DbDataAdapterFactory(SQL, connection).Get();
 
             Assert.That(dbDataAdapter.GetType().ToString(), Is.EqualTo("MySql.Data.MySqlClient.MySqlDataAdapter"));

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace EntityJoke
 {
@@ -14,7 +11,7 @@ namespace EntityJoke
             return GetAssembly().GetType("MySql.Data.MySqlClient.MySqlConnection");
         }
 
-        private Assembly GetAssembly()
+        private static Assembly GetAssembly()
         {
             return Assembly.Load("MySql.Data");
         }
@@ -31,8 +28,7 @@ namespace EntityJoke
 
         public override string ConnectionString()
         {
-            return String.Format("server={0};userid={1};password={2};database={3}"
-                , Host, Username, Password, DataBase);
+            return $"server={Host};userid={Username};password={Password};database={DataBase}";
         }
     }
 }

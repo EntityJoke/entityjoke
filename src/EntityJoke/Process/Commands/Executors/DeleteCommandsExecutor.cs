@@ -27,12 +27,12 @@ namespace EntityJoke.Process.Commands
             field.GetSetter(objectCommand, GetValue(field)).Set();
         }
 
-        private object GetValue(Field field)
+        private static object GetValue(Field field)
         {
             return IsNumber(field) ? (object)0 : null;
         }
 
-        private bool IsNumber(Field field)
+        private static bool IsNumber(Field field)
         {
             return field.Type.FullName.StartsWith("System.Int")
                 || field.Type.FullName.StartsWith("System.Double");

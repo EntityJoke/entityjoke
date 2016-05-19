@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Core.Loaders
 {
     public class EntitiesLoaderReflectionAdapter
     {
-        private Dictionary<string, object> dictionary;
-        private DataTable table;
+        private readonly Dictionary<string, object> dictionary;
+        private readonly DataTable table;
 
         public EntitiesLoaderReflectionAdapter(DataTable table, Dictionary<string, object> dictionary)
         {

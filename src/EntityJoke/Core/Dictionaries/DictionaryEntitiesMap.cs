@@ -6,9 +6,10 @@ namespace EntityJoke.Core
 {
     public class DictionaryEntitiesMap
     {
-        public static DictionaryEntitiesMap INSTANCE = new DictionaryEntitiesMap();
 
-        private Dictionary<string, Entity> entityes = new Dictionary<string,Entity>();
+        public static DictionaryEntitiesMap INSTANCE { get; set; } = new DictionaryEntitiesMap();
+
+        private readonly Dictionary<string, Entity> entityes = new Dictionary<string, Entity>();
 
         private DictionaryEntitiesMap() { }
 
@@ -32,7 +33,7 @@ namespace EntityJoke.Core
             return entityes.ContainsKey(type.FullName);
         }
 
-        private Entity LoadEntity(Type type)
+        private static Entity LoadEntity(Type type)
         {
             return EntityFactory.Get(type);
         }

@@ -14,17 +14,17 @@
             return IsInteger(value) ? ConvertIntToBool(value) : CastToBool(value);
         }
 
-        private bool IsInteger(object value)
+        private static bool IsInteger(object value)
         {
             return value is int;
         }
 
-        private bool ConvertIntToBool(object value)
+        private static bool ConvertIntToBool(object value)
         {
             return ((int)value) != 0;
         }
 
-        private bool CastToBool(object value)
+        private static bool CastToBool(object value)
         {
             return (bool)value;
         }

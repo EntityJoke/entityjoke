@@ -43,10 +43,12 @@ namespace EntityJoke.Process.Commands
 
         private string GetColumns()
         {
-            string columns = "";
+            var builder = new System.Text.StringBuilder();
 
             foreach (Field field in GetFieldsToUpdateOrdered())
-                columns += String.Format(", {0} = {1}", field.ColumnName, GetValueToUpdate(field));
+                builder.Append(String.Format(", {0} = {1}", field.ColumnName, GetValueToUpdate(field)));
+
+            var columns = builder.ToString();
 
             return String.Format("SET {0}", columns.Length > 0 ? columns.Substring(2) : "");
         }
@@ -76,13 +78,13 @@ namespace EntityJoke.Process.Commands
             if (valueB == null)
                 return false;
 
-            Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(valueB.GetType());
-            Field fieldId = entityJoin.FieldDictionary["id"];
+            var entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(valueB.GetType());
+            var fieldId = entityJoin.FieldDictionary["id"];
 
             return IsEqualsField(valueB, fieldId);
         }
 
-        private bool IsEqualsField(object obj, Field field)
+        private static bool IsEqualsField(object obj, Field field)
         {
             var aspect = DictionaryEntitiesAspects.GetInstance().GetAspect(obj);
 
@@ -102,7 +104,7 @@ namespace EntityJoke.Process.Commands
 
         private string GetWhere()
         {
-            Field idField = entity.FieldDictionary["id"];
+            var idField = entity.FieldDictionary["id"];
             return String.Format("WHERE id = {0}", GetValueToUpdate(idField));
         }
 
@@ -121,13 +123,13 @@ namespace EntityJoke.Process.Commands
             if (join == null)
                 return "null";
 
-            Entity entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
-            Field idField = entityJoin.FieldDictionary["id"];
+            var entityJoin = DictionaryEntitiesMap.INSTANCE.GetEntity(join.GetType());
+            var idField = entityJoin.FieldDictionary["id"];
 
             return new FieldValueFormater(join, idField).Format();
         }
 
-        private object GetObjectField(object obj, Field field)
+        private static object GetObjectField(object obj, Field field)
         {
             return field.GetExtractor(obj).Extract();
         }

@@ -44,12 +44,14 @@ namespace EntityJoke.Core.Loaders
 
         public object Build()
         {
-            EntityLoader loader = new EntityLoader();
-            loader.Row = row;
-            loader.Pointer = pointer;
-            loader.Entity = entity;
-            loader.Columns = columns;
-            loader.DictionaryObjectsProcessed = dictionaryEntities;
+            var loader = new EntityLoader
+            {
+                Row = row,
+                Pointer = pointer,
+                Entity = entity,
+                Columns = columns,
+                DictionaryObjectsProcessed = dictionaryEntities
+            };
             return loader.LoadInstance();
         }
 

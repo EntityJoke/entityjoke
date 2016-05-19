@@ -6,8 +6,8 @@ namespace EntityJoke.Core.Loaders
 {
     public class CollectionsLoader
     {
-        private object obj;
-        private Dictionary<string, object> dictionary;
+        private readonly object obj;
+        private readonly Dictionary<string, object> dictionary;
 
         public CollectionsLoader(object obj, Dictionary<string, object> dictionary)
         {

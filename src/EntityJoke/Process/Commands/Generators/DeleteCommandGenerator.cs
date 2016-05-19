@@ -30,7 +30,7 @@ namespace EntityJoke.Process.Commands
 
         private string GetWhere()
         {
-            Field idField = entity.FieldDictionary["id"];
+            var idField = entity.FieldDictionary["id"];
             return String.Format("id = {0}", GetValueToDelete(idField));
         }
 

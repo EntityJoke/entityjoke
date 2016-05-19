@@ -1,12 +1,6 @@
-﻿using EntityJoke.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EntityJoke.Linq
+﻿namespace EntityJoke.Linq
 {
-    public abstract class SQLWithConditionGeneratorBuilder<T> where T : SQLWithConditionGeneratorBuilder<T> 
+    public abstract class SQLWithConditionGeneratorBuilder<T> where T : SQLWithConditionGeneratorBuilder<T>
     {
         protected string condition;
 

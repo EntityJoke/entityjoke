@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace EntityJoke.Linq
 {
     public class FieldPositionCondition
     {
-        public List<int> Positions = new List<int>();
-        private string field;
+        public readonly List<int> Positions = new List<int>();
+        private readonly string field;
 
         public FieldPositionCondition(string field)
         {

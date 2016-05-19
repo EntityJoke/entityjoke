@@ -1,11 +1,4 @@
-﻿using EntityJoke.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EntityJoke.Linq
+﻿namespace EntityJoke.Linq
 {
     public class WhereGeneratorBuilder : SQLWithConditionGeneratorBuilder<WhereGeneratorBuilder>
     {
@@ -15,7 +8,7 @@ namespace EntityJoke.Linq
             if (!HasWhere())
                 return "";
 
-            return String.Format(" WHERE {0}", condition);
+            return $" WHERE {condition}";
         }
 
         private bool HasWhere()

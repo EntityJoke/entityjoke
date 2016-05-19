@@ -1,5 +1,4 @@
-﻿using EntityJoke.Connection;
-using EntityJoke.Core;
+﻿using EntityJoke.Core;
 using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
 using System.Data;
@@ -10,18 +9,18 @@ namespace EntityJoke.Process.Commands
 {
     public class NonQueryCommandsExecutor
     {
+        private readonly ICommandSQLGenerator commandGenerator;
         private DataTable returnCommand;
-        private ICommandSQLGenerator commandGenerator;
         private string commandSQL;
 
-        protected Entity entity;
-        protected object objectCommand;
+        protected readonly Entity entity;
+        protected readonly object objectCommand;
 
         public NonQueryCommandsExecutor(object obj)
         {
             commandGenerator = SelectCommandGenerator.NewInstance(obj);
             entity = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
-            this.objectCommand = obj;
+            objectCommand = obj;
         }
 
         public void Execute()

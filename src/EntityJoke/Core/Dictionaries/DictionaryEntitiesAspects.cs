@@ -1,16 +1,14 @@
 ﻿using EntityJoke.Process;
-using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EntityJoke.Core
 {
     public class DictionaryEntitiesAspects
     {
-        private static DictionaryEntitiesAspects instance = new DictionaryEntitiesAspects();
+        private static readonly DictionaryEntitiesAspects instance = new DictionaryEntitiesAspects();
 
-        private Dictionary<string, object> entityes = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> entityes = new Dictionary<string, object>();
         public int CountObjects { get { return entityes.Count; } }
 
         private DictionaryEntitiesAspects() { }
@@ -48,18 +46,18 @@ namespace EntityJoke.Core
             entityes.Add(GetKey(obj), new ClonerObject(obj).clone());
         }
 
-        private void ProcessJoins(object obj)
+        private static void ProcessJoins(object obj)
         {
             if (obj == null)
                 return;
 
-            Entity ent = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
+            var ent = DictionaryEntitiesMap.INSTANCE.GetEntity(obj.GetType());
 
             ent.GetFieldsJoins()
                 .ForEach(f => ProcessJoins(obj, f));
         }
 
-        private void ProcessJoins(object obj, Field f)
+        private static void ProcessJoins(object obj, Field f)
         {
             var objJoin = f.GetExtractor(obj).Extract();
             DictionaryEntitiesAspects.GetInstance().AddOrRefreshAspect(objJoin);
@@ -70,9 +68,9 @@ namespace EntityJoke.Core
             return entityes.ContainsKey(GetKey(obj));
         }
 
-        private string GetKey(object obj)
+        private static string GetKey(object obj)
         {
-            return new KeyDictionaryObjectExtractor(obj).Extract(); 
+            return new KeyDictionaryObjectExtractor(obj).Extract();
         }
 
         public object GetAspect(object obj)

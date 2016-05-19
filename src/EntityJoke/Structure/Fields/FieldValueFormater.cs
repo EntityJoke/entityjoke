@@ -37,7 +37,7 @@ namespace EntityJoke.Structure.Fields
             return field.Type.FullName.StartsWith("System.Date");
         }
 
-        private string GetDateValue(object value)
+        private static string GetDateValue(object value)
         {
             return GetValueText(((DateTime)value).GetDateTimeFormats()[54]);
         }

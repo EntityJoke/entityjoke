@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJoke.Core
 {
     public class DictionaryInstanceFactory
     {
+        private static readonly DictionaryInstanceFactory instance = new DictionaryInstanceFactory();
 
-        private static DictionaryInstanceFactory instance = new DictionaryInstanceFactory();
-
-        private Dictionary<string, object> values = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> values = new Dictionary<string, object>();
 
         private DictionaryInstanceFactory() { }
 
@@ -36,7 +31,7 @@ namespace EntityJoke.Core
 
         public static void AddDataTableMock(DataTable dataTable)
         {
-            Queue<DataTable> q = new Queue<DataTable>();
+            var q = new Queue<DataTable>();
 
             if (instance.values.ContainsKey("DataTableMockQueue"))
                 q = GetDataTableQueue();

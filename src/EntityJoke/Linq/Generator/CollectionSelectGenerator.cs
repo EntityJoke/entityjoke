@@ -7,8 +7,8 @@ namespace EntityJoke.Linq.Generator
 {
     public class CollectionSelectGenerator
     {
-        private object obj;
-        private FieldCollectionEntity field;
+        private readonly object obj;
+        private readonly FieldCollectionEntity field;
 
         public CollectionSelectGenerator(object obj, FieldCollectionEntity field)
         {
@@ -32,11 +32,7 @@ namespace EntityJoke.Linq.Generator
 
         private string GetWhere()
         {
-            return string.Format("{0}.{1}.{2} = {3}",
-                GetCollectionEntityName(),
-                GetEntityMainName(),
-                GetNameField(),
-                GetIdEntityMain());
+            return $"{GetCollectionEntityName()}.{GetEntityMainName()}.{GetNameField()} = {GetIdEntityMain()}";
         }
 
         private string GetCollectionEntityName()

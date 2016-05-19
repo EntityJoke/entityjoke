@@ -1,6 +1,5 @@
 ﻿using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,9 +23,9 @@ namespace EntityJoke.Linq
             entityAliasTree.Joins.ForEach(j => AddEntityAlias(j));
         }
 
-        private string GetSelectFields(EntityJoin entityAliasTree)
+        private static string GetSelectFields(EntityJoin entityAliasTree)
         {
-            string selectFields = "";
+            var selectFields = "";
 
             GetFieldsOrdered(entityAliasTree)
                 .ForEach(f => selectFields += GetColumn(entityAliasTree, f));
@@ -42,22 +41,19 @@ namespace EntityJoke.Linq
                 .ThenBy(f => f.Name).ToList();
         }
 
-        private string GetColumn(EntityJoin join, Field field)
+        private static string GetColumn(EntityJoin join, Field field)
         {
-            return String.Format("{0}{1} {2}", 
-                SEPARATOR, 
-                GetColumnName(join, field),
-                GetColumnAlias(join, field));
+            return $"{SEPARATOR}{GetColumnName(join, field)} {GetColumnAlias(join, field)}";
         }
 
-        private string GetColumnName(EntityJoin join, Field field)
+        private static string GetColumnName(EntityJoin join, Field field)
         {
-            return String.Format("{0}.{1}", join.Alias.Symbol, field.ColumnName);
+            return $"{join.Alias.Symbol}.{field.ColumnName}";
         }
 
-        private string GetColumnAlias(EntityJoin join, Field field)
+        private static string GetColumnAlias(EntityJoin join, Field field)
         {
-            return String.Format("{0}_{1}", join.Alias.Symbol, field.ColumnName);
+            return $"{join.Alias.Symbol}_{field.ColumnName}";
         }
 
     }

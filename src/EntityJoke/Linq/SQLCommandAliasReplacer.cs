@@ -7,8 +7,8 @@ namespace EntityJoke.Linq
 {
     public class SQLCommandAliasReplacer
     {
+        private readonly Entity entityMain;
         private string sqlCommand;
-        private Entity entityMain;
 
         public SQLCommandAliasReplacer(Entity entity, string sqlCommand)
         {
@@ -48,14 +48,14 @@ namespace EntityJoke.Linq
             return entityMain == entity.Entity;
         }
 
-        private string GetNameFieldWithEntityPath(EntityJoin join, string entityPath)
+        private static string GetNameFieldWithEntityPath(EntityJoin join, string entityPath)
         {
-            return String.Format("{0}.{1}",entityPath, join.Field.Name);
+            return $"{entityPath}.{join.Field.Name}";
         }
 
         private void ReplaceConditionField(EntityJoin join, Field field, string entityPath)
         {
-            FieldAliasReplacer replacer = new FieldAliasReplacerBuilder()
+            var replacer = new FieldAliasReplacerBuilder()
                 .Entity(join)
                 .Field(field)
                 .SqlQuery(sqlCommand)

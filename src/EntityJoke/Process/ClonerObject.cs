@@ -6,7 +6,7 @@ namespace EntityJoke.Process
 {
     public class ClonerObject
     {
-        private object origin;
+        private readonly object origin;
 
         public ClonerObject(object obj)
         {
@@ -20,7 +20,7 @@ namespace EntityJoke.Process
 
         private object GetCopyObj()
         {
-            object copy = Activator.CreateInstance(origin.GetType());
+            var copy = Activator.CreateInstance(origin.GetType());
 
             DictionaryEntitiesMap.INSTANCE.GetEntity(origin.GetType())
                 .GetFields().ForEach(f => CopyFieldValue(copy, f));

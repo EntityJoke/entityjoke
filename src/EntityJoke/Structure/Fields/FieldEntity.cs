@@ -9,18 +9,9 @@ namespace EntityJoke.Structure.Fields
 
         public FieldEntity(FieldInfoCreator creator) : base(creator)
         {
-            SetDeclaringTypeName(creator);
+            DeclaringTypeName = creator.DeclaringTypeName;
             IsEntity = true;
-        }
-
-        protected virtual void SetDeclaringTypeName(FieldInfoCreator creator)
-        {
-            this.DeclaringTypeName = creator.DeclaringTypeName;
-        }
-
-        protected override void SetColumnName(FieldInfoCreator creator)
-        {
-            this.ColumnName = String.Format("id_{0}", creator.ColumnName);
+            ColumnName = String.Format("id_{0}", creator.ColumnName);
         }
 
     }

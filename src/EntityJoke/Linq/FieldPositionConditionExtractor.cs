@@ -45,7 +45,7 @@ namespace EntityJoke.Linq
 
         private void GenerateNewPosition()
         {
-            int index = GetIndexOfField();
+            var index = GetIndexOfField();
             AddPosition(index);
             RefreshLastPositionFound(index);
             RefreshCondition(index);

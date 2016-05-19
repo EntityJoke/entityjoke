@@ -7,10 +7,10 @@ namespace EntityJoke.Core.Loaders
 {
     public class EntitiesLoader<T>
     {
-        private DataTable table;
-        private Entity entity;
-        private List<T> listEntities = new List<T>();
-        private Type type = typeof(T);
+        private readonly DataTable table;
+        private readonly Entity entity;
+        private readonly List<T> listEntities = new List<T>();
+        private readonly Type type = typeof(T);
         private Dictionary<string, object> dictionary;
 
         public EntitiesLoader(DataTable table)

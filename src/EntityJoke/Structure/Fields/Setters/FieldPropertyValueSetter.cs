@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace EntityJoke.Structure.Fields
+﻿namespace EntityJoke.Structure.Fields
 {
     internal class FieldPropertyValueSetter : FieldValueSetter
     {
@@ -10,7 +8,7 @@ namespace EntityJoke.Structure.Fields
 
         public override void Set()
         {
-            PropertyInfo field = obj.GetType().GetProperty(this.field.Name);
+            var field = obj.GetType().GetProperty(this.field.Name);
             field.SetValue(obj, value);
         }
     }

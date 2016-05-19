@@ -1,9 +1,7 @@
-﻿using EntityJoke.Linq;
-using EntityJoke.Process;
+﻿using EntityJoke.Process;
 using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -42,7 +40,7 @@ namespace EntityJoke.Core.Loaders
             return DictionaryObjectsProcessed.ContainsKey(GetKey(obj));
         }
 
-        private string GetKey(object obj)
+        private static string GetKey(object obj)
         {
             return new KeyDictionaryObjectExtractor(obj).Extract();
         }
@@ -55,7 +53,7 @@ namespace EntityJoke.Core.Loaders
         private void RecoverObject()
         {
             obj = GetObjectInDictionary();
-            int fieldsNotEntity = Entity.GetFields().Where(f => !f.IsEntity).ToList().Count;
+            var fieldsNotEntity = Entity.GetFields().Where(f => !f.IsEntity).ToList().Count;
             Pointer.IndexColumn += fieldsNotEntity;
         }
 
@@ -72,7 +70,7 @@ namespace EntityJoke.Core.Loaders
 
         private void ProccesColumns()
         {
-            int limiteLoop = EntityColumnsLength();
+            var limiteLoop = EntityColumnsLength();
 
             for (; Pointer.IndexColumn < limiteLoop; Pointer.IndexColumn++)
                 ProcessField();
@@ -80,13 +78,13 @@ namespace EntityJoke.Core.Loaders
 
         private int EntityColumnsLength()
         {
-            int fieldsNotEntity = Entity.GetFields().Where(f => !f.IsEntity).ToList().Count;
+            var fieldsNotEntity = Entity.GetFields().Where(f => !f.IsEntity).ToList().Count;
             return fieldsNotEntity + Pointer.IndexColumn;
         }
 
         private void ProcessField()
         {
-            DataColumn column = GetCurrentColumn();
+            var column = GetCurrentColumn();
             var value = Row[column.ColumnName];
 
             if (!IsNullValue(value))
@@ -98,7 +96,7 @@ namespace EntityJoke.Core.Loaders
             return Columns[Pointer.IndexColumn];
         }
 
-        private bool IsNullValue(object value)
+        private static bool IsNullValue(object value)
         {
             return value.GetType() == typeof(DBNull);
         }
@@ -108,20 +106,15 @@ namespace EntityJoke.Core.Loaders
             return Entity.FieldDictionary[GetOriginalName(column)];
         }
 
-        private string GetOriginalName(DataColumn column)
+        private static string GetOriginalName(DataColumn column)
         {
-            int indexOf = column.ColumnName.IndexOf("_");
+            var indexOf = column.ColumnName.IndexOf("_");
             return column.ColumnName.Substring(indexOf + 1);
         }
 
         private void SetFieldValue(Field field, object value)
         {
             field.GetSetter(obj, value).Set();
-        }
-
-        private bool IsBool(Field field)
-        {
-            return typeof(bool) == field.Type;
         }
 
         private void ProcessJoins()

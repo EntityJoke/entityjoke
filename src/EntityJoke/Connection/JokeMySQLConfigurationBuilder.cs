@@ -46,12 +46,14 @@ namespace EntityJoke
 
         public void BuildConfiguration()
         {
-            var config = new JokeMySQLConfiguration();
-            config.Host = host;
-            config.Port = port;
-            config.Username = username;
-            config.Password = password;
-            config.DataBase = dataBase;
+            var config = new JokeMySQLConfiguration
+            {
+                Host = host,
+                Port = port,
+                Username = username,
+                Password = password,
+                DataBase = dataBase
+            };
 
             JokeConfiguration.Set(config);
         }

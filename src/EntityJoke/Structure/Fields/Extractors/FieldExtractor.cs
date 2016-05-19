@@ -33,7 +33,7 @@ namespace EntityJoke.Structure.Fields
 
         private void AddField(FieldInfo fieldInfo)
         {
-            Field field = FieldFactory.Get(fieldInfo);
+            var field = FieldFactory.Get(fieldInfo);
             fields.Add(field.ColumnName, field);
         }
 
@@ -66,7 +66,7 @@ namespace EntityJoke.Structure.Fields
 
         private void AddPropertyField(MethodInfo method)
         {
-            Field field = FieldFactory.Get(method);
+            var field = FieldFactory.Get(method);
             fields.Add(field.ColumnName, field);
         }
     }

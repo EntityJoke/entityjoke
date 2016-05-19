@@ -12,13 +12,14 @@ namespace EntityJoke
         public string Password;
         public string DataBase;
 
-        public static JokeConfiguration Get() 
+        public static JokeConfiguration Get()
         {
             return instance;
         }
 
-        public static void Set(JokeConfiguration value) { 
-            instance = value; 
+        public static void Set(JokeConfiguration value)
+        {
+            instance = value;
         }
 
         public abstract Type DbConnectionType();
