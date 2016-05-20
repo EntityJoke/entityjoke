@@ -73,7 +73,8 @@
     <Compile Include="Structure\Fields\Formaters\FieldValueFormatterForSql.cs" />
     <Compile Include="Structure\Fields\Formaters\FieldValueNumberFormatterForSql.cs" />
     <Compile Include="Structure\Fields\Formaters\IFieldValueFormatter.cs" />
-    <Compile Include="Structure\Fields\Setters\FieldBoolValueConverter.cs" />
+    <Compile Include="Utils\Converters\BoolToStringValueConverter.cs" />
+    <Compile Include="Utils\Converters\ObjectToBoolValueConverter.cs" />
     <Compile Include="Structure\Fields\Setters\FieldPropertyValueSetter.cs" />
     <Compile Include="Structure\Fields\Setters\FieldValueSetter.cs" />
     <Compile Include="Process\DataTables\IDataTableGenerador.cs" />

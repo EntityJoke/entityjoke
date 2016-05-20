@@ -1,15 +1,15 @@
-﻿namespace EntityJoke.Structure.Fields
+﻿namespace EntityJoke.Utils.Converters
 {
-    public class FieldBoolValueConverter
+    public class ObjectToBoolValueConverter
     {
         private readonly object value;
 
-        public FieldBoolValueConverter(object value)
+        public ObjectToBoolValueConverter(object value)
         {
             this.value = value;
         }
 
-        internal bool Convert()
+        public bool Convert()
         {
             return IsInteger(value) ? ConvertIntToBool(value) : CastToBool(value);
         }

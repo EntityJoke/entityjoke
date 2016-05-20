@@ -1,4 +1,6 @@
-﻿namespace EntityJoke.Structure.Fields
+﻿using EntityJoke.Utils.Converters;
+
+namespace EntityJoke.Structure.Fields
 {
     public class FieldValueSetter
     {
@@ -25,7 +27,7 @@
 
         private static bool BoolValue(object value)
         {
-            return new FieldBoolValueConverter(value).Convert();;
+            return new ObjectToBoolValueConverter(value).Convert();;
         }
 
         public virtual void Set()

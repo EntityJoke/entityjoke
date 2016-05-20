@@ -98,6 +98,8 @@
     <Compile Include="Structure\FieldExtractorTest.cs" />
     <Compile Include="Structure\Fields\FieldValueFormatterTest.cs" />
     <Compile Include="Structure\ToStringsTest.cs" />
+    <Compile Include="Utils\BoolToStringValueConverterTest.cs" />
+    <Compile Include="Utils\ObjectToBoolValueConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

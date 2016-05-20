@@ -1,9 +1,11 @@
-﻿namespace EntityJoke.Structure.Fields.Formaters
+﻿using EntityJoke.Utils.Converters;
+
+namespace EntityJoke.Structure.Fields.Formaters
 {
     public class FieldValueBoolFormatterForSql : IFieldValueFormatter
     {
         private readonly bool value;
-        //FieldBoolValueConverter converter;
+        private BoolToStringValueConverter converter;
 
         public FieldValueBoolFormatterForSql(object value)
         {
@@ -12,7 +14,8 @@
 
         public string Format()
         {
-            return ""; //converter.Convert().ToString;
+            converter = new BoolToStringValueConverter(value);
+            return converter.Convert();
         }
     }
 }

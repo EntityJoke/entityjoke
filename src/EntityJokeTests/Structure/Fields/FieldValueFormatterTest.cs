@@ -17,7 +17,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoString()
         {
-            object value = "String Value";
+            var value = "String Value";
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueFormatterForSql)));
@@ -27,7 +27,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoInt()
         {
-            int value = 3;
+            var value = 3;
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueNumberFormatterForSql)));
@@ -37,7 +37,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoLong()
         {
-            long value = 999999999999999999L;
+            var value = 999999999999999999L;
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueNumberFormatterForSql)));
@@ -47,7 +47,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoULong()
         {
-            ulong value = 9999999999999999999L;
+            var value = 9999999999999999999L;
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueNumberFormatterForSql)));
@@ -57,7 +57,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoDouble()
         {
-            double value = 99999999.9999999;
+            var value = 99999999.9999999;
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueNumberFormatterForSql)));
@@ -67,7 +67,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoFloat()
         {
-            float value = 9999.999F;
+            var value = 9999.999F;
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueNumberFormatterForSql)));
@@ -77,7 +77,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoDecimal()
         {
-            decimal value = 957865368421657.8546987651357M;
+            var value = 957865368421657.8546987651357M;
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueNumberFormatterForSql)));
@@ -87,7 +87,7 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoData()
         {
-            DateTime value = new DateTime(2015, 07, 11, 21, 25, 15, DateTimeKind.Utc);
+            var value = new DateTime(2015, 07, 11, 21, 25, 15, DateTimeKind.Utc);
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueDateFormatterForSql)));
@@ -97,11 +97,11 @@ namespace EntityJokeTests.Structure.Fields
         [Test]
         public void FormataCampoBoolean()
         {
-            bool value = true;
+            var value = true;
             target = FieldValueFormatterFactory.NewInstance(value);
 
             Assert.That(target, Is.InstanceOf(typeof(FieldValueBoolFormatterForSql)));
-            //Assert.That(target.Format(), Is.EqualTo("1"));
+            Assert.That(target.Format(), Is.EqualTo("1"));
         }
 
     }
