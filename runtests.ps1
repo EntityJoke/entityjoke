@@ -23,7 +23,7 @@ Write-Host ""
 
 Write-Host "=========== [Tests] Run ==========="
 $openCover = (Resolve-Path ".\test-coverage\OpenCover.4.6.519\tools\OpenCover.Console.exe").ToString()
-& $openCover -target:nunit-console.exe "-targetargs:"".\src\EntityJokeTests\bin\$env:CONFIGURATION\EntityJokeTests.dll"" /noshadow" -register:user -output:.\test-coverage\opencoverCoverage.xml
+& $openCover -target:nunit-console.exe "-targetargs:"".\src\EntityJokeTests\bin\$env:CONFIGURATION\EntityJokeTests.dll"" /noshadow" -register:user -output:.\test-coverage\opencoverCoverage.xml -=-filter:+[EntityJoke]*
 Write-Host ""
 
 Write-Host "======== [Tests] Reporter ========="
