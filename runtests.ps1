@@ -1,20 +1,23 @@
 Write-Host ""
 Write-Host ""
 Write-Host "==== [Tests] Install Packages ====="
-mkdir test-coverage
 
+Write-Host ""
 Write-Host "Installing OpenCover 4.6.519"
 nuget install OpenCover -Version 4.6.519 -Verbosity Quiet -OutputDirectory .\test-coverage
 Write-Host "Completed installation of OpenCover 4.6.519"
 
+Write-Host ""
 Write-Host "Installing ReportGenerator 2.4.5"
 nuget install ReportGenerator -Version 2.4.5 -Verbosity Quiet -OutputDirectory .\test-coverage
 Write-Host "Completed installation ReportGenerator 2.4.5"
 
+Write-Host ""
 Write-Host "Installing Coveralls.net 0.6.0"
 nuget install Coveralls.net -Version 0.6.0 -Verbosity Quiet -OutputDirectory .\test-coverage
 Write-Host "Completed installation of Coveralls.net 0.6.0"
 
+Write-Host ""
 Write-Host "Packages... Ok"
 Write-Host ""
 
