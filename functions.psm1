@@ -1,3 +1,10 @@
+﻿function RestorePackages{
+    Write "`n== [Build]Restore Nuget Packages =="
+    Write "Installing Nuget Packages of EntityJoke.sln"
+    nuget restore .\src\EntityJoke.sln -Verbosity Quiet
+    Write "Completed installation of Nuget Packages`n"
+}
+
 function InstallPackage{
     param($namePackage)
     Write "`nInstalling $namePackage"
@@ -31,8 +38,3 @@ function PublishCoverage(){
     $coveralls = (Resolve-Path ".\test-coverage\coveralls.net\tools\csmacnz.Coveralls.exe").ToString()
     & $coveralls --opencover -i .\test-coverage\opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_VERSION --serviceName appveyor
 }
-
-InstallPackages
-ExecuteTests
-GenerateReport
-PublishCoverage
