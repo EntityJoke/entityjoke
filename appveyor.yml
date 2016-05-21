@@ -1,0 +1,35 @@
+version: 1.1.{build}
+skip_tags: true
+image: Visual Studio 2015
+configuration: Debug
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: UG6sMdLOL0a/7csHc5XesCtASiHiGgcVYzOPjF8cgt1urzcCeMCTd0t0GjpisERL
+before_build:
+- ps: >-
+    Import-Module .\functions.psm1
+
+    RestorePackages
+build:
+  project: src\EntityJoke.sln
+  verbosity: minimal
+test_script:
+- ps: >-
+    InstallPackages
+
+    ExecuteTests
+
+    GenerateReport
+
+    PublishCoverage
+artifacts:
+- path: '**\*src\EntityJoke\bin\Debug\EntityJoke.dll'
+- path: coverage
+  name: coverage
+- path: '**\*test-coverage\opencoverCoverage.xml'
