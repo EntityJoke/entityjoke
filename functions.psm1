@@ -40,16 +40,17 @@ function PublishCoverage(){
 }
 
 function RevertCommit(){
+    Write "`n=======[Tests]Revert Commit ======="
     git config --global credential.helper store
     Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
     git config --global user.email "$env:BUILD_USER_EMAIL"
     git config --global user.name "$env:BUILD_USER_NAME"
     git revert $env:APPVEYOR_REPO_COMMIT --no-edit
-    git push origin $env:APPVEYOR_REPO_BRANCH
+    git push origin develop
 }
 
 function VerifyFailedTests(){
-    Write "`n===== [Tests]Publish Coverage ====="
+    Write "`n====[Tests]Verify Failed Tests ===="
     $failures = Select-String -Path .\TestResult.xml -Pattern "result=`"Failure"
     if($failures -ne $null){
       RevertCommit
