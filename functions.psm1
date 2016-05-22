@@ -22,7 +22,7 @@ function InstallPackages{
 function ExecuteTests(){
     Write "`n=========== [Tests] Run ==========="
     $openCover = (Resolve-Path ".\test-coverage\OpenCover\tools\OpenCover.Console.exe").ToString()
-    & $openCover -target:nunit-console.exe "-targetargs:"".\src\EntityJokeTests\bin\$env:CONFIGURATION\EntityJokeTests.dll"" /noshadow" -register:user -output:.\test-coverage\opencoverCoverage.xml -filter:+[EntityJoke]*
+    & $openCover -target:nunit-console.exe "-targetargs:"".\src\EntityJokeTests\bin\$env:CONFIGURATION\EntityJokeTests.dll"" /stoponerror /noshadow" -register:user -output:.\test-coverage\opencoverCoverage.xml -filter:+[EntityJoke]*
 }
 
 function GenerateReport(){
