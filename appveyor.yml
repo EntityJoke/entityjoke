@@ -1,7 +1,4 @@
 version: 1.1.{build}
-branches:
-  only:
-  - develop
 skip_tags: true
 image: Visual Studio 2015
 configuration: Debug

@@ -6,7 +6,7 @@ Build
 - 
 [![Build status](https://ci.appveyor.com/api/projects/status/iakonry0xd3e7rsl?svg=true)](https://ci.appveyor.com/project/entityjoke/entityjoke) 
  
-[![Build History](https://buildstats.info/appveyor/chart/entityjoke/entityjoke)](https://ci.appveyor.com/project/entityjoke/entityjoke 
+[![Build History](https://buildstats.info/appveyor/chart/entityjoke/entityjoke)](https://ci.appveyor.com/project/entityjoke/entityjoke)
 
 Coverage
 -
