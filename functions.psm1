@@ -1,4 +1,4 @@
-function RestorePackages{
+﻿function RestorePackages{
     Write "`n== [Build]Restore Nuget Packages =="
     Write "Installing Nuget Packages of EntityJoke.sln"
     nuget restore .\src\EntityJoke.sln -Verbosity Quiet
