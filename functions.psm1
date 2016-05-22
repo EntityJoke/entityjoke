@@ -22,7 +22,7 @@ function InstallPackages{
 function ExecuteTests(){
     Write "`n=========== [Tests] Run ==========="
     $openCover = (Resolve-Path ".\test-coverage\OpenCover\tools\OpenCover.Console.exe").ToString()
-    & $openCover -target:nunit-console.exe "-targetargs:"".\src\EntityJokeTests\bin\$env:CONFIGURATION\EntityJokeTests.dll"" /stoponerror /noshadow" -register:user -output:.\test-coverage\opencoverCoverage.xml -filter:+[EntityJoke]*
+    & $openCover -target:nunit-console.exe "-targetargs:"".\src\EntityJokeTests\bin\$env:CONFIGURATION\EntityJokeTests.dll"" /noshadow" -register:user -output:.\test-coverage\opencoverCoverage.xml -filter:+[EntityJoke]*
 }
 
 function GenerateReport(){
@@ -37,4 +37,23 @@ function PublishCoverage(){
 
     $coveralls = (Resolve-Path ".\test-coverage\coveralls.net\tools\csmacnz.Coveralls.exe").ToString()
     & $coveralls --opencover -i .\test-coverage\opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_VERSION --serviceName appveyor
+}
+
+function RevertCommit(){
+    git config --global credential.helper store
+    Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+    git config --global user.email "$env:BUILD_USER_EMAIL"
+    git config --global user.name "$env:BUILD_USER_NAME"
+    git revert $env:APPVEYOR_REPO_COMMIT --no-edit
+    git push origin $env:APPVEYOR_REPO_BRANCH
+}
+
+function VerifyFailedTests(){
+    Write "`n===== [Tests]Publish Coverage ====="
+    $failures = Select-String -Path .\TestResult.xml -Pattern "result=`"Failure"
+    if($failures -ne $null){
+      RevertCommit
+    }else{
+      Write "No failures"
+    }
 }

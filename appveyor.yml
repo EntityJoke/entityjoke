@@ -11,6 +11,13 @@ assembly_info:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: UG6sMdLOL0a/7csHc5XesCtASiHiGgcVYzOPjF8cgt1urzcCeMCTd0t0GjpisERL
+  access_token:
+    secure: OY5RqEXI95BommnaZpDOPNHH3lEi5ayRVzgc1AalAa8YqFgtsWoEXv5ogGlLPCju
+  BUILD_USER_EMAIL:
+    secure: o+dSqJaaQWPkKU+SJQSV3wAit4ycjCDXHj5KfjeokyA=
+  BUILD_USER_NAME:
+    secure: HHpa+k9XiSEKCOIXNOeyWQ==
+
 before_build:
 - ps: >-
     Import-Module .\functions.psm1
@@ -28,6 +35,8 @@ test_script:
     GenerateReport
 
     PublishCoverage
+
+    VerifyFailedTests
 artifacts:
 - path: '**\*src\EntityJoke\bin\Debug\EntityJoke.dll'
 - path: coverage
