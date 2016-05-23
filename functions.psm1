@@ -1,5 +1,4 @@
 ﻿function RestorePackages{
-    git checkout master
     Write "`n== [Build]Restore Nuget Packages =="
     Write "Installing Nuget Packages of EntityJoke.sln"
     nuget restore .\src\EntityJoke.sln -Verbosity Quiet
@@ -48,8 +47,8 @@ function RevertCommit(){
     git config --global user.name "$env:BUILD_USER_NAME"
     #git revert $env:APPVEYOR_REPO_COMMIT --no-edit
     git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
-    #git push origin develop
-    git push origin $env:APPVEYOR_REPO_BRANCH 
+    git push origin develop:develop
+    #git push origin $env:APPVEYOR_REPO_BRANCH 
 }
 
 function VerifyFailedTests(){
