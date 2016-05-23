@@ -45,8 +45,11 @@ function RevertCommit(){
     Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
     git config --global user.email "$env:BUILD_USER_EMAIL"
     git config --global user.name "$env:BUILD_USER_NAME"
-    git revert $env:APPVEYOR_REPO_COMMIT --no-edit
-    git push origin develop
+    git checkout master
+    #git revert $env:APPVEYOR_REPO_COMMIT --no-edit
+    git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
+    #git push origin develop
+    git push origin $env:APPVEYOR_REPO_BRANCH 
 }
 
 function VerifyFailedTests(){
