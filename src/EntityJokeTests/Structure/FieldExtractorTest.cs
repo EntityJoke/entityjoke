@@ -19,7 +19,7 @@ namespace EntityJokeTests.Core
         public void AcertaQuantidadeDeFields()
         {
             Dictionary<string, Field> fields = target.Extract();
-            Assert.That(fields.Count, Is.EqualTo(4));
+            Assert.That(fields.Count, Is.EqualTo(5));
         }
 
         [Test]
