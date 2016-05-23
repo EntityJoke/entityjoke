@@ -37,6 +37,7 @@ function PublishCoverage(){
 
     $coveralls = (Resolve-Path ".\test-coverage\coveralls.net\tools\csmacnz.Coveralls.exe").ToString()
     & $coveralls --opencover -i .\test-coverage\opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_VERSION --serviceName appveyor
+    Write "Published"
 }
 
 function RevertCommit(){
@@ -49,15 +50,16 @@ function RevertCommit(){
     git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
     git push origin develop
     #git push origin $env:APPVEYOR_REPO_BRANCH 
+    Write "Commited"
 }
 
 function VerifyFailedTests(){
     Write "`n====[Tests]Verify Failed Tests ===="
     $failures = Select-String -Path .\TestResult.xml -Pattern "result=`"Failure"
     if($failures -ne $null){
-      Write "`nFailures Tests"
+      Write "Failures Tests"
       RevertCommit
     }else{
-      Write "No failures"
+      Write "No Failures"
     }
 }
