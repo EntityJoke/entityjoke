@@ -1,8 +1,6 @@
 version: 1.1.{build}
 skip_tags: true
 image: Visual Studio 2015
-clone_script:
-- ps: git clone -q --branch=develop https://github.com/EntityJoke/entityjoke.git C:\projects\entityjoke
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
