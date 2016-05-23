@@ -55,7 +55,7 @@ function RevertCommit(){
     git remote show origin
     git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
     Write "GGGGGGGGGGGGGGGGGGGGGG"
-    git log
+    git branch
     Write "GGGGGGGGGGGGGGGGGGGGGG"
     git status
     Write "GGGGGGGGGGGGGGGGGGGGGG"
