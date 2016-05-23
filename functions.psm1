@@ -47,7 +47,7 @@ function RevertCommit(){
     git config --global user.name "$env:BUILD_USER_NAME"
     #git revert $env:APPVEYOR_REPO_COMMIT --no-edit
     git status
-    git repo show origin
+    git remote show origin
     git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
     git push origin develop
     #git push origin $env:APPVEYOR_REPO_BRANCH 
