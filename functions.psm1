@@ -55,6 +55,7 @@ function VerifyFailedTests(){
     Write "`n====[Tests]Verify Failed Tests ===="
     $failures = Select-String -Path .\TestResult.xml -Pattern "result=`"Failure"
     if($failures -ne $null){
+      Write "`nFailures Tests"
       RevertCommit
     }else{
       Write "No failures"
