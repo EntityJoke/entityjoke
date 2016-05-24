@@ -17,7 +17,7 @@ namespace EntityJokeTests.Core
         [SetUp]
         public void SetUp()
         {
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(ProdutoTeste));
+            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(ProductForTest));
             target = DictionaryEntitiesObjects.GetInstance();
             target.Clear();
         }
@@ -27,9 +27,9 @@ namespace EntityJokeTests.Core
         {
             Assert.That(target.CountObjects, Is.EqualTo(0));
 
-            CategoriaTeste cat = new CategoriaTeste();
+            CategoryForTest cat = new CategoryForTest();
             cat.Id = 1;
-            cat.Nome = "Categoria";
+            cat.Name = "Categoria";
 
             target.AddOrRefreshObject(cat);
 
@@ -41,9 +41,9 @@ namespace EntityJokeTests.Core
         {
             Assert.That(target.CountObjects, Is.EqualTo(0));
 
-            CategoriaTeste cat = new CategoriaTeste();
+            CategoryForTest cat = new CategoryForTest();
             cat.Id = 1;
-            cat.Nome = "Categoria";
+            cat.Name = "Categoria";
 
             target.AddOrRefreshObject(cat);
             Assert.That(target.CountObjects, Is.EqualTo(1));

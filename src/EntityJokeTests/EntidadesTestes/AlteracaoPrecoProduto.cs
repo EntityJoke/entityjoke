@@ -10,6 +10,6 @@ namespace EntityJokeTests.Core
     {
         public int Id;
         public DateTime DataAlteracao;
-        public PrecoProduto PrecoProd;
+        public ProductPrice PrecoProd;
     }
 }

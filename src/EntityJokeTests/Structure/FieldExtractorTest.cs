@@ -16,14 +16,14 @@ namespace EntityJokeTests.Core
         }
 
         [Test]
-        public void AcertaQuantidadeDeFields()
+        public void Extract5Fields()
         {
             Dictionary<string, Field> fields = target.Extract();
             Assert.That(fields.Count, Is.EqualTo(5));
         }
 
         [Test]
-        public void AssertFieldId()
+        public void ExtractFieldId()
         {
             Dictionary<string, Field> fields = target.Extract();
             Assert.That(fields["id"].Name, Is.EqualTo("Id"));
@@ -65,7 +65,7 @@ namespace EntityJokeTests.Core
         [Test]
         public void AssertFieldIdPrecoProduto()
         {
-            target = new FieldExtractor(typeof(PrecoProduto));
+            target = new FieldExtractor(typeof(ProductPrice));
 
             Dictionary<string, Field> fields = target.Extract();
             Assert.That(fields["id"].Name, Is.EqualTo("Id"));
@@ -73,46 +73,46 @@ namespace EntityJokeTests.Core
         }
 
         [Test]
-        public void AssertFieldDataInicioPrecoProduto()
+        public void ExtractInitDateFieldOfProductPrice()
         {
-            target = new FieldExtractor(typeof(PrecoProduto));
+            target = new FieldExtractor(typeof(ProductPrice));
 
             Dictionary<string, Field> fields = target.Extract();
-            Assert.That(fields["data_inicio"].Name, Is.EqualTo("DataInicio"));
-            Assert.That(fields["data_inicio"].Type.Name, Is.EqualTo("DateTime"));
+            Assert.That(fields["init_date"].Name, Is.EqualTo("InitDate"));
+            Assert.That(fields["init_date"].Type.Name, Is.EqualTo("DateTime"));
         }
 
         [Test]
-        public void AssertFieldDataFimPrecoProduto()
+        public void ExtractEndDateFieldOfProductPrice()
         {
-            target = new FieldExtractor(typeof(PrecoProduto));
+            target = new FieldExtractor(typeof(ProductPrice));
 
             Dictionary<string, Field> fields = target.Extract();
-            Assert.That(fields["data_fim"].Name, Is.EqualTo("DataFim"));
-            Assert.That(fields["data_fim"].Type.Name, Is.EqualTo("DateTime"));
-            Assert.That(fields["data_fim"].IsEntity, Is.EqualTo(false));
+            Assert.That(fields["end_date"].Name, Is.EqualTo("EndDate"));
+            Assert.That(fields["end_date"].Type.Name, Is.EqualTo("DateTime"));
+            Assert.That(fields["end_date"].IsEntity, Is.EqualTo(false));
         }
 
         [Test]
-        public void AssertFieldPrecoPrecoProduto()
+        public void ExtractPriceFieldOfProductPrice()
         {
-            target = new FieldExtractor(typeof(PrecoProduto));
+            target = new FieldExtractor(typeof(ProductPrice));
 
             Dictionary<string, Field> fields = target.Extract();
-            Assert.That(fields["preco"].Name, Is.EqualTo("Preco"));
-            Assert.That(fields["preco"].Type.Name, Is.EqualTo("Double"));
-            Assert.That(fields["preco"].IsEntity, Is.EqualTo(false));
+            Assert.That(fields["price"].Name, Is.EqualTo("Price"));
+            Assert.That(fields["price"].Type.Name, Is.EqualTo("Double"));
+            Assert.That(fields["price"].IsEntity, Is.EqualTo(false));
         }
 
         [Test]
-        public void AssertFieldProdutoPrecoProduto()
+        public void ExtractProductFieldOfProductPrice()
         {
-            target = new FieldExtractor(typeof(PrecoProduto));
+            target = new FieldExtractor(typeof(ProductPrice));
 
             Dictionary<string, Field> fields = target.Extract();
-            Assert.That(fields["id_produto"].Name, Is.EqualTo("Produto"));
-            Assert.That(fields["id_produto"].Type.Name, Is.EqualTo("Produto"));
-            Assert.That(fields["id_produto"].IsEntity, Is.EqualTo(true));
+            Assert.That(fields["id_product"].Name, Is.EqualTo("Product"));
+            Assert.That(fields["id_product"].Type.Name, Is.EqualTo("ProductForTest"));
+            Assert.That(fields["id_product"].IsEntity, Is.EqualTo(true));
         }
 
     }

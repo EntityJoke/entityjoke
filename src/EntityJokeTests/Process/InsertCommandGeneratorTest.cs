@@ -12,115 +12,107 @@ namespace EntityJokeTests.Process
 
         InsertCommandGenerator target;
 
-        [SetUp]
-        public void SetUp()
-        {
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(ProdutoTeste));
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(PrecoProduto));
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(ComparadorProdutos));
-        }
-
         [Test]
-        public void GeraInsertCategoriaTeste()
+        public void GenerateInsertForPostgreSQLOfSimpleEntity()
         {
-            CategoriaTeste categoria = new CategoriaTeste();
-            categoria.Id = 2;
-            categoria.Nome = "Comidas";
+            CategoryForTest category = new CategoryForTest();
+            category.Id = 2;
+            category.Name = "Comidas";
 
-            target = new InsertCommandGenerator(categoria);
+            target = new InsertCommandGenerator(category);
 
-            string insert = "INSERT INTO categoria_teste (nome) VALUES ('Comidas') RETURNING ID";
+            string insert = "INSERT INTO category_for_test (name) VALUES ('Comidas') RETURNING ID";
 
             Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
-        public void GeraInsertProdutoTeste()
+        public void GenerateInsertForPostgreSQLOfEntityWith1Join()
         {
-            ProdutoTeste produto = new ProdutoTeste();
-            produto.Id = 3;
-            produto.Nome = "Lasanha";
-            produto.Embalagem = "Caixa";
-            produto.Marca = "Sadia";
-            produto.Quantidade = "650";
-            produto.UnidadeMedida = "g";
+            ProductForTest product = new ProductForTest();
+            product.Id = 3;
+            product.Name = "Lasanha";
+            product.Packing = "Caixa";
+            product.Maker = "Sadia";
+            product.Quantity = "650";
+            product.Unit = "g";
 
-            produto.CategoriaTeste = new CategoriaTeste();
-            produto.CategoriaTeste.Id = 4;
-            produto.CategoriaTeste.Nome = "Congelados";
+            product.Category = new CategoryForTest();
+            product.Category.Id = 4;
+            product.Category.Name = "Congelados";
 
-            target = new InsertCommandGenerator(produto);
+            target = new InsertCommandGenerator(product);
 
             string insert = "";
-            insert += "INSERT INTO produto_teste (id_categoria_teste, embalagem, marca, nome, quantidade, unidade_medida) VALUES (4, 'Caixa', 'Sadia', 'Lasanha', '650', 'g') RETURNING ID";
+            insert += "INSERT INTO product_for_test (id_category, maker, name, packing, quantity, unit) VALUES (4, 'Sadia', 'Lasanha', 'Caixa', '650', 'g') RETURNING ID";
 
             Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
-        public void GeraInsertProdutoCategoriaNulaTeste()
+        public void GenerateInsertForPostgreSQLOfEntityWithJoinNull()
         {
-            ProdutoTeste produto = new ProdutoTeste();
-            produto.Id = 3;
-            produto.Nome = "Lasanha";
-            produto.Embalagem = "Caixa";
-            produto.Marca = "Sadia";
-            produto.Quantidade = "650";
-            produto.UnidadeMedida = "g";
+            ProductForTest product = new ProductForTest();
+            product.Id = 3;
+            product.Name = "Lasanha";
+            product.Packing = "Caixa";
+            product.Maker = "Sadia";
+            product.Quantity = "650";
+            product.Unit = "g";
 
-            target = new InsertCommandGenerator(produto);
+            target = new InsertCommandGenerator(product);
 
             string insert = "";
-            insert += "INSERT INTO produto_teste (embalagem, marca, nome, quantidade, unidade_medida) VALUES ('Caixa', 'Sadia', 'Lasanha', '650', 'g') RETURNING ID";
+            insert += "INSERT INTO product_for_test (maker, name, packing, quantity, unit) VALUES ('Sadia', 'Lasanha', 'Caixa', '650', 'g') RETURNING ID";
 
             Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
-        public void GeraInsertPrecoProduto()
+        public void GenerateInsertForPostgreSQLOfEntityWithDateTimeFields()
         {
-            DateTime dataIni = new DateTime(2015, 11, 07);
-            DateTime dataFim = new DateTime(2015, 11, 09);
+            DateTime dateIni = new DateTime(2015, 11, 07);
+            DateTime dateEnd = new DateTime(2015, 11, 09);
 
-            PrecoProduto precoProduto = new PrecoProduto();
-            precoProduto.Id = 10;
-            precoProduto.Preco = 20;
-            precoProduto.DataInicio = dataIni;
-            precoProduto.DataFim = dataFim;
+            ProductPrice priceProduct = new ProductPrice();
+            priceProduct.Id = 10;
+            priceProduct.Price = 20;
+            priceProduct.InitDate = dateIni;
+            priceProduct.EndDate = dateEnd;
 
-            precoProduto.Produto = new Produto();
-            precoProduto.Produto.Id = 4;
-            precoProduto.Produto.Nome = "Trigo";
+            priceProduct.Product = new ProductForTest();
+            priceProduct.Product.Id = 4;
+            priceProduct.Product.Name = "Trigo";
 
-            target = new InsertCommandGenerator(precoProduto);
+            target = new InsertCommandGenerator(priceProduct);
 
             string insert = "";
-            insert += "INSERT INTO preco_produto (data_fim, data_inicio, preco, id_produto) VALUES ('" + dataFim.GetDateTimeFormats()[54] + "', '" + dataIni.GetDateTimeFormats()[54] + "', 20, 4) RETURNING ID";
+            insert += "INSERT INTO product_price (end_date, init_date, price, id_product) VALUES ('" + dateEnd.GetDateTimeFormats()[54] + "', '" + dateIni.GetDateTimeFormats()[54] + "', 20, 4) RETURNING ID";
 
             Assert.That(target.Generate(), Is.EqualTo(insert));
         }
 
         [Test]
-        public void GeraInsertComparadorProduto()
+        public void GenerateInsertForPostgreSQLOfEntityWith2JoinsAndDateTime()
         {
             DateTime data = new DateTime(2015, 11, 07);
 
-            ComparadorProdutos comparador = new ComparadorProdutos();
-            comparador.Id = 20;
-            comparador.DataComparacao = data;
+            ProductsComparator comparator = new ProductsComparator();
+            comparator.Id = 20;
+            comparator.ComparatorDate = data;
 
-            comparador.ProdutoA = new Produto();
-            comparador.ProdutoA.Id = 4;
-            comparador.ProdutoA.Nome = "Trigo";
+            comparator.ProductA = new ProductForTest();
+            comparator.ProductA.Id = 4;
+            comparator.ProductA.Name = "Trigo";
 
-            comparador.ProdutoB = new Produto();
-            comparador.ProdutoB.Id = 23;
-            comparador.ProdutoB.Nome = "Macarrão";
+            comparator.ProductB = new ProductForTest();
+            comparator.ProductB.Id = 23;
+            comparator.ProductB.Name = "Macarrão";
 
-            target = new InsertCommandGenerator(comparador);
+            target = new InsertCommandGenerator(comparator);
 
             string insert = "";
-            insert += "INSERT INTO comparador_produtos (data_comparacao, id_produto_a, id_produto_b) VALUES ('" + data.GetDateTimeFormats()[54] + "', 4, 23) RETURNING ID";
+            insert += "INSERT INTO products_comparator (comparator_date, id_product_a, id_product_b) VALUES ('" + data.GetDateTimeFormats()[54] + "', 4, 23) RETURNING ID";
 
             Assert.That(target.Generate(), Is.EqualTo(insert));
         }

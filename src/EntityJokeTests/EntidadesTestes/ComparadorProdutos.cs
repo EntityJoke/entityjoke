@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJokeTests.Core
 {
-    public class ComparadorProdutos
+    public class ProductsComparator
     {
         public int Id;
-        public DateTime DataComparacao;
-        public Produto ProdutoA;
-        public Produto ProdutoB;
+        public DateTime ComparatorDate;
+        public ProductForTest ProductA;
+        public ProductForTest ProductB;
     }
 }

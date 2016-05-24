@@ -24,23 +24,22 @@ namespace EntityJokeTests.Core
         [Test]
         public void CarregaEntidadeCategoria()
         {
-            CategoriaTeste produto;
+            CategoryForTest produto;
 
-            produto = (CategoriaTeste)target
+            produto = (CategoryForTest)target
                 .Entity(entity)
                 .Row(dataTable.Rows[0])
                 .Columns(dataTable.Columns)
                 .Build();
 
             Assert.That(produto.Id, Is.EqualTo(2));
-            Assert.That(produto.Nome, Is.EqualTo("Cereal 1"));
+            Assert.That(produto.Name, Is.EqualTo("Cereal 1"));
         }
 
         private void SetUpDictionaryEntityes()
         {
-            DictionaryEntitiesMap.INSTANCE.Clear();
-            DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(CategoriaTeste));
-            entity = DictionaryEntitiesMap.INSTANCE.GetEntity(typeof(CategoriaTeste));
+            DictionaryEntitiesMap.Clear();
+            entity = DictionaryEntitiesMap.Get(typeof(CategoryForTest));
         }
 
         private void SetUpDataTable()
@@ -53,14 +52,14 @@ namespace EntityJokeTests.Core
         {
             dataTable = new DataTable();
             dataTable.Columns.Add(new DataColumn("c_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("c_nome", typeof(string)));
+            dataTable.Columns.Add(new DataColumn("c_name", typeof(string)));
         }
 
         private void AddRow(int c_id, string c_nome)
         {
             DataRow row1 = dataTable.NewRow();
             row1["c_id"] = c_id;
-            row1["c_nome"] = c_nome;
+            row1["c_name"] = c_nome;
             dataTable.Rows.Add(row1);
         }
 

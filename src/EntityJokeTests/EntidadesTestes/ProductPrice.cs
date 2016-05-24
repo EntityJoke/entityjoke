@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace EntityJokeTests.Core
 {
-    public class PrecoProduto
+    public class ProductPrice
     {
         public int Id {get; set;}
-        public Produto Produto;
-        public double Preco { get; set; }
-        public DateTime DataInicio;
-        public DateTime DataFim { get; set; }
+        public ProductForTest Product;
+        public double Price { get; set; }
+        public DateTime InitDate;
+        public DateTime EndDate { get; set; }
     }
 }

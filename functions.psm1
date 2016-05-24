@@ -40,35 +40,47 @@ function PublishCoverage(){
     Write "Published"
 }
 
-function RevertCommit(){
-    Write "`n=======[Tests]Revert Commit ======="
-    git config --global credential.helper store
-    Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-    git config --global user.email "$env:BUILD_USER_EMAIL"
-    git config --global user.name "$env:BUILD_USER_NAME"
-    #git revert $env:APPVEYOR_REPO_COMMIT --no-edit
-    git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
-    git push origin develop -q
-    #git push origin $env:APPVEYOR_REPO_BRANCH 
-    Write "Commited"
+function DeleteFiles(){
+    Write "Deleting Files"
+    rm -r .\coverage
+    rm -r .\test-coverage
+    rm -r .\src\EntityJoke\bin\$env:CONFIGURATION\EntityJoke.dll
+    Write "Deleted"
 }
 
-function RevertCommitDois(){
-    Write "`n=======[Tests]Revert Commit ======="
+function CloneRepository(){
+    Write "Cloning Repository For Revert"
     git clone -q --branch=develop https://github.com/EntityJoke/entityjoke.git C:\projects\revert
-    ls ..\revert
     cd ..\revert
-    ls
-    Write "`n=======[Tests]Revert Commit ======="
+    Write "Cloned"
+}
+
+function ConfigureGit(){
     git config --global credential.helper store
     Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
     git config --global user.email "$env:BUILD_USER_EMAIL"
     git config --global user.name "$env:BUILD_USER_NAME"
-    #git revert $env:APPVEYOR_REPO_COMMIT --no-edit
-    git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
-    git push origin develop -q
-    #git push origin $env:APPVEYOR_REPO_BRANCH 
-    Write "Commited"
+}
+
+function RevertCommit(){
+    Write "Reverting"
+    git revert $env:APPVEYOR_REPO_COMMIT --no-edit
+    Write "Reverted"
+}
+
+function DoPush(){
+    Write "Pushing"
+    git push origin $env:APPVEYOR_REPO_BRANCH -q
+    Write "Pushed"
+}
+
+function RevertChanges(){
+    Write "`n=======[Tests]Revert Commit ======="
+    DeleteFiles
+    CloneRepository
+    ConfigureGit
+    RevertCommit
+    DoPush
 }
 
 function VerifyFailedTests(){
@@ -76,7 +88,7 @@ function VerifyFailedTests(){
     $failures = Select-String -Path .\TestResult.xml -Pattern "result=`"Failure"
     if($failures -ne $null){
       Write "Failures Tests"
-      RevertCommitDois
+      RevertChanges
     }else{
       Write "No Failures"
     }

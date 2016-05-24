@@ -16,15 +16,9 @@ namespace EntityJokeTests.Core
         [SetUp]
         public void SetUp()
         {
-            SetUpDictionaryEntityes();
+            DictionaryEntitiesMap.Clear();
             SetUpDataTable();
             target = new EntitiesLoader<Produto>(produtoTable);
-        }
-
-        private static void SetUpDictionaryEntityes()
-        {
-            DictionaryEntitiesMap.INSTANCE.Clear();
-            DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(Produto));
         }
 
         [Test]

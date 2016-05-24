@@ -15,11 +15,12 @@ namespace EntityJokeTests.Linq
     public class QuerySimpleTest
     {
         const string SELECT_PRODUTO = "p.id p_id, p.codigo_de_barras p_codigo_de_barras, p.nome p_nome, p.nome2 p_nome2, p.quantidade p_quantidade";
-        const string SELECT_PRECO = "p.id p_id, p.data_fim p_data_fim, p.data_inicio p_data_inicio, p.preco p_preco";
+        const string SELECT_PRODUCT_FOR_TEST = "p.id p_id, p.maker p_maker, p.name p_name, p.packing p_packing, p.quantity p_quantity, p.unit p_unit, c.id c_id, c.name c_name";
+        const string SELECT_PRICE_PRODUCT = "p.id p_id, p.end_date p_end_date, p.init_date p_init_date, p.price p_price";
         const string SELECT_ALTERACAO = "a.id a_id, a.data_alteracao a_data_alteracao";
 
         QuerySimple<Produto> targetProduto;
-        QuerySimple<PrecoProduto> targetPreco;
+        QuerySimple<ProductPrice> targetPreco;
         QuerySimple<AlteracaoPrecoProduto> targetAlteracao;
 
         [SetUp]
@@ -165,27 +166,27 @@ namespace EntityJokeTests.Linq
         public void AssertSQLSimplesPrecoProduto()
         {
             string sql = "";
-            sql += "SELECT " + SELECT_PRECO + ", ";
-            sql += SELECT_PRODUTO.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
-            sql += "FROM preco_produto p ";
-            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto)";
+            sql += "SELECT " + SELECT_PRODUCT_FOR_TEST + " ";
+            sql += "FROM product_for_test p ";
+            sql += "LEFT JOIN category_for_test c ON (c.id = p.id_category)";
 
-            targetPreco = new QuerySimple<PrecoProduto>();
-            Assert.That(targetPreco.ToString(), Is.EqualTo(sql));
+            var targetProduct = new QuerySimple<ProductForTest>();
+            Assert.That(targetProduct.ToString(), Is.EqualTo(sql));
         }
 
         [Test]
         public void AssertSQLComCondicaoSimplesPrecoProduto()
         {
-            targetPreco = new QuerySimple<PrecoProduto>()
-                .Where("precoProduto.Preco = 3");
+            targetPreco = new QuerySimple<ProductPrice>()
+                .Where("productPrice.Price = 3");
 
             string sql = "";
-            sql += "SELECT " + SELECT_PRECO + ", ";
-            sql += SELECT_PRODUTO.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
-            sql += "FROM preco_produto p ";
-            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto) ";
-            sql += "WHERE p.preco = 3";
+            sql += "SELECT " + SELECT_PRICE_PRODUCT + ", ";
+            sql += SELECT_PRODUCT_FOR_TEST.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
+            sql += "FROM product_price p ";
+            sql += "LEFT JOIN product_for_test pr ON (pr.id = p.id_product) ";
+            sql += "LEFT JOIN category_for_test c ON (c.id = pr.id_category) ";
+            sql += "WHERE p.price = 3";
 
             Assert.That(targetPreco.ToString(), Is.EqualTo(sql));
         }
@@ -193,15 +194,16 @@ namespace EntityJokeTests.Linq
         [Test]
         public void AssertSQLComCondicaoCompostaPrecoProduto()
         {
-            targetPreco = new QuerySimple<PrecoProduto>()
-                .Where("precoProduto.Produto.Nome = 'Arroz'");
+            targetPreco = new QuerySimple<ProductPrice>()
+                .Where("productPrice.Product.Name = 'Arroz'");
 
             string sql = "";
-            sql += "SELECT " + SELECT_PRECO + ", ";
-            sql += SELECT_PRODUTO.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
-            sql += "FROM preco_produto p ";
-            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto) ";
-            sql += "WHERE pr.nome = 'Arroz'";
+            sql += "SELECT " + SELECT_PRICE_PRODUCT + ", ";
+            sql += SELECT_PRODUCT_FOR_TEST.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
+            sql += "FROM product_price p ";
+            sql += "LEFT JOIN product_for_test pr ON (pr.id = p.id_product) ";
+            sql += "LEFT JOIN category_for_test c ON (c.id = pr.id_category) ";
+            sql += "WHERE pr.name = 'Arroz'";
 
             Assert.That(targetPreco.ToString(), Is.EqualTo(sql));
         }
@@ -213,11 +215,12 @@ namespace EntityJokeTests.Linq
 
             string sql = "";
             sql += "SELECT a.id a_id, a.data_alteracao a_data_alteracao, ";
-            sql += "p.id p_id, p.data_fim p_data_fim, p.data_inicio p_data_inicio, p.preco p_preco, ";
-            sql += "pr.id pr_id, pr.codigo_de_barras pr_codigo_de_barras, pr.nome pr_nome, pr.nome2 pr_nome2, pr.quantidade pr_quantidade ";
+            sql += SELECT_PRICE_PRODUCT + ", ";
+            sql += SELECT_PRODUCT_FOR_TEST.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
             sql += "FROM alteracao_preco_produto a ";
-            sql += "LEFT JOIN preco_produto p ON (p.id = a.id_preco_prod) ";
-            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto)";
+            sql += "LEFT JOIN product_price p ON (p.id = a.id_preco_prod) ";
+            sql += "LEFT JOIN product_for_test pr ON (pr.id = p.id_product) ";
+            sql += "LEFT JOIN category_for_test c ON (c.id = pr.id_category)";
 
             Assert.That(targetAlteracao.ToString(), Is.EqualTo(sql));
         }
@@ -226,20 +229,21 @@ namespace EntityJokeTests.Linq
         public void GeraSQLComCondicoesCompostasEOrderByCompostoAlteracaoPrecoProduto()
         {
             targetAlteracao = new QuerySimple<AlteracaoPrecoProduto>()
-                .Where("AlteracaoPrecoProduto.PrecoProd.produto.CodigoDeBarras = '058764' AND TRUNC(alteracaoPrecoProduto.DataAlteracao) > '11/07/2015' AND AlteracaoPrecoProduto.PrecoProd.Preco < 4")
-                .OrderBy("AlteracaoPrecoProduto.PrecoProd.DataInicio, AlteracaoPrecoProduto.PrecoProd.produto.Id ASC, alteracaoPrecoProduto.DataAlteracao DESC");
+                .Where("AlteracaoPrecoProduto.PrecoProd.product.name = '058764' AND TRUNC(alteracaoPrecoProduto.DataAlteracao) > '11/07/2015' AND AlteracaoPrecoProduto.PrecoProd.Price < 4")
+                .OrderBy("AlteracaoPrecoProduto.PrecoProd.InitDate, AlteracaoPrecoProduto.PrecoProd.product.Id ASC, alteracaoPrecoProduto.DataAlteracao DESC");
 
             string sql = "";
             sql += "SELECT a.id a_id, a.data_alteracao a_data_alteracao, ";
-            sql += "p.id p_id, p.data_fim p_data_fim, p.data_inicio p_data_inicio, p.preco p_preco, ";
-            sql += "pr.id pr_id, pr.codigo_de_barras pr_codigo_de_barras, pr.nome pr_nome, pr.nome2 pr_nome2, pr.quantidade pr_quantidade ";
+            sql += SELECT_PRICE_PRODUCT + ", ";
+            sql += SELECT_PRODUCT_FOR_TEST.Replace("p.", "pr.").Replace("p_", "pr_") + " ";
             sql += "FROM alteracao_preco_produto a ";
-            sql += "LEFT JOIN preco_produto p ON (p.id = a.id_preco_prod) ";
-            sql += "LEFT JOIN produto pr ON (pr.id = p.id_produto) ";
-            sql += "WHERE pr.codigo_de_barras = '058764' ";
+            sql += "LEFT JOIN product_price p ON (p.id = a.id_preco_prod) ";
+            sql += "LEFT JOIN product_for_test pr ON (pr.id = p.id_product) ";
+            sql += "LEFT JOIN category_for_test c ON (c.id = pr.id_category) ";
+            sql += "WHERE pr.name = '058764' ";
             sql += "AND TRUNC(a.data_alteracao) > '11/07/2015' ";
-            sql += "AND p.preco < 4 ";
-            sql += "ORDER BY p.data_inicio, ";
+            sql += "AND p.price < 4 ";
+            sql += "ORDER BY p.init_date, ";
             sql += "pr.id ASC, ";
             sql += "a.data_alteracao DESC";
 

@@ -16,7 +16,7 @@ namespace EntityJoke.Process.Commands
         public InsertCommandGenerator(object objectInsert)
         {
             this.objectInsert = objectInsert;
-            this.entity = DictionaryEntitiesMap.INSTANCE.GetEntity(objectInsert.GetType());
+            this.entity = DictionaryEntitiesMap.Get(objectInsert.GetType());
         }
 
         public string Generate()

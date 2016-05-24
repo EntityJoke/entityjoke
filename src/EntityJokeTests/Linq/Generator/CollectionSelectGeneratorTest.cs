@@ -30,7 +30,7 @@ namespace EntityJokeTests.Linq.Generator
 
         private static void SetUpDictionaryEntityes()
         {
-            DictionaryEntitiesMap.INSTANCE.Clear();
+            DictionaryEntitiesMap.Clear();
             DictionaryEntitiesObjects.GetInstance().Clear();
         }
     }

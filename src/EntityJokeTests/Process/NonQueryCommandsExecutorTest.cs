@@ -18,7 +18,7 @@ namespace EntityJokeTests.Process
         [SetUp]
         public void SetUp()
         {
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(CategoriaTeste));
+            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(CategoryForTest));
             DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(Ags));
             JokeConfigurationBuilder.NewConfigurationToPostgreSQL()
                 .Host(LOCAL_HOST)
@@ -32,21 +32,21 @@ namespace EntityJokeTests.Process
         //[Test]
         public void TestA()
         {
-            CategoriaTeste cat = new CategoriaTeste();
+            CategoryForTest cat = new CategoryForTest();
             cat.Id = 20000;
-            cat.Nome = "Teste Insert";
+            cat.Name = "Teste Insert";
 
             var insert = new InsertCommandGenerator(cat).Generate();
 
             NonQueryCommandsExecutor executor = new NonQueryCommandsExecutor(cat);
             executor.Execute();
 
-            var novaCategoria = Joke.Query<CategoriaTeste>()
+            var novaCategoria = Joke.Query<CategoryForTest>()
                 .Where("categoriaTeste.Id = 20000")
                 .Execute()[0];
 
             Assert.That(novaCategoria.Id, Is.EqualTo(20000));
-            Assert.That(novaCategoria.Nome, Is.EqualTo("Teste Insert"));
+            Assert.That(novaCategoria.Name, Is.EqualTo("Teste Insert"));
         }
 
         //[Test]

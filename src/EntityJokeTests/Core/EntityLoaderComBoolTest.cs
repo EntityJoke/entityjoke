@@ -56,10 +56,9 @@ namespace EntityJokeTests.Core
 
         private void SetUpDictionaryEntityes()
         {
-            DictionaryEntitiesMap.INSTANCE.Clear();
-            DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(Contato));
+            DictionaryEntitiesMap.Clear();
             DictionaryEntitiesObjects.GetInstance().Clear();
-            entity = DictionaryEntitiesMap.INSTANCE.GetEntity(typeof(Contato));
+            entity = DictionaryEntitiesMap.Get(typeof(Contato));
         }
 
         private void SetUpDataTable()

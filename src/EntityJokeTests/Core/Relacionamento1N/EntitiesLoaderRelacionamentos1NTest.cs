@@ -59,8 +59,7 @@ namespace EntityJokeTests.Core.Relacionamento1N
 
         private static void SetUpDictionaryEntityes()
         {
-            DictionaryEntitiesMap.INSTANCE.Clear();
-            DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(Autor));
+            DictionaryEntitiesMap.Clear();
             DictionaryEntitiesObjects.GetInstance().Clear();
         }
 

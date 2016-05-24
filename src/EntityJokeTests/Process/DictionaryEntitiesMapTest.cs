@@ -14,7 +14,7 @@ namespace EntityJokeTests.Procces
         public void SetUp()
         {
             target = DictionaryEntitiesMap.INSTANCE;
-            target.Clear();
+            DictionaryEntitiesMap.Clear();
         }
 
         [Test]
@@ -47,36 +47,36 @@ namespace EntityJokeTests.Procces
         }
 
         [Test]
-        public void DicionarioAdicionaDuasClasses()
+        public void DictionaryAddClassOnly()
         {
-            bool isEntityAdded = target.TryAddEntity(typeof(Produto));
+            bool isEntityAdded = target.TryAddEntity(typeof(CategoryForTest));
 
             Assert.That(isEntityAdded, Is.EqualTo(true));
             Assert.That(target.EntityesCount(), Is.EqualTo(1));
 
-            isEntityAdded = target.TryAddEntity(typeof(PrecoProduto));
+            isEntityAdded = target.TryAddEntity(typeof(ProductForTest));
 
             Assert.That(isEntityAdded, Is.EqualTo(true));
             Assert.That(target.EntityesCount(), Is.EqualTo(2));
         }
 
         [Test]
-        public void RecuperaEntityProdutoAposCarregarPrecoProduto()
+        public void LoadEntityCategoryWhenLoadEntityProductForTest()
         {
-            target.TryAddEntity(typeof(PrecoProduto));
+            target.TryAddEntity(typeof(ProductForTest));
 
             Assert.That(target.EntityesCount(), Is.EqualTo(2));
 
-            Entity produto = target.GetEntity(typeof(Produto));
+            Entity produto = target.GetEntity(typeof(CategoryForTest));
 
-            Assert.That(produto.Name, Is.EqualTo("produto"));
-            Assert.That(produto.FieldDictionary.Count, Is.EqualTo(5));
+            Assert.That(produto.Name, Is.EqualTo("category_for_test"));
+            Assert.That(produto.FieldDictionary.Count, Is.EqualTo(2));
 
             Assert.That(produto.FieldDictionary["id"].Name, Is.EqualTo("Id"));
             Assert.That(produto.FieldDictionary["id"].Type.Name, Is.EqualTo("Int32"));
 
-            Assert.That(produto.FieldDictionary["codigo_de_barras"].Name, Is.EqualTo("CodigoDeBarras"));
-            Assert.That(produto.FieldDictionary["codigo_de_barras"].Type.Name, Is.EqualTo("String"));
+            Assert.That(produto.FieldDictionary["name"].Name, Is.EqualTo("Name"));
+            Assert.That(produto.FieldDictionary["name"].Type.Name, Is.EqualTo("String"));
         }
 
     }

@@ -10,7 +10,7 @@ namespace EntityJokeTests.Core
     {
         public int Id;
         public string CodigoComparacao;
-        public CategoriaTeste CategoriaA;
-        public CategoriaTeste CategoriaB;
+        public CategoryForTest CategoriaA;
+        public CategoryForTest CategoriaB;
     }
 }

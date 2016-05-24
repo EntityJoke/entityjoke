@@ -35,9 +35,9 @@ namespace EntityJokeTests.Core
             Assert.That(comparador.Id, Is.EqualTo(1));
             Assert.That(comparador.CodigoComparacao, Is.EqualTo("131"));
             Assert.That(comparador.CategoriaA.Id, Is.EqualTo(1));
-            Assert.That(comparador.CategoriaA.Nome, Is.EqualTo("Cat 1"));
+            Assert.That(comparador.CategoriaA.Name, Is.EqualTo("Cat 1"));
             Assert.That(comparador.CategoriaB.Id, Is.EqualTo(2));
-            Assert.That(comparador.CategoriaB.Nome, Is.EqualTo("Cat 2"));
+            Assert.That(comparador.CategoriaB.Name, Is.EqualTo("Cat 2"));
         }
 
         [Test]
@@ -53,9 +53,9 @@ namespace EntityJokeTests.Core
 
         private void SetUpDictionaryEntityes()
         {
-            DictionaryEntitiesMap.INSTANCE.Clear();
+            DictionaryEntitiesMap.Clear();
             DictionaryEntitiesObjects.GetInstance().Clear();
-            entity = DictionaryEntitiesMap.INSTANCE.GetEntity(typeof(ComparadorCategorias));
+            entity = DictionaryEntitiesMap.Get(typeof(ComparadorCategorias));
         }
 
         private void SetUpDataTable()
@@ -67,7 +67,7 @@ namespace EntityJokeTests.Core
             row1["c_id"] = 2;
             row1["c_codigo_comparacao"] = "132";
             row1["ca_id"] = 1;
-            row1["ca_nome"] = "Cat 1";
+            row1["ca_name"] = "Cat 1";
             dataTable.Rows.Add(row1);
         }
 
@@ -77,9 +77,9 @@ namespace EntityJokeTests.Core
             dataTable.Columns.Add(new DataColumn("c_id", typeof(int)));
             dataTable.Columns.Add(new DataColumn("c_codigo_comparacao", typeof(string)));
             dataTable.Columns.Add(new DataColumn("ca_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("ca_nome", typeof(string)));
+            dataTable.Columns.Add(new DataColumn("ca_name", typeof(string)));
             dataTable.Columns.Add(new DataColumn("cat_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("cat_nome", typeof(string)));
+            dataTable.Columns.Add(new DataColumn("cat_name", typeof(string)));
         }
 
         private void AddRow(int id, string codigoComparacao, int idCatA, string nomeCatA, int idCatB, string nomeCatB)
@@ -88,9 +88,9 @@ namespace EntityJokeTests.Core
             row1["c_id"] = id;
             row1["c_codigo_comparacao"] = codigoComparacao;
             row1["ca_id"] = idCatA;
-            row1["ca_nome"] = nomeCatA;
+            row1["ca_name"] = nomeCatA;
             row1["cat_id"] = idCatB;
-            row1["cat_nome"] = nomeCatB;
+            row1["cat_name"] = nomeCatB;
             dataTable.Rows.Add(row1);
         }
 

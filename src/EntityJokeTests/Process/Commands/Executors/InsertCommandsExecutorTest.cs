@@ -47,7 +47,7 @@ namespace EntityJokeTests.Process.Commands.Executors
 
         private static void SetUpDictionaryEntityes()
         {
-            DictionaryEntitiesMap.INSTANCE.Clear();
+            DictionaryEntitiesMap.Clear();
             DictionaryEntitiesObjects.GetInstance().Clear();
         }
 

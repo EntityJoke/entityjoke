@@ -54,8 +54,7 @@ namespace EntityJokeTests.Core.Loaders
 
         private static void SetUpDictionaryEntityes()
         {
-            DictionaryEntitiesMap.INSTANCE.Clear();
-            DictionaryEntitiesMap.INSTANCE.AddEntity(typeof(Autor));
+            DictionaryEntitiesMap.Clear();
             DictionaryEntitiesObjects.GetInstance().Clear();
         }
 

@@ -14,19 +14,19 @@ namespace EntityJokeTests.Process
         [SetUp]
         public void SetUp()
         {
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(CategoriaTeste));
+            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(CategoryForTest));
         }
 
         [Test]
         public void GeraDeleteProduto()
         {
-            CategoriaTeste cat = new CategoriaTeste();
+            CategoryForTest cat = new CategoryForTest();
             cat.Id = 65;
-            cat.Nome = "Cat Delete";
+            cat.Name = "Cat Delete";
 
             target = new DeleteCommandGenerator(cat);
 
-            string delete = "DELETE FROM categoria_teste WHERE id = 65";
+            string delete = "DELETE FROM category_for_test WHERE id = 65";
 
             Assert.That(target.GetCommand(), Is.EqualTo(delete));
 

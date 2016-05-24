@@ -63,7 +63,7 @@
     <Compile Include="Connection\JokeConfigurationTest.cs" />
     <Compile Include="Core\DictionaryEntitiesAspectsTest.cs" />
     <Compile Include="Core\DictionaryEntitiesObjectsTest.cs" />
-    <Compile Include="Core\EntitiesLoaderEntidadesCompostasTest.cs" />
+    <Compile Include="Core\EntitiesLoaderEntitiesWithJoinsTest.cs" />
     <Compile Include="Core\EntitiesLoaderTest.cs" />
     <Compile Include="Core\EntityLoaderComBoolTest.cs" />
     <Compile Include="Core\EntityLoaderEntidadeCompostaTest.cs" />
@@ -72,14 +72,14 @@
     <Compile Include="Core\Loaders\CollectionsLoaderTest.cs" />
     <Compile Include="Core\Relacionamento1N\EntitiesLoaderRelacionamentos1NTest.cs" />
     <Compile Include="EntidadesTestes\AlteracaoPrecoProduto.cs" />
-    <Compile Include="EntidadesTestes\CategoriaTeste.cs" />
-    <Compile Include="EntidadesTestes\ComparadorCategorias.cs" />
+    <Compile Include="EntidadesTestes\CategoryForTest.cs" />
+    <Compile Include="EntidadesTestes\ProductsComparator.cs" />
     <Compile Include="EntidadesTestes\ComparadorProdutos.cs" />
     <Compile Include="EntidadesTestes\Contato.cs" />
     <Compile Include="EntidadesTestes\GGSTeste.cs" />
-    <Compile Include="EntidadesTestes\PrecoProduto.cs" />
+    <Compile Include="EntidadesTestes\ProductPrice.cs" />
     <Compile Include="EntidadesTestes\Produto.cs" />
-    <Compile Include="EntidadesTestes\ProdutoTeste.cs" />
+    <Compile Include="EntidadesTestes\ProductForTest.cs" />
     <Compile Include="EntidadesTestes\Relacionamento1N\Autor.cs" />
     <Compile Include="EntidadesTestes\Relacionamento1N\Livro.cs" />
     <Compile Include="Linq\FieldPositionConditionExtractorTest.cs" />

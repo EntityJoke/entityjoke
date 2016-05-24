@@ -13,11 +13,6 @@ namespace EntityJoke.Core
 
         private DictionaryEntitiesMap() { }
 
-        public void Clear()
-        {
-            entityes.Clear();
-        }
-
         public bool TryAddEntity(Type type)
         {
             if (ExistsEntity(type))
@@ -59,6 +54,11 @@ namespace EntityJoke.Core
         public static Entity Get(Type type)
         {
             return Instance().GetEntity(type);
+        }
+
+        public static void Clear()
+        {
+            Instance().entityes.Clear();
         }
 
         public static DictionaryEntitiesMap Instance()

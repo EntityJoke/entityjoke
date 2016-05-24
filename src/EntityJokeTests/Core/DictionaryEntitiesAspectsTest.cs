@@ -17,7 +17,7 @@ namespace EntityJokeTests.Core
         [SetUp]
         public void SetUp()
         {
-            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(ProdutoTeste));
+            DictionaryEntitiesMap.INSTANCE.TryAddEntity(typeof(ProductForTest));
             target = DictionaryEntitiesAspects.GetInstance();
             target.Clear();
         }
@@ -27,9 +27,9 @@ namespace EntityJokeTests.Core
         {
             Assert.That(target.CountObjects, Is.EqualTo(0));
 
-            CategoriaTeste cat = new CategoriaTeste();
+            CategoryForTest cat = new CategoryForTest();
             cat.Id = 1;
-            cat.Nome = "Categoria";
+            cat.Name = "Categoria";
 
             target.AddOrRefreshAspect(cat);
 
@@ -41,25 +41,25 @@ namespace EntityJokeTests.Core
         {
             Assert.That(target.CountObjects, Is.EqualTo(0));
 
-            CategoriaTeste cat = new CategoriaTeste();
+            CategoryForTest cat = new CategoryForTest();
             cat.Id = 1;
-            cat.Nome = "Categoria";
+            cat.Name = "Categoria";
 
             target.AddOrRefreshAspect(cat);
             Assert.That(target.CountObjects, Is.EqualTo(1));
             Assert.That(cat, Is.Not.EqualTo(target.GetAspect(cat)));
 
-            var aspecto = target.GetAspect(cat) as CategoriaTeste;
+            var aspecto = target.GetAspect(cat) as CategoryForTest;
             Assert.That(cat.Id, Is.EqualTo(aspecto.Id));
-            Assert.That(cat.Nome, Is.EqualTo(aspecto.Nome));
+            Assert.That(cat.Name, Is.EqualTo(aspecto.Name));
 
             target.AddOrRefreshAspect(cat);
             Assert.That(target.CountObjects, Is.EqualTo(1));
             Assert.That(cat, Is.Not.EqualTo(target.GetAspect(cat)));
 
-            aspecto = target.GetAspect(cat) as CategoriaTeste;
+            aspecto = target.GetAspect(cat) as CategoryForTest;
             Assert.That(cat.Id, Is.EqualTo(aspecto.Id));
-            Assert.That(cat.Nome, Is.EqualTo(aspecto.Nome));
+            Assert.That(cat.Name, Is.EqualTo(aspecto.Name));
         }
     }
 }
