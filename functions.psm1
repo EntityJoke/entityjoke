@@ -53,12 +53,30 @@ function RevertCommit(){
     Write "Commited"
 }
 
+function RevertCommitDois(){
+    Write "`n=======[Tests]Revert Commit ======="
+    git clone -q --branch=develop https://github.com/EntityJoke/entityjoke.git C:\projects\revert
+    ls ..\revert
+    cd ..\revert
+    ls
+    Write "`n=======[Tests]Revert Commit ======="
+    git config --global credential.helper store
+    Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+    git config --global user.email "$env:BUILD_USER_EMAIL"
+    git config --global user.name "$env:BUILD_USER_NAME"
+    #git revert $env:APPVEYOR_REPO_COMMIT --no-edit
+    git revert 8d7bbd2225131c36ab354f9d31cf1c4f4a947b94 --no-edit
+    git push origin develop -q
+    #git push origin $env:APPVEYOR_REPO_BRANCH 
+    Write "Commited"
+}
+
 function VerifyFailedTests(){
     Write "`n====[Tests]Verify Failed Tests ===="
     $failures = Select-String -Path .\TestResult.xml -Pattern "result=`"Failure"
     if($failures -ne $null){
       Write "Failures Tests"
-      RevertCommit
+      RevertCommitDois
     }else{
       Write "No Failures"
     }
