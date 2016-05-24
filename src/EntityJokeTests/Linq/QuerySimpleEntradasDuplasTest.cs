@@ -34,7 +34,7 @@ namespace EntityJokeTests.Linq
             Assert.That(targetProduto.ToString(), Is.EqualTo(sql));
         }
 
-        //[Test]
+        [Test]
         public void GeraSQLSimplesComparadorProduto()
         {
             target = new QuerySimple<ProductsComparator>()
