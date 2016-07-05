@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 
 namespace EntityJoke.Core.Loaders
 {
     public class EntitiesLoaderReflectionAdapter
     {
         private readonly Dictionary<string, object> dictionary;
-        private readonly DataTable table;
+        private readonly List<Dictionary<string, object>> table;
 
-        public EntitiesLoaderReflectionAdapter(DataTable table, Dictionary<string, object> dictionary)
+        public EntitiesLoaderReflectionAdapter(List<Dictionary<string, object>> table, Dictionary<string, object> dictionary)
         {
             this.table = table;
             this.dictionary = dictionary;

@@ -2,16 +2,16 @@
 using EntityJoke.Core.Loaders;
 using EntityJoke.Structure.Entities;
 using NUnit.Framework;
-using System.Data;
+using System.Collections.Generic;
 
 namespace EntityJokeTests.Core
 {
     [TestFixture]
     public class EntityLoaderDuasEntidadesCompostasTest
     {
-        EntityLoaderBuilder target;
-        DataTable dataTable;
         Entity entity;
+        EntityLoaderBuilder target;
+        List<Dictionary<string, object>> dataTable;
 
         [SetUp]
         public void SetUp()
@@ -28,8 +28,7 @@ namespace EntityJokeTests.Core
 
             comparador = (ComparadorCategorias)target
                 .Entity(entity)
-                .Row(dataTable.Rows[0])
-                .Columns(dataTable.Columns)
+                .Row(dataTable[0])
                 .Build();
 
             Assert.That(comparador.Id, Is.EqualTo(1));
@@ -60,38 +59,27 @@ namespace EntityJokeTests.Core
 
         private void SetUpDataTable()
         {
-            SetUpColunas();
+            dataTable = new List<Dictionary<string, object>>();
             AddRow(1, "131", 1, "Cat 1", 2, "Cat 2");
 
-            DataRow row1 = dataTable.NewRow();
-            row1["c_id"] = 2;
-            row1["c_codigo_comparacao"] = "132";
-            row1["ca_id"] = 1;
-            row1["ca_name"] = "Cat 1";
-            dataTable.Rows.Add(row1);
-        }
-
-        private void SetUpColunas()
-        {
-            dataTable = new DataTable();
-            dataTable.Columns.Add(new DataColumn("c_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("c_codigo_comparacao", typeof(string)));
-            dataTable.Columns.Add(new DataColumn("ca_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("ca_name", typeof(string)));
-            dataTable.Columns.Add(new DataColumn("cat_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("cat_name", typeof(string)));
+            //DataRow row1 = dataTable.NewRow();
+            //row1["c_id"] = 2;
+            //row1["c_codigo_comparacao"] = "132";
+            //row1["ca_id"] = 1;
+            //row1["ca_name"] = "Cat 1";
+            //dataTable.Rows.Add(row1);
         }
 
         private void AddRow(int id, string codigoComparacao, int idCatA, string nomeCatA, int idCatB, string nomeCatB)
         {
-            DataRow row1 = dataTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["c_id"] = id;
             row1["c_codigo_comparacao"] = codigoComparacao;
             row1["ca_id"] = idCatA;
             row1["ca_name"] = nomeCatA;
             row1["cat_id"] = idCatB;
             row1["cat_name"] = nomeCatB;
-            dataTable.Rows.Add(row1);
+            dataTable.Add(row1);
         }
 
     }

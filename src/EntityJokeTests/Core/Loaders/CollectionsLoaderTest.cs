@@ -5,16 +5,12 @@ using EntityJokeTests.EntidadesTestes.Relacionamento1N;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityJokeTests.Core.Loaders
 {
     public class CollectionsLoaderTest
     {
-        DataTable livroTable;
+        List<Dictionary<string, object>> livroTable;
 
         CollectionsLoader target;
 
@@ -71,30 +67,22 @@ namespace EntityJokeTests.Core.Loaders
 
         private void SetUpLivro()
         {
-            livroTable = new DataTable();
-            SetUpColunasLivroTable();
+            livroTable = new List<Dictionary<string, object>>();
+
             var autor = new Autor() { Id = 1, Nome = "Érico Veríssimo" };
             AddRowLivro(1, "O Continente", autor);
             AddRowLivro(6, "O Retrato", autor);
             AddRowLivro(4, "O Arquipélago", autor);
         }
 
-        private void SetUpColunasLivroTable()
-        {
-            livroTable.Columns.Add(new DataColumn("l_id", typeof(int)));
-            livroTable.Columns.Add(new DataColumn("l_titulo", typeof(string)));
-            livroTable.Columns.Add(new DataColumn("a_id", typeof(int)));
-            livroTable.Columns.Add(new DataColumn("a_nome", typeof(string)));
-        }
-
         private void AddRowLivro(int id, string nome, Autor autor)
         {
-            DataRow row1 = livroTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["l_id"] = id;
             row1["l_titulo"] = nome;
             row1["a_id"] = autor.Id;
             row1["a_nome"] = autor.Nome;
-            livroTable.Rows.Add(row1);
+            livroTable.Add(row1);
         }
 
     }

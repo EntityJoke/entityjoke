@@ -1,5 +1,5 @@
 ﻿using EntityJoke.Connection;
-using System.Data;
+using System.Collections.Generic;
 using System.Data.Common;
 
 namespace EntityJoke.Process.Commands
@@ -13,18 +13,22 @@ namespace EntityJoke.Process.Commands
             this.commandSql = commandSql;
         }
 
-        public DataTable Generate()
+        public List<Dictionary<string, object>> Generate()
         {
             var conn = DbConnectionFactory.Get();
             conn.Open();
 
-            var adp = new DbDataAdapterFactory(commandSql, conn).Get();
-            var dataTable = new DataTable();
-
-            adp.Fill(dataTable);
+            var dataTable = GenerateDataTable(conn);
 
             conn.Close();
 
+            return dataTable;
+        }
+
+        private List<Dictionary<string, object>> GenerateDataTable(DbConnection conn)
+        {
+            var adp = new DbDataAdapterFactory(commandSql, conn).Get();
+            var dataTable = new List<Dictionary<string, object>>();
             return dataTable;
         }
     }

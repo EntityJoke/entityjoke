@@ -1,6 +1,6 @@
 ﻿using EntityJoke.Core;
 using EntityJoke.Process.Commands;
-using System.Data;
+using System.Collections.Generic;
 
 namespace EntityJoke.Mocks
 {
@@ -13,7 +13,7 @@ namespace EntityJoke.Mocks
             this.sql = sql;
         }
 
-        public DataTable Generate()
+        public List<Dictionary<string, object>> Generate()
         {
             return DictionaryInstanceFactory.GetDataTable();
         }

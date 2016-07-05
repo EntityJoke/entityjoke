@@ -1,6 +1,5 @@
 ﻿using EntityJoke.Core.Loaders;
 using System.Collections.Generic;
-using System.Data;
 
 namespace EntityJoke.Process.Commands
 {
@@ -19,12 +18,12 @@ namespace EntityJoke.Process.Commands
             return LoadEntities(dataTable);
         }
 
-        private DataTable ExecuteCommandSQL()
+        private List<Dictionary<string, object>> ExecuteCommandSQL()
         {
             return DataTableGeneratorFactory.Get(commandSQL).Generate();
         }
 
-        private static List<T> LoadEntities(DataTable dataTable)
+        private static List<T> LoadEntities(List<Dictionary<string, object>> dataTable)
         {
             return new EntitiesLoader<T>(dataTable).Load();
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 
 namespace EntityJoke.Core
 {
@@ -29,9 +28,9 @@ namespace EntityJoke.Core
             instance.Set("DataTableGeneratorMock", isMock);
         }
 
-        public static void AddDataTableMock(DataTable dataTable)
+        public static void AddDataTableMock(List<Dictionary<string, object>> dataTable)
         {
-            var q = new Queue<DataTable>();
+            var q = new Queue<List<Dictionary<string, object>>>();
 
             if (instance.values.ContainsKey("DataTableMockQueue"))
                 q = GetDataTableQueue();
@@ -41,12 +40,12 @@ namespace EntityJoke.Core
             q.Enqueue(dataTable);
         }
 
-        private static Queue<DataTable> GetDataTableQueue()
+        private static Queue<List<Dictionary<string, object>>> GetDataTableQueue()
         {
-            return (Queue<DataTable>)instance.values["DataTableMockQueue"];
+            return (Queue<List<Dictionary<string, object>>>)instance.values["DataTableMockQueue"];
         }
 
-        internal static DataTable GetDataTable()
+        internal static List<Dictionary<string, object>> GetDataTable()
         {
             return GetDataTableQueue().Dequeue();
         }

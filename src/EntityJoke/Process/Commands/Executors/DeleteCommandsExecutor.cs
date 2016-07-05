@@ -1,4 +1,5 @@
 ﻿using EntityJoke.Structure.Fields;
+using System.Collections.Generic;
 
 namespace EntityJoke.Process.Commands
 {
@@ -17,7 +18,7 @@ namespace EntityJoke.Process.Commands
             return new DeleteCommandGenerator(objectCommand).GetCommand();
         }
 
-        protected override void RefreshObject(System.Data.DataTable returnCommand)
+        protected override void RefreshObject(List<Dictionary<string, object>> returnCommand)
         {
             entity.GetFields().ForEach(f => SetFieldNull(f));
         }

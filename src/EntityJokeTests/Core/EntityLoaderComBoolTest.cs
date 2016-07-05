@@ -3,6 +3,7 @@ using EntityJoke.Core.Loaders;
 using EntityJoke.Structure.Entities;
 using EntityJokeTests.EntidadesTestes;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Data;
 
 namespace EntityJokeTests.Core
@@ -11,7 +12,7 @@ namespace EntityJokeTests.Core
     internal class EntityLoaderComBoolTest
     {
         EntityLoaderBuilder target;
-        DataTable dataTable;
+        List<Dictionary<string, object>> dataTable;
         Entity entity;
 
         [SetUp]
@@ -29,8 +30,7 @@ namespace EntityJokeTests.Core
 
             contato = (Contato)target
                 .Entity(entity)
-                .Row(dataTable.Rows[0])
-                .Columns(dataTable.Columns)
+                .Row(dataTable[0])
                 .Build();
 
             Assert.That(contato.Id   , Is.EqualTo(1));
@@ -45,8 +45,7 @@ namespace EntityJokeTests.Core
 
             contato = (Contato)target
                 .Entity(entity)
-                .Row(dataTable.Rows[1])
-                .Columns(dataTable.Columns)
+                .Row(dataTable[1])
                 .Build();
 
             Assert.That(contato.Id, Is.EqualTo(2));
@@ -63,26 +62,18 @@ namespace EntityJokeTests.Core
 
         private void SetUpDataTable()
         {
-            SetUpColunas();
+            dataTable = new List<Dictionary<string, object>>();
             AddRow(1, "Nome A", 1);
             AddRow(2, "Nome B", 0);
         }
 
-        private void SetUpColunas()
-        {
-            dataTable = new DataTable();
-            dataTable.Columns.Add(new DataColumn("p_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("p_nome", typeof(string)));
-            dataTable.Columns.Add(new DataColumn("p_ativo", typeof(int)));
-        }
-
         private void AddRow(int id, string nome, int marca)
         {
-            DataRow row1 = dataTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["p_id"] = id;
             row1["p_nome"] = nome;
             row1["p_ativo"] = marca;
-            dataTable.Rows.Add(row1);
+            dataTable.Add(row1);
         }
     }
 }

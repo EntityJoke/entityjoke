@@ -2,6 +2,8 @@
 using EntityJoke.Core.Loaders;
 using EntityJoke.Structure.Entities;
 using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 
 namespace EntityJokeTests.Core
@@ -10,7 +12,7 @@ namespace EntityJokeTests.Core
     public class EntityLoaderTest
     {
         EntityLoaderBuilder target;
-        DataTable dataTable;
+        List<Dictionary<string, object>> dataTable;
         Entity entity;
 
         [SetUp]
@@ -28,8 +30,7 @@ namespace EntityJokeTests.Core
 
             produto = (CategoryForTest)target
                 .Entity(entity)
-                .Row(dataTable.Rows[0])
-                .Columns(dataTable.Columns)
+                .Row(dataTable[0])
                 .Build();
 
             Assert.That(produto.Id, Is.EqualTo(2));
@@ -44,23 +45,16 @@ namespace EntityJokeTests.Core
 
         private void SetUpDataTable()
         {
-            SetUpColunas();
+            dataTable = new List<Dictionary<string, object>>();
             AddRow(2, "Cereal 1");
-        }
-
-        private void SetUpColunas()
-        {
-            dataTable = new DataTable();
-            dataTable.Columns.Add(new DataColumn("c_id", typeof(int)));
-            dataTable.Columns.Add(new DataColumn("c_name", typeof(string)));
         }
 
         private void AddRow(int c_id, string c_nome)
         {
-            DataRow row1 = dataTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["c_id"] = c_id;
             row1["c_name"] = c_nome;
-            dataTable.Rows.Add(row1);
+            dataTable.Add(row1);
         }
 
     }

@@ -1,6 +1,6 @@
 ﻿using EntityJoke.Core;
 using EntityJoke.Structure.Entities;
-using System.Data;
+using System.Collections.Generic;
 
 namespace EntityJoke.Process.Commands.Executors
 {
@@ -8,7 +8,7 @@ namespace EntityJoke.Process.Commands.Executors
     {
         protected readonly object obj;
         protected readonly Entity entity;
-        protected DataTable dataTable;
+        protected List<Dictionary<string, object>> dataTable;
 
         protected ICommandSQLGenerator commandGenerator;
         protected IDataTableGenerator dataTableGenerator;

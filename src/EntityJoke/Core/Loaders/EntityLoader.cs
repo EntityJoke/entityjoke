@@ -2,6 +2,7 @@
 using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,9 +15,7 @@ namespace EntityJoke.Core.Loaders
 
         public PointerIndexColumn Pointer;
         public Entity Entity;
-        public DataRow Row;
-        public DataColumnCollection Columns;
-
+        public Dictionary<string, object> Row;
         public Dictionary<string, object> DictionaryObjectsProcessed;
 
         public object LoadInstance()
@@ -84,16 +83,16 @@ namespace EntityJoke.Core.Loaders
 
         private void ProcessField()
         {
-            var column = GetCurrentColumn();
-            var value = Row[column.ColumnName];
+            var columnName = CurrentColumnName();
+            var value = Row[columnName];
 
             if (!IsNullValue(value))
-                SetFieldValue(GetColumnField(column), value);
+                SetFieldValue(GetColumnField(), value);
         }
 
-        private DataColumn GetCurrentColumn()
+        private string CurrentColumnName()
         {
-            return Columns[Pointer.IndexColumn];
+            return Row.Keys.ToList<string>()[Pointer.IndexColumn];
         }
 
         private static bool IsNullValue(object value)
@@ -101,15 +100,17 @@ namespace EntityJoke.Core.Loaders
             return value.GetType() == typeof(DBNull);
         }
 
-        private Field GetColumnField(DataColumn column)
+        private Field GetColumnField()
         {
-            return Entity.FieldDictionary[GetOriginalName(column)];
+            return Entity.FieldDictionary[GetOriginalName()];
         }
 
-        private static string GetOriginalName(DataColumn column)
+        private string GetOriginalName()
         {
-            var indexOf = column.ColumnName.IndexOf("_");
-            return column.ColumnName.Substring(indexOf + 1);
+            var currentColumnName = CurrentColumnName();
+            var indexOf = currentColumnName.IndexOf("_");
+
+            return currentColumnName.Substring(indexOf + 1);
         }
 
         private void SetFieldValue(Field field, object value)
@@ -132,7 +133,6 @@ namespace EntityJoke.Core.Loaders
             return new EntityLoaderBuilder()
                 .Entity(join.Entity)
                 .Row(Row)
-                .Columns(Columns)
                 .PointerIndexColumn(Pointer)
                 .Dictionary(DictionaryObjectsProcessed)
                 .Build();

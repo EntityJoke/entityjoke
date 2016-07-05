@@ -2,7 +2,7 @@
 {
     public class BoolToStringValueConverter
     {
-        private bool value;
+        private readonly bool value;
 
         public BoolToStringValueConverter(bool value)
         {

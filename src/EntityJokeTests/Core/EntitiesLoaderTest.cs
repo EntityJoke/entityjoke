@@ -2,7 +2,6 @@
 using EntityJoke.Core.Loaders;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.Data;
 
 namespace EntityJokeTests.Core
 {
@@ -11,7 +10,7 @@ namespace EntityJokeTests.Core
     {
         EntitiesLoader<Produto> target;
 
-        DataTable produtoTable;
+        List<Dictionary<string, object>> produtoTable;
 
         [SetUp]
         public void SetUp()
@@ -24,14 +23,14 @@ namespace EntityJokeTests.Core
         [Test]
         public void AssertDataTable()
         {
-            Assert.That(produtoTable.Rows[0]["p_id"], Is.EqualTo(1));
-            Assert.That(produtoTable.Rows[0]["p_nome"], Is.EqualTo("Trigo"));
+            Assert.That(produtoTable[0]["p_id"], Is.EqualTo(1));
+            Assert.That(produtoTable[0]["p_nome"], Is.EqualTo("Trigo"));
 
-            Assert.That(produtoTable.Rows[1]["p_id"], Is.EqualTo(2));
-            Assert.That(produtoTable.Rows[1]["p_nome"], Is.EqualTo("Arroz"));
+            Assert.That(produtoTable[1]["p_id"], Is.EqualTo(2));
+            Assert.That(produtoTable[1]["p_nome"], Is.EqualTo("Arroz"));
 
-            Assert.That(produtoTable.Rows[2]["p_id"], Is.EqualTo(3));
-            Assert.That(produtoTable.Rows[2]["p_nome"], Is.EqualTo("Lasanha"));
+            Assert.That(produtoTable[2]["p_id"], Is.EqualTo(3));
+            Assert.That(produtoTable[2]["p_nome"], Is.EqualTo("Lasanha"));
         }
 
         [Test]
@@ -88,32 +87,22 @@ namespace EntityJokeTests.Core
 
         private void SetUpDataTable()
         {
-            SetUpColunas();
+            produtoTable = new List<Dictionary<string, object>>();
             AddRow(1, "Trigo", "Trigo Especial Alvalade", 1, "654987");
             AddRow(2, "Arroz", "Arroz Parboilizado Tio João", 1, "652314");
             AddRow(3, "Lasanha", "Lasanha 4 Queijos Saida", 650, "621457");
         }
 
-        private void SetUpColunas()
-        {
-            produtoTable = new DataTable();
-            produtoTable.Columns.Add(new DataColumn("p_id", typeof(int)));
-            produtoTable.Columns.Add(new DataColumn("p_nome", typeof(string)));
-            produtoTable.Columns.Add(new DataColumn("p_nome2", typeof(string)));
-            produtoTable.Columns.Add(new DataColumn("p_quantidade", typeof(double)));
-            produtoTable.Columns.Add(new DataColumn("p_codigo_de_barras", typeof(string)));
-        }
-
         private void AddRow(int id, string nome, string nome2, double quantidade, string codigoDeBarras)
         {
-            DataRow row1 = produtoTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["p_id"] = id;
             row1["p_nome"] = nome;
             row1["p_nome2"] = nome2;
             row1["p_quantidade"] = quantidade;
             row1["p_codigo_de_barras"] = codigoDeBarras;
 
-            produtoTable.Rows.Add(row1);
+            produtoTable.Add(row1);
         }
     }
 }
