@@ -13,7 +13,8 @@ namespace EntityJoke
 
         private static Assembly GetAssembly()
         {
-            return Assembly.Load("Npgsql");
+            var assemblyName = new AssemblyName("Npgsql");
+            return Assembly.Load(assemblyName);
         }
 
         public override Type DbDataAdapterType()

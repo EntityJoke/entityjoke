@@ -1,5 +1,6 @@
 ﻿using EntityJoke.Connection;
-using System.Data;
+using EntityJoke.Process.Commands.Generators;
+using System.Collections.Generic;
 using System.Data.Common;
 
 namespace EntityJoke.Process.Commands
@@ -13,18 +14,36 @@ namespace EntityJoke.Process.Commands
             this.commandSql = commandSql;
         }
 
-        public DataTable Generate()
+        public List<Dictionary<string, object>> Generate()
         {
             var conn = DbConnectionFactory.Get();
             conn.Open();
 
-            var adp = new DbDataAdapterFactory(commandSql, conn).Get();
-            var dataTable = new DataTable();
-
-            adp.Fill(dataTable);
+            var dataTable = GenerateDataTable(conn);
 
             conn.Close();
 
+            return dataTable;
+        }
+
+        private List<Dictionary<string, object>> GenerateDataTable(DbConnection conn)
+        {
+            var dataTable = new List<Dictionary<string, object>>();
+            using (DbCommand cmd = DbCommandGenerator.Generate(commandSql))
+            {
+                cmd.Connection = conn;
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var dic = new Dictionary<string, object>();
+                        for(var i = 0; i < reader.FieldCount; i++)
+                            dic.Add(reader.GetName(i), reader[i]);
+                        dataTable.Add(dic);
+                    }
+                }
+            }
             return dataTable;
         }
     }

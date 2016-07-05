@@ -3,7 +3,6 @@ using EntityJoke.Process.Commands;
 using EntityJoke.Structure.Fields;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Reflection;
 
 namespace EntityJoke.Core.Loaders
@@ -45,7 +44,7 @@ namespace EntityJoke.Core.Loaders
 
         private static Type DataTableType()
         {
-            return typeof(DataTable);
+            return typeof(List<Dictionary<string, object>>);
         }
 
         private static Type DictionaryType()
@@ -53,7 +52,7 @@ namespace EntityJoke.Core.Loaders
             return typeof(Dictionary<string, object>);
         }
 
-        private DataTable GetDataTable()
+        private List<Dictionary<string, object>> GetDataTable()
         {
             return DataTableGeneratorFactory.Get(CommandSql()).Generate();
         }

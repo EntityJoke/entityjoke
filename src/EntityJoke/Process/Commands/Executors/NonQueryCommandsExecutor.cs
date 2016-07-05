@@ -1,6 +1,7 @@
 ﻿using EntityJoke.Core;
 using EntityJoke.Structure.Entities;
 using EntityJoke.Structure.Fields;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace EntityJoke.Process.Commands
     public class NonQueryCommandsExecutor
     {
         private readonly ICommandSQLGenerator commandGenerator;
-        private DataTable returnCommand;
+        private List<Dictionary<string, object>> returnCommand;
         private string commandSQL;
 
         protected readonly Entity entity;
@@ -60,9 +61,9 @@ namespace EntityJoke.Process.Commands
             new NonQueryCommandsExecutor(objectJoin).Execute();
         }
 
-        protected virtual void RefreshObject(DataTable returnCommand)
+        protected virtual void RefreshObject(List<Dictionary<string, object>> returnCommand)
         {
-            foreach (DataRow row in returnCommand.Rows)
+            foreach (var row in returnCommand)
                 entity.FieldDictionary["id"].GetSetter(objectCommand, row["id"]).Set();
         }
     }

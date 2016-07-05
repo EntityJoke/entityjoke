@@ -1,11 +1,11 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
 
 namespace EntityJoke.Process.Commands
 {
     public interface IDataTableGenerator
     {
 
-        DataTable Generate();
+        List<Dictionary<string, object>> Generate();
 
     }
 }

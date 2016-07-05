@@ -1,14 +1,15 @@
 ﻿using EntityJoke.Core;
 using EntityJokeTests.EntidadesTestes.Relacionamento1N;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Data;
 
 namespace EntityJokeTests.Core.Relacionamento1N
 {
     public class EntitiesLoaderRelacionamentos1NTest
     {
-        DataTable autorTable;
-        DataTable livroTable;
+        List<Dictionary<string, object>> autorTable;
+        List<Dictionary<string, object>> livroTable;
 
         [SetUp]
         public void SetUp()
@@ -77,51 +78,35 @@ namespace EntityJokeTests.Core.Relacionamento1N
 
         private void SetUpAutor()
         {
-            autorTable = new DataTable();
-            SetUpColunasAutorTable();
+            autorTable = new List<Dictionary<string, object>>();
             AddRowAutor(new Autor() { Id = 1, Nome = "Érico Veríssimo" });
-        }
-
-        private void SetUpColunasAutorTable()
-        {
-            autorTable.Columns.Add(new DataColumn("a_id", typeof(int)));
-            autorTable.Columns.Add(new DataColumn("a_nome", typeof(string)));
         }
 
         private void AddRowAutor(Autor autor)
         {
-            DataRow row1 = autorTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["a_id"] = autor.Id;
             row1["a_nome"] = autor.Nome;
-            autorTable.Rows.Add(row1);
+            autorTable.Add(row1);
         }
 
         private void SetUpLivro()
         {
-            livroTable = new DataTable();
-            SetUpColunasLivroTable();
+            livroTable = new List<Dictionary<string, object>>();
             var autor = new Autor() { Id = 1, Nome = "Érico Veríssimo" };
             AddRowLivro(1, "O Continente", autor);
             AddRowLivro(6, "O Retrato", autor);
             AddRowLivro(4, "O Arquipélago", autor);
         }
 
-        private void SetUpColunasLivroTable()
-        {
-            livroTable.Columns.Add(new DataColumn("l_id", typeof(int)));
-            livroTable.Columns.Add(new DataColumn("l_titulo", typeof(string)));
-            livroTable.Columns.Add(new DataColumn("a_id", typeof(int)));
-            livroTable.Columns.Add(new DataColumn("a_nome", typeof(string)));
-        }
-
         private void AddRowLivro(int id, string nome, Autor autor)
         {
-            DataRow row1 = livroTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["l_id"] = id;
             row1["l_titulo"] = nome;
             row1["a_id"] = autor.Id;
             row1["a_nome"] = autor.Nome;
-            livroTable.Rows.Add(row1);
+            livroTable.Add(row1);
         }
     }
 }

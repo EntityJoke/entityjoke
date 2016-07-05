@@ -1,15 +1,14 @@
 ﻿using EntityJoke.Structure.Entities;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 
 namespace EntityJoke.Core.Loaders
 {
     public class EntityLoaderBuilder
     {
-        private DataRow row;
+        private Dictionary<string, object> row;
         private PointerIndexColumn pointer = new PointerIndexColumn();
         private Entity entity;
-        private DataColumnCollection columns;
         private Dictionary<string, object> dictionaryEntities = new Dictionary<string, object>();
 
         public EntityLoaderBuilder Entity(Entity entity)
@@ -18,13 +17,7 @@ namespace EntityJoke.Core.Loaders
             return this;
         }
 
-        public EntityLoaderBuilder Columns(DataColumnCollection columns)
-        {
-            this.columns = columns;
-            return this;
-        }
-
-        public EntityLoaderBuilder Row(DataRow row)
+        public EntityLoaderBuilder Row(Dictionary<string, object> row)
         {
             this.row = row;
             return this;
@@ -49,7 +42,6 @@ namespace EntityJoke.Core.Loaders
                 Row = row,
                 Pointer = pointer,
                 Entity = entity,
-                Columns = columns,
                 DictionaryObjectsProcessed = dictionaryEntities
             };
             return loader.LoadInstance();

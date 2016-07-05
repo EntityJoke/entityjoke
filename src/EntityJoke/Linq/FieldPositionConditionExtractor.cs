@@ -16,12 +16,12 @@ namespace EntityJoke.Linq
 
         public FieldPositionConditionExtractor(string condition)
         {
-            this.condition = String.Copy(condition.ToUpper());
+            this.condition = (condition.ToUpper());
         }
 
         public FieldPositionCondition Extract(string field)
         {
-            this.field = String.Copy(field.ToUpper());
+            this.field = (field.ToUpper());
             Process(field);
             return position;
         }

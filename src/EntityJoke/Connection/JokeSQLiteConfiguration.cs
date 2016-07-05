@@ -13,7 +13,8 @@ namespace EntityJoke
 
         private static Assembly GetAssembly()
         {
-            return Assembly.Load("System.Data.SQLite");
+            var assemblyName = new AssemblyName("System.Data.SQLite");
+            return Assembly.Load(assemblyName);
         }
 
         public override Type DbDataAdapterType()

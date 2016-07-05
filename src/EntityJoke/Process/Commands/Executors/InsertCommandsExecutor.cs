@@ -25,7 +25,7 @@ namespace EntityJoke.Process.Commands.Executors
 
         protected virtual void RefreshObject()
         {
-            foreach (DataRow row in dataTable.Rows)
+            foreach (var row in dataTable)
                 entity.FieldDictionary["id"].GetSetter(obj, row["id"]).Set();
         }
 

@@ -2,7 +2,7 @@
 using EntityJoke.Process.Commands.Executors;
 using EntityJokeTests.EntidadesTestes;
 using NUnit.Framework;
-using System.Data;
+using System.Collections.Generic;
 
 namespace EntityJokeTests.Process.Commands.Executors
 {
@@ -10,18 +10,18 @@ namespace EntityJokeTests.Process.Commands.Executors
     {
         CommandsExecutor target;
 
-        DataTable dataTable;
+        List<Dictionary<string, object>> dataTable;
 
         [SetUp]
         public void SetUp()
         {
+            dataTable = new List<Dictionary<string, object>>();
             SetUpDictionaryEntityes();
-            SetUpDataTable();
             DictionaryInstanceFactory.SetDataTableGeneratorMock(true);
         }
 
         [Test]
-        public void InsereObjetoComSucesso()
+        public void InsereContatoComSucesso()
         {
             ConfigureIdDataTableMock(15);
 
@@ -57,17 +57,11 @@ namespace EntityJokeTests.Process.Commands.Executors
             DictionaryInstanceFactory.SetDataTableGeneratorMock(false);
         }
 
-        private void SetUpDataTable()
-        {
-            dataTable = new DataTable();
-            dataTable.Columns.Add(new DataColumn("id", typeof(int)));
-        }
-
         private void AddRowToTable(int id)
         {
-            DataRow row1 = dataTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["id"] = id;
-            dataTable.Rows.Add(row1);
+            dataTable.Add(row1);
         }
 
     }

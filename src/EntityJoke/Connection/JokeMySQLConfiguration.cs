@@ -13,7 +13,8 @@ namespace EntityJoke
 
         private static Assembly GetAssembly()
         {
-            return Assembly.Load("MySql.Data");
+            var assemblyName = new AssemblyName("MySql.Data");
+            return Assembly.Load(assemblyName);
         }
 
         public override Type DbDataAdapterType()

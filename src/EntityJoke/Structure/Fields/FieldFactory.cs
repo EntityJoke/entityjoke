@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace EntityJoke.Structure.Fields
@@ -31,7 +33,8 @@ namespace EntityJoke.Structure.Fields
 
         private static bool IsEntityEnumerable(Type type)
         {
-            return type.GetInterface("ICollection") != null;
+            var interfaces = new List<Type>(type.GetInterfaces());
+            return interfaces.Any(t => t.Name == "ICollection");
         }
 
         private static Field CreateFieldEnumerableEntity(FieldInfoCreator creator)

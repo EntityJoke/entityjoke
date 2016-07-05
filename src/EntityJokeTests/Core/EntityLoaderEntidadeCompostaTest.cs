@@ -2,6 +2,7 @@
 using EntityJoke.Core.Loaders;
 using EntityJoke.Structure.Entities;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Data;
 
 namespace EntityJokeTests.Core
@@ -9,9 +10,9 @@ namespace EntityJokeTests.Core
     [TestFixture]
     public class EntityLoaderEntidadeCompostaTest
     {
-        EntityLoaderBuilder target;
-        DataTable dataTable;
         Entity entity;
+        EntityLoaderBuilder target;
+        List<Dictionary<string, object>> dataTable;
 
         [SetUp]
         public void SetUp()
@@ -28,8 +29,7 @@ namespace EntityJokeTests.Core
 
             produto = (ProductForTest)target
                 .Entity(entity)
-                .Row(dataTable.Rows[0])
-                .Columns(dataTable.Columns)
+                .Row(dataTable[0])
                 .Build();
 
             Assert.That(produto.Id, Is.EqualTo(1));
@@ -48,15 +48,13 @@ namespace EntityJokeTests.Core
             var produto1 = (ProductForTest)target
                 .Entity(entity)
                 .PointerIndexColumn(new PointerIndexColumn())
-                .Row(dataTable.Rows[0])
-                .Columns(dataTable.Columns)
+                .Row(dataTable[0])
                 .Build();
 
             var produto2 = (ProductForTest)target
                 .Entity(entity)
                 .PointerIndexColumn(new PointerIndexColumn())
-                .Row(dataTable.Rows[1])
-                .Columns(dataTable.Columns)
+                .Row(dataTable[1])
                 .Build();
 
             Assert.That(produto1, Is.Not.EqualTo(produto2));
@@ -72,27 +70,14 @@ namespace EntityJokeTests.Core
 
         private void SetUpDataTable()
         {
-            SetUpColunas();
+            dataTable = new List<Dictionary<string, object>>();
             AddRow(1, "Trigo", "Alvalade", "1", "Pacote", "Kg", 2, "Cereal 1");
             AddRow(2, "Trigo", "Sol", "5", "Pacote", "Kg", 2, "Cereal 1");
         }
 
-        private void SetUpColunas()
-        {
-            dataTable = new DataTable();
-            dataTable.Columns.Add(new DataColumn("p_id"      , typeof(int)));
-            dataTable.Columns.Add(new DataColumn("p_name"    , typeof(string)));
-            dataTable.Columns.Add(new DataColumn("p_maker"   , typeof(string)));
-            dataTable.Columns.Add(new DataColumn("p_quantity", typeof(string)));
-            dataTable.Columns.Add(new DataColumn("p_packing" , typeof(string)));
-            dataTable.Columns.Add(new DataColumn("p_unit"    , typeof(string)));
-            dataTable.Columns.Add(new DataColumn("c_id"      , typeof(int)));
-            dataTable.Columns.Add(new DataColumn("c_name"    , typeof(string)));
-        }
-
         private void AddRow(int id, string nome, string marca, string quantidade, string embalagem, string unidadeMedida, int c_id, string c_nome)
         {
-            DataRow row1 = dataTable.NewRow();
+            var row1 = new Dictionary<string, object>();
             row1["p_id"      ] = id;
             row1["p_name"    ] = nome;
             row1["p_maker"   ] = marca;
@@ -101,7 +86,7 @@ namespace EntityJokeTests.Core
             row1["p_unit"    ] = unidadeMedida;
             row1["c_id"      ] = c_id;
             row1["c_name"    ] = c_nome;
-            dataTable.Rows.Add(row1);
+            dataTable.Add(row1);
         }
 
     }

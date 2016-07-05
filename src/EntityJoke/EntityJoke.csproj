@@ -45,6 +45,7 @@
     <Compile Include="Linq\Generator\CollectionSelectGenerator.cs" />
     <Compile Include="Process\Commands\Executors\CommandsExecutor.cs" />
     <Compile Include="Process\Commands\Executors\InsertCommandsExecutor.cs" />
+    <Compile Include="Process\Commands\Generators\DbCommandGenerator.cs" />
     <Compile Include="Process\Commands\Generators\SelectCommandGenerator.cs" />
     <Compile Include="Process\Commands\Generators\DataTableGenerator.cs" />
     <Compile Include="Connection\DbConnectionFactory.cs" />
