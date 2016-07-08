@@ -1,4 +1,5 @@
 ﻿using EntityJoke.Utils.Converters;
+using System.Reflection;
 
 namespace EntityJoke.Structure.Fields
 {
@@ -32,7 +33,7 @@ namespace EntityJoke.Structure.Fields
 
         public virtual void Set()
         {
-            var field = obj.GetType().GetField(this.field.Name);
+            var field = TypeExtensions.GetField(obj.GetType(), this.field.Name);
             field.SetValue(obj, value);
         }
 

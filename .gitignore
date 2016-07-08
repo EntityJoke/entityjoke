@@ -19,8 +19,9 @@ bld/
 # Roslyn cache directories
 *.ide/
 
-# VS Code Folder
+# VS Folders
 *.vscode/
+*.vs/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
