@@ -2,7 +2,7 @@
   "version": "1.0.0-*",
   "buildOptions": {
     "debugType": "portable",
-    "emitEntryPoint": true
+    "emitEntryPoint": false
   },
   "dependencies": {},
   "frameworks": {
@@ -17,7 +17,8 @@
         },
         "System.Reflection": {
           "version": "4.1.0"
-        }
+        },
+        "npgsql": "3.1.5"
       },
       "imports": "dnxcore50"
     }
